@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, DateTime, func
 from datetime import datetime
 from .user import User
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 # from category import Category
 
 
@@ -18,7 +18,7 @@ class Project(db.Model):
     name = db.Column(db.String(100), nullable=False, unique=True)
     description = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False)
-    ownerId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    ownerId = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     categoryId = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     bannerImg = db.Column(db.String, nullable=False)
     endDate = db.Column(db.Date, nullable=False)
