@@ -1,7 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, DateTime, func
-# from datetime import datetime
-# from user import User
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
