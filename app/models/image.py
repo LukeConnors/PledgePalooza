@@ -7,10 +7,11 @@ from .db import db
 
 class Image(db.Model):
     __tablename__ = 'images'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Column(db.Integer, primary_key=True, autoincrement=True))
     url = db.Column(db.String, nullable=False)
-    projectId = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+    imageableId = db.Column(db.Integer, nullable=False)
+    imageableType = db.Column(db.String, nullable=False)
+    
 
 
     # EXTERNAL-MODEL RELATIONSHIPS(FOREIGN-KEYS):
