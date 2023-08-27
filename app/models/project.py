@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, DateTime, func
-from datetime import datetime
-from .user import User
+# from datetime import datetime
+# from .user import User
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 # from category import Category
 
@@ -14,12 +14,15 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 class Project(db.Model):
     __tablename__ = 'projects'
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
     description = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False)
-    ownerId = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
-    categoryId = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    categoryId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=False)
     bannerImg = db.Column(db.String, nullable=False)
     endDate = db.Column(db.Date, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
