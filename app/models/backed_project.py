@@ -15,5 +15,5 @@ class BackedProject(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=func.now(), onupdate=func.now())
 
-
+    user = db.relationship('User', back_populates='backed_project')
     
