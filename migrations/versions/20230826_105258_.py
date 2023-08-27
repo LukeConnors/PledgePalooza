@@ -46,7 +46,7 @@ def upgrade():
     op.create_table('images',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('url', sa.String(), nullable=False),
-    sa.Column('imageableId', sa.Integer(), sa.ForeignKey('projects.id', 'rewards.id'), nullable=False),
+    sa.Column('imageableId', sa.Integer(), nullable=False),
     sa.Column('imageableType', sa.String(), nullable=False)
     )
                     
