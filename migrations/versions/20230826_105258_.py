@@ -19,7 +19,7 @@ down_revision = 'ffdc0a98111c'
 branch_labels = None
 depends_on = None
 
-print('hello world')
+
 
 def upgrade():
     op.create_table('categories',
