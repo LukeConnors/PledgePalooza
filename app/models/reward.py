@@ -20,3 +20,4 @@ class Reward(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=func.now(), onupdate=func.now())
 
     image = db.relationship('Image', back_populates='reward')
+    project = db.relationship('Project', back_populates='reward')
