@@ -19,6 +19,7 @@ down_revision = 'ffdc0a98111c'
 branch_labels = None
 depends_on = None
 
+print('hello world')
 
 def upgrade():
     op.create_table('categories',
@@ -45,14 +46,14 @@ def upgrade():
     op.create_table('images',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('url', sa.String(), nullable=False),
-    sa.Column('projectId', sa.Integer(), sa.ForeignKey("projects.id"), nullable=False)
+    sa.Column('imageableId', sa.Integer(), sa.ForeignKey('projects.id', 'rewards.id'), nullable=False),
+    sa.Column('imageableType', sa.String(), nullable=False)
     )
                     
     op.create_table('rewards',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False, primary_key=True),
     sa.Column('projectId', sa.Integer(), sa.ForeignKey('projects.id'), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('img', sa.String(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('est_deliv', sa.DateTime(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
