@@ -10,7 +10,7 @@ class Image(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
     
-    id = db.Column(db.Column(db.Integer, primary_key=True, autoincrement=True))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     url = db.Column(db.String, nullable=False)
     imageableId = db.Column(db.Integer, nullable=False)
     imageableType = db.Column(db.String, nullable=False)
