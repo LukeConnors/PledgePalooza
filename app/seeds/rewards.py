@@ -1,5 +1,6 @@
 from app.models import db, User, Project, Reward, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import date
 
 def seed_rewards():
     reward1 = Reward(
@@ -7,7 +8,7 @@ def seed_rewards():
         name='Early Bird Special',
         description='Be among the first to get the game at a special price!',
         price=35,
-        est_delivery='2024-05-01',
+        est_delivery=date(2024, 5, 1),
         quantity=100,
     )
 
@@ -16,7 +17,7 @@ def seed_rewards():
         name='Enchanting Art Print',
         description="Receive a stunning art print inspired by the game's artwork.",
         price=50,
-        est_delivery='2024-06-01',
+        est_delivery=date(2024, 6, 1),
         quantity=50,
     )
 
@@ -25,7 +26,7 @@ def seed_rewards():
         name="Collector's Edition",
         description="Get the deluxe collector's edition with exclusive content",
         price=75,
-        est_delivery='2024-07-01',
+        est_delivery=date(2024, 7, 1),
         quantity=30,
     )
 
@@ -34,7 +35,7 @@ def seed_rewards():
         name='Game + Expansion Pack',
         description='Get the base game and the first expansion pack bundled together!',
         price=60,
-        est_delivery='2024-08-01',
+        est_delivery=date(2024, 8, 1),
         quantity=60,
     )
 
@@ -44,7 +45,7 @@ def seed_rewards():
         description='Embark on your VR adventure with this essential starter pack!',
 
         price=40,
-        est_delivery='2024-09-01',
+        est_delivery=date(2024, 9, 1),
         quantity=100,
     )
 
@@ -53,7 +54,7 @@ def seed_rewards():
         name='Exclusive In-Game Pet',
         description='Receive an adorable virtual pet companion in the game!',
         price=25,
-        est_delivery='2024-09-01',
+        est_delivery=date(2024, 9, 1),
         quantity=200,
     )
 
@@ -62,7 +63,7 @@ def seed_rewards():
         name='VIP Access',
         description='Gain VIP status and enjoy early access and special in-game perks!',
         price=75,
-        est_delivery='2024-08-15',
+        est_delivery=date(2024, 8, 5),
         quantity=50,
     )
 
@@ -71,7 +72,7 @@ def seed_rewards():
         name='Limited Edition Poster',
         description='Decorate your gaming space with a limited edition poster featuring game artwork.',
         price=30,
-        est_delivery='2024-09-15',
+        est_delivery=date(2024, 9, 5),
         quantity=75,
     )
 
@@ -80,7 +81,7 @@ def seed_rewards():
         name='Explorer Pack',
         description='Start your cosmic journey with this essential explorer pack!',
         price=35,
-        est_delivery='2023-10-01',
+        est_delivery=date(2023, 0, 1),
         quantity=150,
     )
 
@@ -89,7 +90,7 @@ def seed_rewards():
         name='Limited Edition Game Board',
         description='Get a unique limited edition game board with exclusive artwork.',
         price=50,
-        est_delivery='2023-09-15',
+        est_delivery=date(2023, 9, 5),
         quantity=100,
     )
 
@@ -98,7 +99,7 @@ def seed_rewards():
         name='Galactic Commander Pack',
         description='Command the galaxy with this deluxe commander pack!',
         price=75,
-        est_delivery='2023-09-01',
+        est_delivery=date(2023, 9, 1),
         quantity=75,
     )
 
@@ -107,7 +108,7 @@ def seed_rewards():
         name='Custom Alien Species',
         description='Create and name your own alien species featured in the game.',
         price=100,
-        est_delivery='2023-08-25',
+        est_delivery=date(2023, 8, 5),
         quantity=25,
     )
 
@@ -116,7 +117,7 @@ def seed_rewards():
         name="Starter Spellbook",
         description="Begin your journey into arcane alchemy with this starter spellbook!",
         price=20,
-        est_delivery="2023-12-01",
+        est_delivery=date(2023, 12, 1),
         quantity=200,
     )
 
@@ -125,7 +126,7 @@ def seed_rewards():
         name="Collector's Edition Card Set",
         description="Own a collector's edition set of magical cards with unique artwork.",
         price=40,
-        est_delivery="2023-11-15",
+        est_delivery=date(2023, 11, 15),
         quantity=100,
     )
 
@@ -134,7 +135,7 @@ def seed_rewards():
         name="Master Alchemist Kit",
         description="Become a master alchemist with this deluxe kit of rare ingredients and tools.",
         price=70,
-        est_delivery="2023-11-01",
+        est_delivery=date(2023, 11, 1),
         quantity=50,
     )
 
@@ -143,7 +144,7 @@ def seed_rewards():
         name="Custom Spell Card",
         description="Design your own spell card and add it to the game!",
         price=100,
-        est_delivery="2023-10-25",
+        est_delivery=date(2023, 10, 25),
         quantity=30,
     )
 
@@ -152,7 +153,7 @@ def seed_rewards():
         name="Beta Tester Access",
         description="Be one of the first to explore the cybernetic world as a beta tester!",
         price=15,
-        est_delivery="2024-01-15",
+        est_delivery=date(2024, 1, 15),
         quantity=300,
     )
 
@@ -161,7 +162,7 @@ def seed_rewards():
         name="Digital Art Collection",
         description="Receive a collection of stunning digital art inspired by Cybernetica.",
         price=30,
-        est_delivery="2023-12-31",
+        est_delivery=date(2023, 12, 31),
         quantity=100,
     )
 
@@ -170,7 +171,7 @@ def seed_rewards():
         name="Ultimate Cybernetic Upgrade",
         description="Enhance your VR experience with the ultimate cybernetic hardware upgrade.",
         price=100,
-        est_delivery="2023-12-15",
+        est_delivery=date(2023, 12, 15),
         quantity=50,
     )
 
@@ -179,7 +180,7 @@ def seed_rewards():
         name="Exclusive In-Game Character",
         description="Unlock an exclusive in-game character with unique abilities!",
         price=50,
-        est_delivery="2023-12-01",
+        est_delivery=date(2023, 12, 1),
         quantity=75,
     )
 
@@ -188,7 +189,7 @@ def seed_rewards():
         name="Dragon Tamer's Starter Kit",
         description="Begin your journey as a dragon tamer with this essential starter kit!",
         price=20,
-        est_delivery="2024-01-15",
+        est_delivery=date(2024, 1, 15),
         quantity=200,
     )
 
@@ -197,7 +198,7 @@ def seed_rewards():
         name="Limited Edition Art Book",
         description="Own a limited edition art book featuring stunning illustrations from Dragons Dominion.",
         price=35,
-        est_delivery="2023-12-31",
+        est_delivery=date(2023, 12, 31),
         quantity=100,
     )
 
@@ -206,7 +207,7 @@ def seed_rewards():
         name="Legendary Dragon Figurine",
         description="Receive an intricately crafted figurine of a legendary dragon from the game.",
         price=75,
-        est_delivery="2023-12-15",
+        est_delivery=date(2023, 12, 15),
         quantity=50,
     )
 
@@ -215,7 +216,7 @@ def seed_rewards():
         name="Custom Character Illustration",
         description="Get a custom character illustration of yourself as a hero in Dragons Dominion.",
         price=50,
-        est_delivery="2023-12-01",
+        est_delivery=date(2023, 12, 1),
         quantity=75,
     )
 
@@ -224,7 +225,7 @@ def seed_rewards():
         name="Virtual Dive Certification",
         description="Get certified as a virtual diver and gain access to exclusive in-game content.",
         price=30,
-        est_delivery="2024-01-15",
+        est_delivery=date(2024, 1, 15),
         quantity=150,
     )
 
@@ -233,7 +234,7 @@ def seed_rewards():
         name="Ocean Explorer's Bundle",
         description="Receive a bundle of ocean-themed VR experiences, including AquaVenture.",
         price=50,
-        est_delivery="2023-12-31",
+        est_delivery=date(2023, 12, 31),
         quantity=100,
     )
 
@@ -242,7 +243,7 @@ def seed_rewards():
         name="DeepSea Diver's Kit",
         description="Get equipped with a virtual deep-sea diving kit for immersive exploration.",
         price=75,
-        est_delivery="2023-12-15",
+        est_delivery=date(2023, 12, 15),
         quantity=50,
     )
 
@@ -251,7 +252,7 @@ def seed_rewards():
         name="Underwater Photography Course",
         description="Join a virtual underwater photography course and capture stunning aquatic moments.",
         price=40,
-        est_delivery="2023-12-01",
+        est_delivery=date(2023, 12, 1),
         quantity=75,
     )
 
@@ -260,7 +261,7 @@ def seed_rewards():
         name="QuantumX Developer Kit",
         description="Get your hands on the QuantumX developer kit and start experimenting with quantum computing.",
         price=250,
-        est_delivery="2024-01-15",
+        est_delivery=date(2024, 1, 15),
         quantity=50,
     )
 
@@ -269,7 +270,7 @@ def seed_rewards():
         name="QuantumX Quantum Simulator",
         description="Receive access to the QuantumX quantum simulator for virtual quantum experiments.",
         price=100,
-        est_delivery="2024-01-31",
+        est_delivery=date(2024, 1, 31),
         quantity=100,
     )
 
@@ -278,7 +279,7 @@ def seed_rewards():
         name="QuantumX Masterclass",
         description="Join a virtual masterclass on quantum computing with leading experts in the field.",
         price=150,
-        est_delivery="2024-02-15",
+        est_delivery=date(2024, 2, 15),
         quantity=30,
     )
 
@@ -287,7 +288,7 @@ def seed_rewards():
         name="QuantumX Research Grant",
         description="Receive a research grant to support your quantum computing research project.",
         price=500,
-        est_delivery="2024-03-31",
+        est_delivery=date(2024, 3, 31),
         quantity=10,
     )
 
@@ -296,7 +297,7 @@ def seed_rewards():
         name="LunaLens Basic Kit",
         description="Get the LunaLens Basic Kit and start experiencing augmented reality in a whole new way.",
         price=199,
-        est_delivery="2024-02-28",
+        est_delivery=date(2024, 2, 28),
         quantity=100,
     )
 
@@ -305,7 +306,7 @@ def seed_rewards():
         name="LunaLens Pro Edition",
         description="Upgrade to the LunaLens Pro Edition for advanced AR capabilities and exclusive content.",
         price=299,
-        est_delivery="2024-03-15",
+        est_delivery=date(2024, 3, 15),
         quantity=50,
     )
 
@@ -314,7 +315,7 @@ def seed_rewards():
         name="LunaLens Developer Kit",
         description="Receive the LunaLens Developer Kit for creating your own augmented reality experiences.",
         price=499,
-        est_delivery="2024-04-01",
+        est_delivery=date(2024, 4, 1),
         quantity=30,
     )
 
@@ -323,7 +324,7 @@ def seed_rewards():
         name="LunaLens Exclusive Access",
         description="Get exclusive early access to LunaLens updates and features.",
         price=99,
-        est_delivery="2024-03-31",
+        est_delivery=date(2024, 3, 31),
         quantity=200,
     )
 
@@ -332,7 +333,7 @@ def seed_rewards():
         name="SkyHawk Explorer Pack",
         description="Get the SkyHawk Explorer Pack and start your aerial adventures with our AI-powered drone.",
         price=499,
-        est_delivery="2024-03-15",
+        est_delivery=date(2024, 3, 15),
         quantity=100,
     )
 
@@ -341,7 +342,7 @@ def seed_rewards():
         name="SkyHawk Pro Pack",
         description="Upgrade to the SkyHawk Pro Pack for advanced features and extended flight time.",
         price=799,
-        est_delivery="2024-03-31",
+        est_delivery=date(2024, 3, 31),
         quantity=50,
     )
 
@@ -350,7 +351,7 @@ def seed_rewards():
         name="SkyHawk Autonomous Flight Kit",
         description="Receive the SkyHawk Autonomous Flight Kit to experience fully autonomous drone flights.",
         price=1199,
-        est_delivery="2024-04-15",
+        est_delivery=date(2024, 4, 15),
         quantity=30,
     )
 
@@ -359,7 +360,7 @@ def seed_rewards():
         name="SkyHawk Exclusive Access",
         description="Get exclusive early access to SkyHawk software updates and new features.",
         price=99,
-        est_delivery="2024-04-05",
+        est_delivery=date(2024, 4, 5),
         quantity=200,
     )
 
@@ -368,7 +369,7 @@ def seed_rewards():
         name="EcoCharge Essential Pack",
         description="Get the EcoCharge Essential Pack and start charging your devices sustainably with our solar-powered charger.",
         price=79,
-        est_delivery="2024-04-15",
+        est_delivery=date(2024, 4, 15),
         quantity=100,
     )
 
@@ -377,7 +378,7 @@ def seed_rewards():
         name="EcoCharge Ultimate Pack",
         description="Upgrade to the EcoCharge Ultimate Pack for additional solar panels and faster charging.",
         price=129,
-        est_delivery="2024-04-30",
+        est_delivery=date(2024, 4, 30),
         quantity=50,
     )
 
@@ -386,7 +387,7 @@ def seed_rewards():
         name="EcoCharge Solar Backpack",
         description="Receive the EcoCharge Solar Backpack, a backpack with built-in solar panels to charge your devices on the go.",
         price=149,
-        est_delivery="2024-05-15",
+        est_delivery=date(2024, 5, 15),
         quantity=30,
     )
 
@@ -395,7 +396,7 @@ def seed_rewards():
         name="EcoCharge Eco-Warrior Bundle",
         description="Become an eco-warrior with this bundle, including multiple EcoCharge sets and a tree planted in your name.",
         price=299,
-        est_delivery="2024-05-05",
+        est_delivery=date(2024, 5, 5),
         quantity=20,
     )
 
@@ -404,7 +405,7 @@ def seed_rewards():
         name="EcoStyle Essential Collection",
         description="Get the EcoStyle Essential Collection, featuring eco-friendly clothing items made from sustainable materials.",
         price=99,
-        est_delivery="2024-07-15",
+        est_delivery=date(2024, 7, 15),
         quantity=100,
     )
 
@@ -413,7 +414,7 @@ def seed_rewards():
         name="EcoStyle Premium Collection",
         description="Upgrade to the EcoStyle Premium Collection, with exclusive, high-quality eco-friendly fashion pieces.",
         price=149,
-        est_delivery="2024-07-30",
+        est_delivery=date(2024, 7, 30),
         quantity=50,
     )
 
@@ -422,7 +423,7 @@ def seed_rewards():
         name="EcoStyle Sustainable Accessories",
         description="Accessorize sustainably with our EcoStyle Sustainable Accessories, including bags, hats, and more.",
         price=49,
-        est_delivery="2024-08-15",
+        est_delivery=date(2024, 8, 15),
         quantity=30,
     )
 
@@ -431,7 +432,7 @@ def seed_rewards():
         name="EcoStyle Eco-Chic Wardrobe",
         description="Revamp your wardrobe sustainably with the EcoStyle Eco-Chic Wardrobe, a complete collection of eco-friendly fashion.",
         price=249,
-        est_delivery="2024-08-05",
+        est_delivery=date(2024, 8, 5),
         quantity=20,
     )
 
@@ -440,7 +441,7 @@ def seed_rewards():
         name="UrbanThreads Classic Tee",
         description="Get the UrbanThreads Classic Tee, a comfortable and stylish addition to your streetwear collection.",
         price=39,
-        est_delivery="2024-08-01",
+        est_delivery=date(2024, 8, 1),
         quantity=100,
     )
 
@@ -449,7 +450,7 @@ def seed_rewards():
         name="UrbanThreads Hoodie",
         description="Upgrade your street style with the UrbanThreads Hoodie, a cozy and fashionable choice for any season.",
         price=69,
-        est_delivery="2024-08-15",
+        est_delivery=date(2024, 8, 15),
         quantity=75,
     )
 
@@ -458,7 +459,7 @@ def seed_rewards():
         name="UrbanThreads Exclusive Caps",
         description="Complete your streetwear look with UrbanThreads Exclusive Caps, available in various urban-inspired designs.",
         price=29,
-        est_delivery="2024-08-10",
+        est_delivery=date(2024, 8, 10),
         quantity=50,
     )
 
@@ -467,7 +468,7 @@ def seed_rewards():
         name="UrbanThreads Streetwear Bundle",
         description="Upgrade your entire wardrobe with the UrbanThreads Streetwear Bundle, featuring a range of streetwear essentials.",
         price=149,
-        est_delivery="2024-08-20",
+        est_delivery=date(2024, 8, 20),
         quantity=30,
     )
 
@@ -476,7 +477,7 @@ def seed_rewards():
         name="Epic Tales: Book 1 - The Quest Begins",
         description="Get the first book in the 'Epic Tales' series and start your journey into the world of epic fantasy.",
         price=19,
-        est_delivery="2024-11-01",
+        est_delivery=date(2024, 11, 1),
         quantity=200,
     )
 
@@ -485,7 +486,7 @@ def seed_rewards():
         name="Epic Tales: Collector's Edition Set",
         description="Collect all books in the 'Epic Tales' series with this special collector's edition set. Dive deep into the fantasy realms.",
         price=99,
-        est_delivery="2024-11-15",
+        est_delivery=date(2024, 11, 15),
         quantity=100,
     )
 
@@ -494,7 +495,7 @@ def seed_rewards():
         name="Epic Tales: Exclusive Art Prints",
         description="Decorate your walls with exclusive art prints inspired by 'Epic Tales' and bring the fantasy world to life.",
         price=29,
-        est_delivery="2024-11-10",
+        est_delivery=date(2024, 11, 10),
         quantity=150,
     )
 
@@ -503,7 +504,7 @@ def seed_rewards():
         name="Epic Tales: Author's Q&A Session",
         description="Join an exclusive live Q&A session with the author of 'Epic Tales' and dive deeper into the creative process.",
         price=49,
-        est_delivery="2024-11-20",
+        est_delivery=date(2024, 11, 20),
         quantity=50,
     )
 
@@ -512,7 +513,7 @@ def seed_rewards():
         name="Cookbook Chronicles: Digital Edition",
         description="Get a digital copy of 'Cookbook Chronicles' and explore culinary delights from around the world.",
         price=12,
-        est_delivery="2024-11-15",
+        est_delivery=date(2024, 11, 15),
         quantity=500,
     )
 
@@ -521,7 +522,7 @@ def seed_rewards():
         name="Cookbook Chronicles: Hardcover Collector's Edition",
         description="Own a collector's edition hardcover of 'Cookbook Chronicles' filled with mouthwatering recipes and beautiful illustrations.",
         price=49,
-        est_delivery="2024-11-20",
+        est_delivery=date(2024, 11, 20),
         quantity=300,
     )
 
@@ -530,7 +531,7 @@ def seed_rewards():
         name="Cookbook Chronicles: Exclusive Cooking Class",
         description="Join an exclusive online cooking class hosted by renowned chefs featured in the book and learn culinary secrets.",
         price=89,
-        est_delivery="2024-11-25",
+        est_delivery=date(2024, 11, 25),
         quantity=100,
     )
 
@@ -539,7 +540,7 @@ def seed_rewards():
         name="Cookbook Chronicles: Signed Copy + Personal Recipe",
         description="Receive a signed copy of 'Cookbook Chronicles' along with a personalized recipe card from the author.",
         price=29,
-        est_delivery="2024-11-18",
+        est_delivery=date(2024, 11, 18),
         quantity=200,
     )
 
@@ -548,7 +549,7 @@ def seed_rewards():
         name="Whodunit Mysteries: Digital Collection",
         description="Get a digital collection of the entire 'Whodunit Mysteries' series and dive into a world of suspense and intrigue.",
         price=20,
-        est_delivery="2024-12-10",
+        est_delivery=date(2024, 12, 10),
         quantity=500,
     )
 
@@ -557,7 +558,7 @@ def seed_rewards():
         name="Whodunit Mysteries: Exclusive Collector's Set",
         description="Own an exclusive collector's set of the 'Whodunit Mysteries' series, including hardcovers, posters, and more.",
         price=99,
-        est_delivery="2024-12-15",
+        est_delivery=date(2024, 12, 15),
         quantity=300,
     )
 
@@ -566,7 +567,7 @@ def seed_rewards():
         name="Whodunit Mysteries: Personalized Detective Kit",
         description="Receive a personalized detective kit with clues, props, and puzzles to immerse yourself in the world of mysteries.",
         price=149,
-        est_delivery="2024-12-18",
+        est_delivery=date(2024, 12, 18),
         quantity=100,
     )
 
@@ -575,7 +576,7 @@ def seed_rewards():
         name="Whodunit Mysteries: Virtual Author Q&A",
         description="Join a virtual Q&A session with the author of 'Whodunit Mysteries' and ask questions about the series.",
         price=29,
-        est_delivery="2024-12-12",
+        est_delivery=date(2024, 12, 12),
         quantity=200,
     )
 
