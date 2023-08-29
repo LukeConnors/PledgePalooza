@@ -21,3 +21,4 @@ class Reward(db.Model):
 
     image = db.relationship('Image' , primaryjoin="and_(Image.imageable_type=='reward', foreign(Image.imageable_id)==Reward.id)")
     project = db.relationship('Project', back_populates='reward')
+    backed_project = db.relationship('BackedProject', back_populates='reward')

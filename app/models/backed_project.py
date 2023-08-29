@@ -16,4 +16,5 @@ class BackedProject(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=func.now(), onupdate=func.now())
 
     user = db.relationship('User', back_populates='backed_project')
-    
+    project = db.relationship('Project', back_populates='backed_project')
+    reward = db.relationship('Reward', back_populates='backed_project')
