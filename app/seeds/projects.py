@@ -176,16 +176,15 @@ def seed_projects():
     db.session.add(project14)
     db.session.add(project15)
     db.session.add(project16)
-    
+
 
     db.session.commit()
 
 
-def undo_projects():
-    db.session.execute("DELETE FROM projects;")
+def undo_users():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.projects RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM projects"))
+
     db.session.commit()
-
-
-
-
-

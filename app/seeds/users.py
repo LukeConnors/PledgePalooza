@@ -11,7 +11,7 @@ def seed_users():
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password')
     tristan = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        username='tristan', email='tristan@aa.io', password='password')
     johnny = User(
         username='johnny', email='johnny@aa.io', password='password')
     jacob = User(
@@ -24,7 +24,7 @@ def seed_users():
         username='luke', email='luke@aa.io', password='password')
     jason = User(
         username='jason', email='jason@aa.io', password='password')
-        
+
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -50,5 +50,5 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
-        
+
     db.session.commit()

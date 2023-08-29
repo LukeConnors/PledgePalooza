@@ -21,14 +21,14 @@ def seed_backed_projects():
         projectId=2,
         rewardId=5,
         userId=1,
-        amount=570
+        amount=60
     )
 
     backedProject4 = BackedProject(
         projectId=5,
         rewardId=14,
         userId=1,
-        amount=60
+        amount=45
     )
 
     backedProject5 = BackedProject(
@@ -49,7 +49,7 @@ def seed_backed_projects():
         projectId=7,
         rewardId=23,
         userId=4,
-        amount=60
+        amount=80
     )
 
     backedProject8 = BackedProject(
@@ -82,9 +82,9 @@ def seed_backed_projects():
 
     backedProject12 = BackedProject(
         projectId=16,
-        rewardId=60,
+        rewardId=59,
         userId=6,
-        amount=40
+        amount=150
     )
 
     backedProject13 = BackedProject(
@@ -171,5 +171,9 @@ def seed_backed_projects():
 
 
 def undo_backed_projects():
-    db.session.execute("DELETE FROM backed_projects;")
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.backed_projects RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM backed_projects"))
+
     db.session.commit()
