@@ -19,5 +19,5 @@ class Reward(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=func.now(), onupdate=func.now())
 
-    image = db.relationship('Image', back_populates='reward')
+    image = db.relationship('Image' , primaryjoin="and_(Image.imageable_type=='reward', foreign(Image.imageable_id)==Reward.id)")
     project = db.relationship('Project', back_populates='reward')
