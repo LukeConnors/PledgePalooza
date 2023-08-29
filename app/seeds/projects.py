@@ -9,7 +9,7 @@ def seed_projects():
         location='Enchantoria Games, San Francisco, USA',
         ownerId=1,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
-        bannerImg='mystic_realms.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/MysticRealm1.png',
         endDate='2023-12-31',
     )
 
@@ -19,7 +19,7 @@ def seed_projects():
         location='Oasis Studios, Los Angeles, USA',
         ownerId=2,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
-        bannerImg='virtual_oasis.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/VRheadset.png',
         endDate='2024-06-30',
     )
 
@@ -29,7 +29,7 @@ def seed_projects():
         location='Galaxy Games, Seattle, USA',
         ownerId=3,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
-        bannerImg='cosmic_odyssey.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Cosmic1.png',
         endDate='2023-08-15',
     )
 
@@ -39,7 +39,7 @@ def seed_projects():
         location='Mystic Games, Edinburgh, UK',
         ownerId=4,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
-        bannerImg='arcane_alchemy.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Arcane1.png',
         endDate='2023-10-31',
     )
 
@@ -49,7 +49,7 @@ def seed_projects():
         location='Cyber Nexus, Tokyo, Japan',
         ownerId=5,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
-        bannerImg='cybernetica.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Cybernetica1.png',
         endDate='2024-05-15',
     )
 
@@ -59,7 +59,7 @@ def seed_projects():
         location='Dragonfire Studios, Dublin, Ireland',
         ownerId=6,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
-        bannerImg='dragons_dominion.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/DragonsDomain.png',
         endDate='2023-09-30',
     )
     project7 = Project(
@@ -68,7 +68,7 @@ def seed_projects():
         location='DeepSea Studios, Sydney, Australia',
         ownerId=7,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
-        bannerImg='aquaventure.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/aquaventure.png',
         endDate='2024-04-20',
     )
 
@@ -78,7 +78,7 @@ def seed_projects():
         location='Quantum Labs, Silicon Valley, USA',
         ownerId=8,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
-        bannerImg='quantumx.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/quantumx1.png',
         endDate='2024-02-28',
     )
 
@@ -88,7 +88,7 @@ def seed_projects():
         location='LunaTech, New York City, USA',
         ownerId=9,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for tech products
-        bannerImg='lunalens.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/lunalens1.png',
         endDate='2024-03-15',
     )
 
@@ -98,7 +98,7 @@ def seed_projects():
         location='SkyTech Innovations, Los Angeles, USA',
         ownerId=10,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
-        bannerImg='skyhawk.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/skyhawk.png',
         endDate='2024-04-10',
     )
     project11 = Project(
@@ -107,7 +107,7 @@ def seed_projects():
         location='EcoTech Solutions, Amsterdam, Netherlands',
         ownerId=6,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
-        bannerImg='ecocharge.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/ecocharge1.png',
         endDate='2024-05-05',
     )
     project12 = Project(
@@ -116,7 +116,7 @@ def seed_projects():
         location='EcoChic Studios, Paris, France',
         ownerId=5,  # Replace with the actual user ID
         categoryId=4,  # Replace with the actual category ID for fashion
-        bannerImg='ecostyle.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/ecostyle1.png',
         endDate='2024-06-30',
     )
 
@@ -126,7 +126,7 @@ def seed_projects():
         location='UrbanX Apparel, New York City, USA',
         ownerId=4,  # Replace with the actual user ID
         categoryId=4,  # Replace with the actual category ID for fashion
-        bannerImg='urbanthreads.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/urbanthreads.png',
         endDate='2024-07-15',
     )
     project14 = Project(
@@ -135,7 +135,7 @@ def seed_projects():
         location='MysticWords Publishing, London, UK',
         ownerId=3,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for books
-        bannerImg='epictales.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/epictales.png',
         endDate='2024-10-20',
     )
 
@@ -145,7 +145,7 @@ def seed_projects():
         location='Culinary Creations, New Orleans, USA',
         ownerId=2,  # Replace with the actual user ID
         categoryId=5,  # Replace with the actual category ID for books
-        bannerImg='cookbook.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/cookbook1.png',
         endDate='2024-11-10',
     )
 
@@ -155,7 +155,7 @@ def seed_projects():
         location='Ink & Intrigue Publishing, New York City, USA',
         ownerId=1,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for books
-        bannerImg='whodunit.jpg',
+        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/mystery1.png',
         endDate='2024-12-05',
     )
 
@@ -181,7 +181,7 @@ def seed_projects():
     db.session.commit()
 
 
-def undo_users():
+def undo_projects():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.projects RESTART IDENTITY CASCADE;")
     else:

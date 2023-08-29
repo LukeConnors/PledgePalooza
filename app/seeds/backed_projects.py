@@ -133,7 +133,7 @@ def seed_backed_projects():
         projectId=6,
         rewardId=17,
         userId=10,
-        amount=35
+        amount=30
     )
     backedProject20 = BackedProject(
         projectId=13,
