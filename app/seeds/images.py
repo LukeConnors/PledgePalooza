@@ -10,96 +10,70 @@ def seed_images():
 
     project_image2 = Image(
         url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Cosmic2.png",
-        imageable_id=2,
+        imageable_id=3,
         imageable_type="project"
     )
 
     project_image3 = Image(
         url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Arcane2.png",
-        imageable_id=2,
+        imageable_id=4,
         imageable_type="project"
     )
     project_image4 = Image(
         url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/DragonsDomain2.png",
-        imageable_id=2,
+        imageable_id=6,
         imageable_type="project"
     )
     project_image5 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/aquaventure2.png",
+        imageable_id=7,
         imageable_type="project"
     )
     project_image6 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/quantumx2.png",
+        imageable_id=8,
         imageable_type="project"
     )
     project_image7 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/lunalens2.png",
+        imageable_id=9,
         imageable_type="project"
     )
     project_image8 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/skyhawk2.png",
+        imageable_id=10,
         imageable_type="project"
     )
     project_image9 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/ecostyle2.png",
+        imageable_id=12,
         imageable_type="project"
     )
     project_image10 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/urbanthreads2.png",
+        imageable_id=13,
         imageable_type="project"
     )
     project_image11 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/epictales2.png",
+        imageable_id=14,
         imageable_type="project"
     )
     project_image12 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/epictales3.png",
+        imageable_id=14,
         imageable_type="project"
     )
     project_image13 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/cookbook2.png",
+        imageable_id=15,
         imageable_type="project"
     )
     project_image14 = Image(
-        url= "",
-        imageable_id=2,
+        url= "https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/mystery2.png",
+        imageable_id=16,
         imageable_type="project"
     )
-    project_image15 = Image(
-        url= "",
-        imageable_id=2,
-        imageable_type="project"
-    )
-    project_image16 = Image(
-        url= "",
-        imageable_id=2,
-        imageable_type="project"
-    )
-    project_image17 = Image(
-        url= "",
-        imageable_id=2,
-        imageable_type="project"
-    )
-    project_image18 = Image(
-        url= "",
-        imageable_id=2,
-        imageable_type="project"
-    )
-    project_image19 = Image(
-        url= "",
-        imageable_id=2,
-        imageable_type="project"
-    )
-
 
 
 
@@ -123,11 +97,6 @@ def seed_images():
     db.session.add(project_image12)
     db.session.add(project_image13)
     db.session.add(project_image14)
-    db.session.add(project_image15)
-    db.session.add(project_image16)
-    db.session.add(project_image17)
-    db.session.add(project_image18)
-    db.session.add(project_image19)
 
 
     db.session.commit()
