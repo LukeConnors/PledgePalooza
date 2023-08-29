@@ -18,3 +18,6 @@ class BackedProject(db.Model):
     user = db.relationship('User', back_populates='backed_project')
     project = db.relationship('Project', back_populates='backed_project')
     reward = db.relationship('Reward', back_populates='backed_project')
+
+    def test():
+        pass
