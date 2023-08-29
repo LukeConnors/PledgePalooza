@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, DateTime, func
-from .db import db
+from .db import db, environment, SCHEMA
 
 class Category(db.Model):
     __tablename__ = 'categories'
