@@ -61,7 +61,7 @@ def seed_projects():
         ownerId=6,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/DragonsDomain.png',
-        endDate=date(2023, 9-30),
+        endDate=date(2023, 9, 30),
     )
     project7 = Project(
         name='AquaVenture: The Underwater VR Odyssey',
@@ -128,7 +128,7 @@ def seed_projects():
         ownerId=4,  # Replace with the actual user ID
         categoryId=4,  # Replace with the actual category ID for fashion
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/urbanthreads.png',
-        endDate='2024-07-15',
+        endDate=date(2024, 7, 15),
     )
     project14 = Project(
         name='Epic Tales: Fantasy Novel Series',

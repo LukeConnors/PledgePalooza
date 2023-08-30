@@ -44,10 +44,11 @@ def upgrade():
 
 
     op.create_table('images',
-    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False, primary_key=True),
     sa.Column('url', sa.String(), nullable=False),
-    sa.Column('imageableId', sa.Integer(), nullable=False),
-    sa.Column('imageableType', sa.String(), nullable=False)
+    sa.Column('imageable_id', sa.Integer(), nullable=False),
+    sa.Column('imageable_type', sa.String(), nullable=False),
+    sa.PrimaryKeyConstraint('id')
     )
 
     op.create_table('rewards',
