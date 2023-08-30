@@ -21,7 +21,7 @@ def seed_projects():
         ownerId=2,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/VRheadset.png',
-        endDate='2024-06-30',
+        endDate=date(2024, 6, 30),
     )
 
     project3 = Project(
@@ -31,7 +31,7 @@ def seed_projects():
         ownerId=3,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Cosmic1.png',
-        endDate='2023-08-15',
+        endDate=date(2023, 8, 15),
     )
 
     project4 = Project(
@@ -41,7 +41,7 @@ def seed_projects():
         ownerId=4,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Arcane1.png',
-        endDate='2023-10-31',
+        endDate=date(2023, 10, 31),
     )
 
     project5 = Project(
@@ -51,7 +51,7 @@ def seed_projects():
         ownerId=5,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Cybernetica1.png',
-        endDate='2024-05-15',
+        endDate=date(2024, 5, 15),
     )
 
     project6 = Project(
@@ -61,7 +61,7 @@ def seed_projects():
         ownerId=6,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/DragonsDomain.png',
-        endDate='2023-09-30',
+        endDate=date(2023, 9-30),
     )
     project7 = Project(
         name='AquaVenture: The Underwater VR Odyssey',
@@ -70,7 +70,7 @@ def seed_projects():
         ownerId=7,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/aquaventure.png',
-        endDate='2024-04-20',
+        endDate=date(2024, 4, 20),
     )
 
     project8 = Project(
@@ -80,7 +80,7 @@ def seed_projects():
         ownerId=8,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/quantumx1.png',
-        endDate='2024-02-28',
+        endDate=date(2024, 2, 28),
     )
 
     project9 = Project(
@@ -90,7 +90,7 @@ def seed_projects():
         ownerId=9,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for tech products
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/lunalens1.png',
-        endDate='2024-03-15',
+        endDate=date(2024, 3, 15),
     )
 
     project10 = Project(
@@ -100,7 +100,7 @@ def seed_projects():
         ownerId=10,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/skyhawk.png',
-        endDate='2024-04-10',
+        endDate=date(2024, 4, 10),
     )
     project11 = Project(
         name='EcoCharge: The Solar-Powered Charger',
@@ -109,7 +109,7 @@ def seed_projects():
         ownerId=6,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/ecocharge1.png',
-        endDate='2024-05-05',
+        endDate=date(2024, 5, 5),
     )
     project12 = Project(
         name='EcoStyle: Sustainable Fashion Line',
@@ -118,7 +118,7 @@ def seed_projects():
         ownerId=5,  # Replace with the actual user ID
         categoryId=4,  # Replace with the actual category ID for fashion
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/ecostyle1.png',
-        endDate='2024-06-30',
+        endDate=date(2024, 6, 30),
     )
 
     project13 = Project(
@@ -137,7 +137,7 @@ def seed_projects():
         ownerId=3,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for books
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/epictales.png',
-        endDate='2024-10-20',
+        endDate=date(2024, 10, 20),
     )
 
     project15 = Project(
@@ -147,7 +147,7 @@ def seed_projects():
         ownerId=2,  # Replace with the actual user ID
         categoryId=5,  # Replace with the actual category ID for books
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/cookbook1.png',
-        endDate='2024-11-10',
+        endDate=date(2024, 11, 10),
     )
 
     project16 = Project(
@@ -157,7 +157,7 @@ def seed_projects():
         ownerId=1,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for books
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/mystery1.png',
-        endDate='2024-12-05',
+        endDate=date(2024, 12, 5),
     )
 
 
