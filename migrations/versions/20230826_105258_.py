@@ -42,35 +42,36 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
-    
+
     op.create_table('images',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('url', sa.String(), nullable=False),
     sa.Column('imageableId', sa.Integer(), nullable=False),
     sa.Column('imageableType', sa.String(), nullable=False)
     )
-                    
+
     op.create_table('rewards',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False, primary_key=True),
     sa.Column('projectId', sa.Integer(), sa.ForeignKey('projects.id'), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
-    sa.Column('est_deliv', sa.DateTime(), nullable=False),
+    sa.Column('est_deliv', sa.Date(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-    
+
     op.create_table('backed_projects',
-    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False, primary_key=True),
     sa.Column('projectId', sa.Integer(), sa.ForeignKey('projects.id'), nullable=False),
     sa.Column('rewardId', sa.Integer(), sa.ForeignKey('rewards.id'), nullable=False),
     sa.Column('userId', sa.Integer(), sa.ForeignKey('users.id'), nullable=False),
-    sa.Column('amount', sa.Integer(), nullable=False),
+    sa.Column('cost', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.PrimaryKeyConstraint('id')
     )
 
 

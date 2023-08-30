@@ -7,139 +7,139 @@ def seed_backed_projects():
         projectId=1,
         rewardId=1,
         userId=2,
-        amount=50
+        cost=50
     )
 
     backedProject2 = BackedProject(
         projectId=3,
         rewardId=9,
         userId=2,
-        amount=55
+        cost=55
     )
 
     backedProject3 = BackedProject(
         projectId=2,
         rewardId=5,
         userId=1,
-        amount=60
+        cost=60
     )
 
     backedProject4 = BackedProject(
         projectId=5,
         rewardId=14,
         userId=1,
-        amount=45
+        cost=45
     )
 
     backedProject5 = BackedProject(
         projectId=4,
         rewardId=61,
         userId=3,
-        amount=30
+        cost=30
     )
 
     backedProject6 = BackedProject(
         projectId=5,
         rewardId=13,
         userId=3,
-        amount=20
+        cost=20
     )
 
     backedProject7 = BackedProject(
         projectId=7,
         rewardId=23,
         userId=4,
-        amount=80
+        cost=80
     )
 
     backedProject8 = BackedProject(
         projectId=9,
         rewardId=29,
         userId=4,
-        amount=205
+        cost=205
     )
 
     backedProject9 = BackedProject(
         projectId=11,
         rewardId=40,
         userId=5,
-        amount=300
+        cost=300
     )
 
     backedProject10 = BackedProject(
         projectId=13,
         rewardId=45,
         userId=5,
-        amount=40
+        cost=40
     )
 
     backedProject11 = BackedProject(
         projectId=15,
         rewardId=54,
         userId=6,
-        amount=50
+        cost=50
     )
 
     backedProject12 = BackedProject(
         projectId=16,
         rewardId=59,
         userId=6,
-        amount=150
+        cost=150
     )
 
     backedProject13 = BackedProject(
         projectId=5,
         rewardId=15,
         userId=7,
-        amount=120
+        cost=120
     )
 
     backedProject14 = BackedProject(
         projectId=8,
         rewardId=25,
         userId=7,
-        amount=300
+        cost=300
     )
 
     backedProject15 = BackedProject(
         projectId=14,
         rewardId=49,
         userId=8,
-        amount=27
+        cost=27
     )
 
     backedProject16 = BackedProject(
         projectId=12,
         rewardId=43,
         userId=8,
-        amount=65
+        cost=65
     )
 
     backedProject17 = BackedProject(
         projectId=10,
         rewardId=36,
         userId=9,
-        amount=105
+        cost=105
     )
 
     backedProject18 = BackedProject(
         projectId=13,
         rewardId=46,
         userId=9,
-        amount=76
+        cost=76
     )
 
     backedProject19 = BackedProject(
         projectId=6,
         rewardId=17,
         userId=10,
-        amount=30
+        cost=30
     )
     backedProject20 = BackedProject(
         projectId=13,
         rewardId=46,
         userId=10,
-        amount=76
+        cost=76
     )
 
     db.session.add(backedProject1)

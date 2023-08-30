@@ -1,5 +1,6 @@
 from app.models import db, User, Project, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import date
 
 
 def seed_projects():
@@ -10,7 +11,7 @@ def seed_projects():
         ownerId=1,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/MysticRealm1.png',
-        endDate='2023-12-31',
+        endDate=date(2023, 12, 31),
     )
 
     project2 = Project(
