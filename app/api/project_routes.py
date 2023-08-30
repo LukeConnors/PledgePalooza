@@ -9,7 +9,8 @@ from app.forms.image_form import ImageForm
 
 # Routes
 
-
+def try():
+    pass
 # !!!!!!!!!!!!! Projects CRUD !!!!!!!!!!!!!!!!!!!
 
 # GET all projects at '/projects'
@@ -36,9 +37,9 @@ project_routes = Blueprint("projects", __name__)
 @login_required
 def upload_description_images():
     form = ImageForm()
- 
+
     if form.validate_on_submit():
-          
+
         image = form.data["image"]
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)

@@ -3,6 +3,7 @@ from sqlalchemy.sql import text
 from datetime import date
 
 
+
 def seed_projects():
     project1 = Project(
         name='Mystic Realms: Legends of Enchantoria',
