@@ -1,19 +1,29 @@
 from flask import Blueprint, request
-from app.models import db, Image, User
+from app.models import db, Image, User, Project
 from flask_login import current_user, login_required
 from app.api.helper_aws import (
     upload_file_to_s3, get_unique_filename)
 from app.forms.image_form import ImageForm
 
-# project_routes = Blueprint('users', __name__)
+project_routes = Blueprint('projects', __name__)
 
 # Routes
 
-def try():
+def trying():
     pass
 # !!!!!!!!!!!!! Projects CRUD !!!!!!!!!!!!!!!!!!!
 
 # GET all projects at '/projects'
+@project_routes.route("/")
+def all_projects():
+    """
+    Query for all projects and returns them in a list of user dictionaries
+    """
+    projects = Project.query.all()
+    return {'projects': [project.to_dict() for project in projects]}
+
+
+
 
 # POST a project for authenticated user '/projects'
 
