@@ -35,6 +35,11 @@ def my_projects():
 
 # GET a project's details '/projects/:id'
 
+@project_routes.route('/<int:id>')
+def project_details(id):
+    project = Project.query.get(id)
+    return project.to_dict()
+
 # PUT a project's details (authenticated user) '/projects/:id'
 
 # DELETE a project by projectId '/projects/:id'
