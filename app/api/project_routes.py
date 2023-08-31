@@ -1,5 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, redirect
 from app.models import db, Image, User, Project, Reward
+from app.forms.project_form import ProjectForm
 from flask_login import current_user, login_required
 from app.api.helper_aws import (
     upload_file_to_s3, get_unique_filename)
@@ -23,6 +24,27 @@ def all_projects():
 
 
 # POST a project for authenticated user '/projects'
+@project_routes.route('/', methods=["POST"])
+def post_form():
+    """
+    Create a new project for an authenticated user
+    """
+    form = ProjectForm()
+    if form.validate_on_submit():
+        new_project = Project(
+            name = form.data["name"],
+            description = form.data["description"],
+            location = form.data["location"],
+            categoryId = form.data["categoryId"],
+            bannerImg = form.data["bannerImg"],
+            endDate = form.data["endDate"],
+            ownerId = current_user.id
+        )
+        db.session.add(new_project)
+        db.session.commit()
+
+        return new_project.to_dict()
+       
 
 # GET all projects owned by current user '/projects/my-projects'
 
@@ -39,6 +61,7 @@ def my_projects():
 def project_details(id):
     project = Project.query.get(id)
     return project.to_dict()
+
 
 # PUT a project's details (authenticated user) '/projects/:id'
 
