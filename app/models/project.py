@@ -36,3 +36,10 @@ class Project(db.Model):
     reward = db.relationship('Reward', back_populates='project')
     image = db.relationship('Image', primaryjoin="and_(Image.imageable_type=='project', foreign(Image.imageable_id)==Project.id)",)
     backed_project = db.relationship('BackedProject', back_populates='project')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description
+        }
