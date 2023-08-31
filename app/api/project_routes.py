@@ -5,6 +5,7 @@ from flask_login import current_user, login_required
 from app.api.helper_aws import (
     upload_file_to_s3, get_unique_filename)
 from app.forms.image_form import ImageForm
+from .helper_aws import upload_file_to_s3
 
 
 project_routes = Blueprint('projects', __name__)
@@ -44,6 +45,9 @@ def post_form():
         db.session.commit()
 
         return new_project.to_dict()
+    
+    else: 
+        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
        
 
 # GET all projects owned by current user '/projects/my-projects'
@@ -67,9 +71,19 @@ def project_details(id):
 
 # DELETE a project by projectId '/projects/:id'
 
-# POST a banner image to a project (authenticated user) '/projects/:id/banner-image'
-
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
+
+@project_routes('/projects/<int:id>/description-images')
+@login_required
+def description_images(id):
+    form = ImageForm()
+    if form.validate_on_submit():
+       image = upload_file_to_s3(form.image)
+        new_image = Image(
+            url = image.url
+            imagable_id = id,
+            imageable_type = "project"
+        )
 
 
 # !!!!!!!!!!!!! Rewards CRUD !!!!!!!!!!!!!!!!!!!

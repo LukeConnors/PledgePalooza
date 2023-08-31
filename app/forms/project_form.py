@@ -12,6 +12,6 @@ class ProjectForm(FlaskForm):
     name = StringField('Name', [validators.DataRequired(), validators.Length(max=100)])
     description = TextAreaField('Description', [validators.DataRequired()])
     location = StringField('Location', [validators.DataRequired()])
-    categoryId = SelectField('Category', [validators.DataRequired()], choices=[("Board Game", 1),("Video Game", 2),("Technology", 3),("Retail", 4), ("Cooking", 5)]) 
-    bannerImg = FileField('Banner Image', [validators.DataRequired()]) 
+    categoryId = SelectField('Category', [validators.DataRequired()], choices=[(1, "Board Game"),(2, "Video Game"),(3, "Technology"),(4, "Retail"), (5, "Cooking")], coerce=int) 
+    bannerImg = StringField('Banner Image', [validators.DataRequired()]) 
     endDate = DateField('End Date', [validators.DataRequired()]) 
