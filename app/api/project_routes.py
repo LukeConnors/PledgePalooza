@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import db, Image, User, Project
+from app.models import db, Image, User, Project, Reward
 from flask_login import current_user, login_required
 from app.api.helper_aws import (
     upload_file_to_s3, get_unique_filename)
@@ -51,7 +51,11 @@ def project_details(id):
 
 # !!!!!!!!!!!!! Rewards CRUD !!!!!!!!!!!!!!!!!!!
 
-# GET rewards by projectId at '/projects/:project-id/rewards-
+# GET rewards by projectId at '/projects/:project-id/rewards'
+@project_routes.route('/<int:id>/rewards')
+def project_rewards(id):
+    rewards = Reward.query.filter(Reward.projectId == id).all()
+    return {'rewards': [reward.to_dict() for reward in rewards]}
 
 # POST a reward by projectId at '/projects/:project-id/rewards' (auth user)
 

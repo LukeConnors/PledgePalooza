@@ -56,7 +56,7 @@ def upgrade():
     sa.Column('projectId', sa.Integer(), sa.ForeignKey('projects.id'), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
-    sa.Column('est_deliv', sa.Date(), nullable=False),
+    sa.Column('est_delivery', sa.Date(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),

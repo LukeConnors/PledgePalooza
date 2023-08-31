@@ -81,7 +81,7 @@ def seed_rewards():
         name='Explorer Pack',
         description='Start your cosmic journey with this essential explorer pack!',
         price=35,
-        est_delivery=date(2023, 0, 1),
+        est_delivery=date(2023, 9, 1),
         quantity=150,
     )
 
@@ -661,11 +661,12 @@ def seed_rewards():
     db.session.add(reward63)
     db.session.add(reward64)
 
-    def undo_rewards():
-        if environment == "production":
-            db.session.execute(f"TRUNCATE table {SCHEMA}.rewards RESTART IDENTITY CASCADE;")
-        else:
-            db.session.execute(text("DELETE FROM rewards"))
+    db.session.commit()
 
+def undo_rewards():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.rewards RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM rewards"))
 
     db.session.commit()
