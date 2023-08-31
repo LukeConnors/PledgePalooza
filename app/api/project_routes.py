@@ -26,6 +26,13 @@ def all_projects():
 
 # GET all projects owned by current user '/projects/my-projects'
 
+@project_routes.route('/my-projects')
+@login_required
+def my_projects():
+    projects = Project.query.filter(current_user.id == Project.ownerId).all()
+
+    return {"my_projects": [project.to_dict() for project in projects]}
+
 # GET a project's details '/projects/:id'
 
 # PUT a project's details (authenticated user) '/projects/:id'
