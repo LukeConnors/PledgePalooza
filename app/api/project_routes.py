@@ -100,6 +100,8 @@ def edit_project_form(id):
 
 # DELETE a project by projectId '/projects/:id'
 
+
+
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
 # @project_routes('/projects/<int:id>/description-images')
@@ -108,7 +110,7 @@ def edit_project_form(id):
 #     form = ImageForm()
 #     if form.validate_on_submit():
 #        image = upload_file_to_s3(form.image)
-#         new_image = Image(
+#       new_image = Image(
 #             url = image.url
 #             imagable_id = id,
 #             imageable_type = "project"
@@ -133,5 +135,10 @@ def project_rewards(id):
 # !!!!!!!!!!!!!!! Backed CRU(no D) !!!!!!!!!!!!!!
 
 # POST backed status by projectId at '/projects/:project-id/back' (auth user)
+@project_routes.route('/<int:id>/back')
+@login_required
+def back_project(id):
+    project = Project.query.get(id)
+    rewards = Reward.query.filter(project.id == Reward.projectId)
 
 # PUT backed amount by projectId at '/projects/:project-id/back'  (auth user)
