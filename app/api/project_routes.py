@@ -145,7 +145,7 @@ def project_rewards(id):
 @login_required  # Change the route and method to PUT
 def add_reward_form(id):
     """
-    Update an existing project for an authenticated user
+    Add a reward for an existing project for an authenticated user
     """
     form = RewardForm()
     if form.validate_on_submit():
@@ -153,7 +153,6 @@ def add_reward_form(id):
         if project:
             # Update the project's attributes with the new data
             new_reward = Reward(
-            # Not sure about projectId
             projectId = project.id,
             name = form.data["name"],
             description = form.data["description"],
