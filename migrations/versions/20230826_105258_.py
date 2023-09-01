@@ -67,7 +67,7 @@ def upgrade():
     op.create_table('backed_projects',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False, primary_key=True),
     sa.Column('projectId', sa.Integer(), sa.ForeignKey('projects.id'), nullable=False),
-    sa.Column('rewardId', sa.Integer(), sa.ForeignKey('rewards.id'), nullable=False),
+    sa.Column('rewardId', sa.Integer(), sa.ForeignKey('rewards.id'), nullable=True),
     sa.Column('userId', sa.Integer(), sa.ForeignKey('users.id'), nullable=False),
     sa.Column('cost', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),

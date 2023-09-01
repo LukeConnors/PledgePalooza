@@ -116,19 +116,19 @@ def delete_project(id):
         return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
-@project_routes('/projects/<int:id>/description-images')
-@login_required
-def description_images(id):
-    form = ImageForm()
-    if form.validate_on_submit():
-            image = upload_file_to_s3(form.image)
-            new_image = Image(
-            url = image.url,
-            imagable_id = id,
-            imageable_type = "project"
-            )
+# @project_routes('/projects/<int:id>/description-images')
+# @login_required
+# def description_images(id):
+#     form = ImageForm()
+#     if form.validate_on_submit():
+#             image = upload_file_to_s3(form.image)
+#             new_image = Image(
+#             url = image.url,
+#             imagable_id = id,
+#             imageable_type = "project"
+#             )
 
-            return new_image.to_dict();
+#             return new_image.to_dict();
 
 
 # !!!!!!!!!!!!! Rewards CRUD !!!!!!!!!!!!!!!!!!!
@@ -144,6 +144,32 @@ def project_rewards(id):
 # UPDATE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
 
 # DELETE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
+
+@project_routes.route('/<int:projectId>/rewards/<int:rewardId>', methods=["DELETE"])
+@login_required  
+def delete_reward(projectId, rewardId):
+    """
+    Delete an existing reward associated with a project for an authenticated user
+    """
+
+    project = Project.query.get(projectId)  # Get the existing project by its ID
+    if not project:
+        return jsonify({"error": "Project not found"}), 404
+        
+    if project.ownerId != current_user.id:
+        return jsonify({"error": "Unauthorized"}), 403
+    
+    reward = Reward.query.get(rewardId)
+    if not reward:
+        return jsonify({"error": "Reward not found"})
+    
+    if project.id != reward.projectId:
+        return jsonify({"error": "Reward does not belong to this project"})
+    
+    db.session.delete(reward)
+    db.session.commit()
+
+    return jsonify({"Message": "Successfully Deleted!"})
 
 
 # !!!!!!!!!!!!!!! Backed CRU(no D) !!!!!!!!!!!!!!

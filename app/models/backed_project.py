@@ -9,7 +9,7 @@ class BackedProject(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     projectId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), nullable=False)
-    rewardId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('rewards.id')), nullable=False)
+    rewardId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('rewards.id')), nullable=True)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     cost = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
