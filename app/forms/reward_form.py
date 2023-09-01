@@ -14,4 +14,4 @@ class RewardForm(FlaskForm):
     description = TextAreaField('Description', [validators.DataRequired()])
     price = IntegerField('Price', [validators.DataRequired()])
     est_delivery = DateField('Estimated Delivery', [validators.DataRequired()])
-    quantity = DateField('Quantity', [validators.DataRequired()])
+    quantity = IntegerField('Quantity', [validators.DataRequired()])
