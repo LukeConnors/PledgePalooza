@@ -47,10 +47,10 @@ def post_form():
         db.session.commit()
 
         return new_project.to_dict()
-    
-    else: 
+
+    else:
         return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
-       
+
 
 # GET all projects owned by current user '/projects/my-projects'
 
@@ -72,31 +72,31 @@ def project_details(id):
 # PUT a project's details (authenticated user) '/projects/:id'
 
 @project_routes.route('/<int:id>', methods=["PUT"])
-@login_required
-def edit_form(id):
+@login_required  # Change the route and method to PUT
+def edit_project_form(id):
     """
-    Updates/edits a project for an authenticated user
+    Update an existing project for an authenticated user
     """
     form = ProjectForm()
     if form.validate_on_submit():
-        project = Project.query.get(id)
-
+        project = Project.query.get(id)  # Get the existing project by its ID
         if project:
+            # Update the project's attributes with the new data
+            project.name = form.data["name"]
+            project.description = form.data["description"]
+            project.location = form.data["location"]
+            project.categoryId = form.data["categoryId"]
+            project.bannerImg = form.data["bannerImg"]
+            project.endDate = form.data["endDate"]
+            # No need to update ownerId; it should remain the same
 
-            project.name = form.data["name"],
-            project.description = form.data["description"],
-            project.location = form.data["location"],
-            project.categoryId = form.data["categoryId"],
-            project.bannerImg = form.data["bannerImg"],
-            project.endDate = form.data["endDate"],
-        
             db.session.commit()
 
             return project.to_dict()
-    
-    else: 
+        else:
+            return jsonify({"error": "Project not found"}), 404
+    else:
         return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
-
 
 # DELETE a project by projectId '/projects/:id'
 
