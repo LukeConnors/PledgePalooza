@@ -1,11 +1,12 @@
 from flask import Blueprint, request, jsonify, redirect
-from app.models import db, Image, User, Project, Reward
+from app.models import db, Image, User, Project, Reward, Category
 from app.forms.project_form import ProjectForm
 from flask_login import current_user, login_required
 from app.api.helper_aws import (
     upload_file_to_s3, get_unique_filename)
 from app.forms.image_form import ImageForm
 from .helper_aws import upload_file_to_s3
+from datetime import date
 
 
 project_routes = Blueprint('projects', __name__)
@@ -26,6 +27,7 @@ def all_projects():
 
 # POST a project for authenticated user '/projects'
 @project_routes.route('/', methods=["POST"])
+@login_required
 def post_form():
     """
     Create a new project for an authenticated user
@@ -69,21 +71,48 @@ def project_details(id):
 
 # PUT a project's details (authenticated user) '/projects/:id'
 
+@project_routes.route('/<int:id>', methods=["PUT"])
+@login_required
+def edit_form(id):
+    """
+    Updates/edits a project for an authenticated user
+    """
+    form = ProjectForm()
+    if form.validate_on_submit():
+        project = Project.query.get(id)
+
+        if project:
+
+            project.name = form.data["name"],
+            project.description = form.data["description"],
+            project.location = form.data["location"],
+            project.categoryId = form.data["categoryId"],
+            project.bannerImg = form.data["bannerImg"],
+            project.endDate = form.data["endDate"],
+        
+            db.session.commit()
+
+            return project.to_dict()
+    
+    else: 
+        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
+
+
 # DELETE a project by projectId '/projects/:id'
 
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
-@project_routes('/projects/<int:id>/description-images')
-@login_required
-def description_images(id):
-    form = ImageForm()
-    if form.validate_on_submit():
-       image = upload_file_to_s3(form.image)
-        new_image = Image(
-            url = image.url
-            imagable_id = id,
-            imageable_type = "project"
-        )
+# @project_routes('/projects/<int:id>/description-images')
+# @login_required
+# def description_images(id):
+#     form = ImageForm()
+#     if form.validate_on_submit():
+#        image = upload_file_to_s3(form.image)
+#         new_image = Image(
+#             url = image.url
+#             imagable_id = id,
+#             imageable_type = "project"
+#         )
 
 
 # !!!!!!!!!!!!! Rewards CRUD !!!!!!!!!!!!!!!!!!!
