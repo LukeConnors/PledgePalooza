@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import User, BackedProject, Project
 
 user_routes = Blueprint('users', __name__)
 
@@ -27,3 +27,13 @@ def user(id):
 
 
 # GET all backed projects by userId at '/users/current/backed-projects'
+
+@user_routes.route('/current/backed-projects')
+@login_required
+def get_all_backed():
+    backed_projects =  BackedProject.query.filter(BackedProject.userId == current_user.id).all()
+    if backed_projects:
+        return {"backed_projects":[project.to_dict() for project in backed_projects]}
+    else:
+        return jsonify({"error":"This user has not backed any projects"})
+

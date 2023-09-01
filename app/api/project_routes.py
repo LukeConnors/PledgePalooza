@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify, redirect
-from app.models import db, Image, User, Project, Reward, Category
+from app.models import db, Image, User, Project, Reward, Category, BackedProject
 from app.forms.project_form import ProjectForm
 from app.forms.reward_form import RewardForm
+from app.forms.back_form import BackForm
 from flask_login import current_user, login_required
 from app.api.helper_aws import (
     upload_file_to_s3, get_unique_filename)
@@ -105,16 +106,21 @@ def edit_project_form(id):
 def delete_project(id):
     """
     Update an existing project for an authenticated user
+    
     """
     project = Project.query.get(id)  # Get the existing project by its ID
-    if project:
+
+    if not project:
+        return jsonify({"error": "Project not found"})
+
+    if project.ownerId == current_user.id:
         db.session.delete(project)
         db.session.commit()
 
         return jsonify({"Message": "Successfully Deleted!"})
 
     else:
-        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
+        return jsonify({"error": "Unauthorized Action", "form errors": form.errors}), 400
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
 # @project_routes('/projects/<int:id>/description-images')
@@ -167,6 +173,26 @@ def add_reward_form(id):
     else:
         return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
 # UPDATE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
+@project_routes.route('/<int:projectId>/rewards/<int:rewardId>', methods=['PUT'])
+@login_required
+def update_reward(projectId, rewardId):
+    form = RewardForm()
+    if form.validate_on_submit():
+        reward = Reward.query.get(rewardId)
+        if reward:
+            reward.name = form.data["name"]
+            reward.description = form.data["description"]
+            reward.price = form.data["price"]
+            reward.estDelivery = form.data["est_delivery"]
+            reward.quantity = form.data["quantity"]
+
+            db.session.commit()
+
+            return reward.to_dict()
+        else:
+            return jsonify({"error": "Reward not found"}), 404
+    else:
+        return jsonify({"error": "Invalid form data", "form errors": form.errors})
 
 # DELETE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
 
@@ -201,4 +227,54 @@ def delete_reward(projectId, rewardId):
 
 # POST backed status by projectId at '/projects/:project-id/back' (auth user)
 
+@project_routes.route('/<int:id>/back', methods=["POST"])
+@login_required
+def post_backed(id):
+    form = BackForm()
+    if form.validate_on_submit():
+        project = Project.query.get(id)
+        rewards = Reward.query.filter(project.id == Reward.projectId).all()
+        if project:
+            new_back = BackedProject(
+                cost = form.data["cost"],
+                projectId = project.id,
+                rewardId = None,
+                userId = current_user.id
+            )
+            for reward in rewards:
+                count = 0
+                if(reward.price <= new_back.cost and reward.price > count):
+                    count = reward.price
+                    new_back.rewardId = reward.id
+            db.session.add(new_back)
+            db.session.commit()
+
+            return new_back.to_dict()
+        else: 
+            return jsonify({"error": "Project does not exist"})
+        
+    else:
+        return jsonify({"error": "Invalid form data", "form.errors": form.errors})
+        
+
 # PUT backed amount by projectId at '/projects/:project-id/back'  (auth user)
+
+@project_routes.route('/<int:id>/back', methods=["PUT"])
+@login_required
+def update_project(id):
+    form = BackForm()
+    if form.validate_on_submit():
+        project = Project.query.get(id)
+        rewards = Reward.query.filter(project.id == Reward.projectId).all()
+        back = BackedProject.query.filter(current_user.id == BackedProject.userId).first()
+        if project:
+            back.cost = form.data["cost"]
+            for reward in rewards:
+                count = 0
+                if(reward.price <= back.cost and reward.price > count):
+                    count = reward.price
+                    back.rewardId = reward.id
+            db.session.commit()
+            return back.to_dict()
+        else:
+            return jsonify({"error": "Project does not exist"})
