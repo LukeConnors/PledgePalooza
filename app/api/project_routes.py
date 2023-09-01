@@ -99,7 +99,21 @@ def edit_project_form(id):
         return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
 
 # DELETE a project by projectId '/projects/:id'
+@project_routes.route('/<int:id>', methods=["DELETE"])
+@login_required  # Change the route and method to PUT
+def delete_project(id):
+    """
+    Update an existing project for an authenticated user
+    """
+    project = Project.query.get(id)  # Get the existing project by its ID
+    if project:
+        db.session.delete(project)
+        db.session.commit()
 
+        return jsonify({"Message": "Successfully Deleted!"})
+
+    else:
+        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
 # @project_routes('/projects/<int:id>/description-images')
