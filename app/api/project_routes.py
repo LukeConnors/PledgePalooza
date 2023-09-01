@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, redirect
 from app.models import db, Image, User, Project, Reward, Category
 from app.forms.project_form import ProjectForm
+from app.forms.reward_form import RewardForm
 from flask_login import current_user, login_required
 from app.api.helper_aws import (
     upload_file_to_s3, get_unique_filename)
@@ -140,7 +141,32 @@ def project_rewards(id):
     return {'rewards': [reward.to_dict() for reward in rewards]}
 
 # POST a reward by projectId at '/projects/:project-id/rewards' (auth user)
+@project_routes.route('/<int:id>', methods=["POST"])
+@login_required  # Change the route and method to PUT
+def add_reward_form(id):
+    """
+    Update an existing project for an authenticated user
+    """
+    form = RewardForm()
+    if form.validate_on_submit():
+        project = Project.query.get(id)
+        if project:
+            # Update the project's attributes with the new data
+            new_reward = Reward(
+            # Not sure about projectId
+            projectId = project.id,
+            name = form.data["name"],
+            description = form.data["description"],
+            price = form.data["price"],
+            estDelivery = form.data["est_delivery"],
+            quantity = form.data["quantity"],
+            )
+        db.session.add(new_reward)
+        db.session.commit()
 
+        return new_reward.to_dict()
+    else:
+        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
 # UPDATE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
 
 # DELETE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
