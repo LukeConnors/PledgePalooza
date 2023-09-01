@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, DateTime, func
+from sqlalchemy import func
+from datetime import date
 
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
@@ -33,8 +34,8 @@ class Project(db.Model):
     category = db.relationship('Category', back_populates='project')
 
     # INTERNAL-MODEL RELATIONS(PRIMARY-KEY):
-    reward = db.relationship('Reward', back_populates='project')
-    image = db.relationship('Image', primaryjoin="and_(Image.imageable_type=='project', foreign(Image.imageable_id)==Project.id)",)
+    reward = db.relationship('Reward', back_populates='project', cascade="all, delete-orphan")
+    image = db.relationship('Image', primaryjoin="and_(Image.imageable_type=='project', foreign(Image.imageable_id)==Project.id)", cascade="all, delete-orphan")
     backed_project = db.relationship('BackedProject', back_populates='project')
 
     def to_dict(self):
