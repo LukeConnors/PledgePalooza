@@ -29,19 +29,19 @@ def all_projects():
 
 # POST a project for authenticated user '/projects'
 @project_routes.route('/', methods=["POST"])
-@login_required
 def post_form():
     """
     Create a new project for an authenticated user
     """
     form = ProjectForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_project = Project(
             name = form.data["name"],
             description = form.data["description"],
             location = form.data["location"],
             categoryId = form.data["categoryId"],
-            bannerImg = form.data["bannerImg"],
+            bannerImg = upload_file_to_s3(form.data["bannerImg"]),
             endDate = form.data["endDate"],
             ownerId = current_user.id
         )
@@ -106,7 +106,7 @@ def edit_project_form(id):
 def delete_project(id):
     """
     Update an existing project for an authenticated user
-    
+
     """
     project = Project.query.get(id)  # Get the existing project by its ID
 
@@ -135,7 +135,7 @@ def delete_project(id):
 #             imageable_type = "project"
 #             )
 
-#             return new_image.to_dict();
+#             return new_image.to_dict()
 
 
 # !!!!!!!!!!!!! Rewards CRUD !!!!!!!!!!!!!!!!!!!
@@ -197,7 +197,7 @@ def update_reward(projectId, rewardId):
 # DELETE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
 
 @project_routes.route('/<int:projectId>/rewards/<int:rewardId>', methods=["DELETE"])
-@login_required  
+@login_required
 def delete_reward(projectId, rewardId):
     """
     Delete an existing reward associated with a project for an authenticated user
@@ -206,17 +206,17 @@ def delete_reward(projectId, rewardId):
     project = Project.query.get(projectId)  # Get the existing project by its ID
     if not project:
         return jsonify({"error": "Project not found"}), 404
-        
+
     if project.ownerId != current_user.id:
         return jsonify({"error": "Unauthorized"}), 403
-    
+
     reward = Reward.query.get(rewardId)
     if not reward:
         return jsonify({"error": "Reward not found"})
-    
+
     if project.id != reward.projectId:
         return jsonify({"error": "Reward does not belong to this project"})
-    
+
     db.session.delete(reward)
     db.session.commit()
 
@@ -250,12 +250,12 @@ def post_backed(id):
             db.session.commit()
 
             return new_back.to_dict()
-        else: 
+        else:
             return jsonify({"error": "Project does not exist"})
-        
+
     else:
         return jsonify({"error": "Invalid form data", "form.errors": form.errors})
-        
+
 
 # PUT backed amount by projectId at '/projects/:project-id/back'  (auth user)
 
