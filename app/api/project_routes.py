@@ -36,15 +36,27 @@ def post_form():
     form = ProjectForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        new_project = Project(
-            name = form.data["name"],
-            description = form.data["description"],
-            location = form.data["location"],
-            categoryId = form.data["categoryId"],
-            bannerImg = upload_file_to_s3(form.data["bannerImg"]),
-            endDate = form.data["endDate"],
-            ownerId = current_user.id
-        )
+        # Get the file from the request
+        banner_img = request.files['bannerImg']
+
+        # Check if a file was uploaded
+        if banner_img:
+            # Generate a unique filename for the image
+            unique_filename = get_unique_filename(banner_img.filename)
+
+            # Upload the file to S3 and get the URL
+            image_url = upload_file_to_s3(banner_img)
+
+            # Set the `bannerImg` field of the project to the S3 URL
+            new_project = Project(
+                name=form.data["name"],
+                description=form.data["description"],
+                location=form.data["location"],
+                categoryId=form.data["categoryId"],
+                bannerImg=image_url["url"],  # Use the S3 URL here
+                endDate=form.data["endDate"],
+                ownerId=current_user.id
+            )
         db.session.add(new_project)
         db.session.commit()
 

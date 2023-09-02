@@ -2,110 +2,119 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-
 function ProjectFormPage() {
-    const [formData, setFormData] = useState({
-        name: "",
-        description: "",
-        location: "",
-        categoryId: "",
-        bannerImg: "",
-        endDate: "",
-    })
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    location: "",
+    categoryId: "",
+    bannerImg: "",
+    endDate: "",
+  });
 
-    const categories = [
-        { id: 1, name: "Board Game" },
-        { id: 2, name: "Video Game" },
-        { id: 3, name: "Technology" },
-        { id: 4, name: "Retail" },
-        { id: 5, name: "Cooking" },
-    ];
+  const categories = [
+    { id: 1, name: "Board Game" },
+    { id: 2, name: "Video Game" },
+    { id: 3, name: "Technology" },
+    { id: 4, name: "Retail" },
+    { id: 5, name: "Cooking" },
+  ];
 
-// const csrf = document.querySelector("[name=csrf_token]").value
+  // const csrf = document.querySelector("[name=csrf_token]").value
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(formData)
-        try{
-            const res = await fetch('/api/projects', {
-                method: "POST",
-                headers: {"content-type": "application/json"},
-                body: JSON.stringify(formData)
-            })
-            if (res.ok){
-                const data = await res.json()
-                console.log(data)
-            } else {
-                const errorData = await res.json()
-                console.log(errorData)
-            }
-        } catch(e){
-            console.log("fetch error:", e)
-        }
-    };
-return (
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formDataToSend = new FormData();
+
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("description", formData.description);
+    formDataToSend.append("location", formData.location);
+    formDataToSend.append("categoryId", formData.categoryId);
+    formDataToSend.append("endDate", formData.endDate);
+    formDataToSend.append("bannerImg", formData.bannerImg);
+
+    try {
+      const res = await fetch("/api/projects/", {
+        method: "POST",
+        body: formDataToSend,
+        credentials: "include",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+      } else {
+        const errorData = await res.json();
+        console.log(errorData);
+      }
+    } catch (e) {
+      console.log("fetch error:", e);
+    }
+  };
+
+  return (
     <>
-    <h1>Create a Project</h1>
-    <form onSubmit={handleSubmit}>
+      <h1>Create a Project</h1>
+      <form onSubmit={handleSubmit}>
         <label>
-            Name
-            <input
+          Name
+          <input
             type="text"
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
-            />
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          />
         </label>
         <label>
-            Description
-            <input
+          Description
+          <input
             type="textarea"
             value={formData.description}
-            onChange={(e) => setFormData({...formData, description: e.target.value})}
-            />
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          />
         </label>
         <label>
-            Location
-            <input
+          Location
+          <input
             type="text"
             value={formData.location}
-            onChange={(e) => setFormData({...formData, location: e.target.value})}
-            />
+            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+          />
         </label>
         <label>
-            <select name="categories"
+          <select
+            name="categories"
             value={formData.categoryId}
-            onChange={(e) => setFormData({...formData, categoryId: e.target.value})}
-            >
-            <option disabled value="">Select a category</option>
+            onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
+          >
+            <option disabled value="">
+              Select a category
+            </option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}
-            </select>
+          </select>
         </label>
         <label>
-            Banner Image
-            <input
+          Banner Image
+          <input
             type="file"
-            value={formData.bannerImg}
             accept=".png, .jpeg, .jpg"
-            onChange={(e) => setFormData({...formData, bannerImg: e.target.value})}
-            />
+            onChange={(e) => setFormData({ ...formData, bannerImg: e.target.files[0] })}
+          />
         </label>
         <label>
-            Project Closing Date
-            <input
+          Project Closing Date
+          <input
             type="date"
             value={formData.endDate}
-            onChange={(e) => setFormData({...formData, endDate: e.target.value})}
-            />
+            onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
+          />
         </label>
         <button type="submit">Submit</button>
-    </form>
+      </form>
     </>
-)
-
+  );
 }
 
-export default ProjectFormPage
+export default ProjectFormPage;

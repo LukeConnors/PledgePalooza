@@ -41,5 +41,6 @@ class Project(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'description': self.description
+            'description': self.description,
+            "bannerImg": self.bannerImg
         }
