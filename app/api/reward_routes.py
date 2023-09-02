@@ -7,7 +7,7 @@ from app.forms.image_form import ImageForm
 from .helper_aws import upload_file_to_s3
 from datetime import date
 
-project_routes = Blueprint('rewards', __name__)
+reward_routes = Blueprint('rewards', __name__)
 
 #  POST an Image to a reward by reward ID '/rewards/:rewardId'
 @reward_routes.route('/<int:id>/image')
@@ -19,7 +19,7 @@ def post_image(id):
         img_url = upload_file_to_s3(img)
     if form.validate_on_submit():
             new_image = Image(
-            url = image_url["url"],
+            url = img_url["url"],
             imagable_id = id,
             imageable_type = "reward"
             )
