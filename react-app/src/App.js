@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import ProjectFormPage from "./components/ProjectForm";
+import ProjectDetails from "./components/ProjectDetails";
 import Projects from "./components/Projects";
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/new-project">
             <ProjectFormPage />
+          </Route>
+          <Route path="/projects/:projectId">
+            <ProjectDetails />
           </Route>
         </Switch>
       )}
