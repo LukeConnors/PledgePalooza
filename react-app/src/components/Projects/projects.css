@@ -5,6 +5,7 @@
 }
 
 .home-sub-text {
+  margin: 10px 0;
   color: #656969;
 }
 
@@ -37,7 +38,7 @@
 }
 
 .hero-card-sub-text {
-  margin-top: -32px;
+  margin-top: -5px;
   font-size: 0.8rem;
   color: #656969;
 }
