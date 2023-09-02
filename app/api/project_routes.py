@@ -135,19 +135,22 @@ def delete_project(id):
         return jsonify({"error": "Unauthorized Action", "form errors": form.errors}), 400
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
-# @project_routes('/projects/<int:id>/description-images')
-# @login_required
-# def description_images(id):
-#     form = ImageForm()
-#     if form.validate_on_submit():
-#             image = upload_file_to_s3(form.image)
-#             new_image = Image(
-#             url = image.url,
-#             imagable_id = id,
-#             imageable_type = "project"
-#             )
+@project_routes('/projects/<int:id>/description-images')
+@login_required
+def description_images(id):
+    form = ImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    img = request.files['image']
+    if img:
+        img_url = upload_file_to_s3(img)
+    if form.validate_on_submit():
+            new_image = Image(
+            url = image_url["url"],
+            imagable_id = id,
+            imageable_type = "project"
+            )
 
-#             return new_image.to_dict()
+            return new_image.to_dict()
 
 
 # !!!!!!!!!!!!! Rewards CRUD !!!!!!!!!!!!!!!!!!!
@@ -233,6 +236,7 @@ def delete_reward(projectId, rewardId):
     db.session.commit()
 
     return jsonify({"Message": "Successfully Deleted!"})
+
 
 
 # !!!!!!!!!!!!!!! Backed CRU(no D) !!!!!!!!!!!!!!
