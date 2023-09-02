@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import "./ProjectDetails.css"
+import OpenModalButton from "../OpenModalButton";
+import ImageFormModal from "../DesImageFormModal";
 
 
 function ProjectDetails() {
@@ -9,8 +11,8 @@ function ProjectDetails() {
     const [rewards, setRewards] = useState([]);
     const {projectId} = useParams();
 
-    
-    useEffect(()=> {          
+
+    useEffect(()=> {
         console.log("projectId", projectId)
             fetch(`/api/projects/${projectId}`)
                 .then(response => response.json())
@@ -35,12 +37,16 @@ function ProjectDetails() {
             console.log(project)
 
 
-        
+
             return (
                 <div>
                     <div className="project-detail">
                         <h1>{project.name}</h1>
                         <p>{project.description}</p>
+                        <OpenModalButton
+                            buttonText={"Add an Image"}
+                            modalComponent={<ImageFormModal />}
+                        />
                         <img src={project.bannerImg} alt={project.name} />
                     </div>
 
@@ -49,6 +55,9 @@ function ProjectDetails() {
                             <div key={reward.id} className="reward-tile">
                                 <h3>{reward.name}</h3>
                                 <p>{reward.description}</p>
+                                <OpenModalButton
+                                buttonText={"Add an Image"}
+                                />
                                 <p>Price: ${reward.price}</p>
                             </div>
                         ))}
