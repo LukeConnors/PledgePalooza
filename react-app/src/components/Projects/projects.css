@@ -1,0 +1,74 @@
+.home-hero-main-text > * {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
+
+.home-sub-text {
+  color: #656969;
+}
+
+.home-hero-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 70%;
+  height: 100px;
+  margin: 0 auto;
+  border: 1px lightgray solid;
+  font-family: "Open Sans", sans-serif;
+  box-shadow: 0 6px 6px hsl(0deg 0% 0% / 0.3);
+}
+.hero-card-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid lightgray;
+}
+.hero-card-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid lightgray;
+}
+.hero-card-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-card-sub-text {
+  margin-top: -32px;
+  font-size: 0.8rem;
+  color: #656969;
+}
+.hero-card-main-text {
+  margin-top: 15px;
+  font-size: 1.9rem;
+  color: #017362;
+}
+
+.main-project-image {
+  height: 500px;
+  border-radius: 10px;
+}
+
+.project-card {
+  margin-top: 20px;
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.home-project-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 90px;
+}
+
+.home-project-details > * {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
