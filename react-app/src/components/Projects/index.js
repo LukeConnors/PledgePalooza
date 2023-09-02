@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./projects.css";
+import { Link } from "react-router-dom";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -35,35 +36,39 @@ function Projects() {
         <div>
           {projects.map((project, index) =>
             index % 2 === 0 ? (
-              <div className="project-card" key={project.id}>
-                <div>
-                  <img
-                    className="main-project-image"
-                    alt={`${project.name}`}
-                    src={project.bannerImg}
-                  ></img>
+              <Link to={`/projects/${project.id}`}>
+                <div className="project-card" key={project.id}>
+                  <div>
+                    <img
+                      className="main-project-image"
+                      alt={`${project.name}`}
+                      src={project.bannerImg}
+                    ></img>
+                  </div>
+                  <div className="home-project-details">
+                    <h1 key={project.id}>{project.name}</h1>
+                    <p>{project.description}</p>
+                    <p>By: {project.ownerName}</p>
+                  </div>
                 </div>
-                <div className="home-project-details">
-                  <h1 key={project.id}>{project.name}</h1>
-                  <p>{project.description}</p>
-                  <p>By: {project.ownerName}</p>
-                </div>
-              </div>
+              </Link>
             ) : (
-              <div className="project-card" key={project.id}>
-                <div className="home-project-details">
-                  <h1 key={project.id}>{project.name}</h1>
-                  <p>{project.description}</p>
-                  <p>By: {project.ownerName}</p>
+              <Link to={`/projects/${project.id}`}>
+                <div className="project-card" key={project.id}>
+                  <div className="home-project-details">
+                    <h1 key={project.id}>{project.name}</h1>
+                    <p>{project.description}</p>
+                    <p>By: {project.ownerName}</p>
+                  </div>
+                  <div>
+                    <img
+                      className="main-project-image"
+                      alt={`${project.name}`}
+                      src={project.bannerImg}
+                    ></img>
+                  </div>
                 </div>
-                <div>
-                  <img
-                    className="main-project-image"
-                    alt={`${project.name}`}
-                    src={project.bannerImg}
-                  ></img>
-                </div>
-              </div>
+              </Link>
             )
           )}
         </div>
