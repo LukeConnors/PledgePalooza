@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import ProjectFormPage from "./components/ProjectForm"
+import ProjectDetails from "./components/ProjectDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
           <Route path="/new-project">
             <ProjectFormPage />
           </Route>
+          <Route path="/projects/:projectId">
+            <ProjectDetails />
+          </Route> 
         </Switch>
       )}
     </>
