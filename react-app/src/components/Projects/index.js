@@ -34,7 +34,7 @@ function Projects() {
         </div>
       </div>
       <div>
-        <h2>Featured Projects:</h2>
+        <h2 className="feat-projects">Featured Projects:</h2>
         {isLoaded ? (
           <div>
             {projects.map((project, index) =>
