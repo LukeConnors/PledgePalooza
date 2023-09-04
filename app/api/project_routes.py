@@ -135,22 +135,25 @@ def delete_project(id):
         return jsonify({"error": "Unauthorized Action", "form errors": form.errors}), 400
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
-@project_routes.route('/projects/<int:id>/description-images')
+@project_routes.route('/<int:id>/des-images')
 @login_required
 def description_images(id):
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    img = request.files['image']
-    if img:
-        img_url = upload_file_to_s3(img)
     if form.validate_on_submit():
+        img = request.files['image']
+        if img:
+            img_url = upload_file_to_s3(img)
+
             new_image = Image(
             url = img_url["url"],
             imagable_id = id,
             imageable_type = "project"
             )
 
-            return new_image.to_dict()
+        db.session.add(new_image)
+        db.session.commit()
+        return new_image.to_dict()
 
 
 # !!!!!!!!!!!!! Rewards CRUD !!!!!!!!!!!!!!!!!!!
@@ -247,6 +250,7 @@ def delete_reward(projectId, rewardId):
 @login_required
 def post_backed(id):
     form = BackForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         project = Project.query.get(id)
         rewards = Reward.query.filter(project.id == Reward.projectId).all()

@@ -4,12 +4,17 @@ import { Redirect, useParams } from "react-router-dom";
 import "./ProjectDetails.css"
 import OpenModalButton from "../OpenModalButton";
 import ImageFormModal from "../DesImageFormModal";
+import BackProjectModal from "../BackProjectModal";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../store/session";
+import RewardImageFormModal from "../RewardImageModal";
 
 
 function ProjectDetails() {
     const [project, setProject] = useState({});
     const [rewards, setRewards] = useState([]);
     const {projectId} = useParams();
+    const user = useSelector(userSelector)
 
 
     useEffect(()=> {
@@ -43,10 +48,18 @@ function ProjectDetails() {
                     <div className="project-detail">
                         <h1>{project.name}</h1>
                         <p>{project.description}</p>
-                        <OpenModalButton
-                            buttonText={"Add an Image"}
-                            modalComponent={<ImageFormModal />}
-                        />
+                        {console.log("!!!!!!!", project.ownerId)}
+                        {user.id === project.ownerId ? (
+                            <OpenModalButton
+                                buttonText={"Add an Image"}
+                                modalComponent={<ImageFormModal projectId={projectId} />}
+                            />
+                        ) : (
+                            <OpenModalButton
+                            buttonText={"Back this project"}
+                            modalComponent={<BackProjectModal projectId={projectId} />}
+                            />
+                        )}
                         <img src={project.bannerImg} alt={project.name} />
                     </div>
 
@@ -57,6 +70,7 @@ function ProjectDetails() {
                                 <p>{reward.description}</p>
                                 <OpenModalButton
                                 buttonText={"Add an Image"}
+                                modalComponent={<RewardImageFormModal rewardId={reward.id}/>}
                                 />
                                 <p>Price: ${reward.price}</p>
                             </div>
@@ -68,6 +82,4 @@ function ProjectDetails() {
 
 
 
-
-
-export default ProjectDetails
+ export default ProjectDetails

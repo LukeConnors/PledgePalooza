@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useModal } from "../../context/Modal";
 
 
-function ImageFormModal(projectId) {
+function RewardImageFormModal(rewardId) {
     const {closeModal} = useModal()
 
     const [formData, setFormData] = useState({
@@ -14,12 +14,11 @@ function ImageFormModal(projectId) {
         e.preventDefault();
         const info = new FormData()
         info.append("url", formData.url);
-        console.log("THIS IS OUR URL", formData.url)
         try {
-            const res = await fetch(`/api/projects/${projectId.projectId}/des-images`, {
+            const res = await fetch(`/api/rewards/${rewardId}/image`, {
               method: "POST",
               body: formData,
-              credentials: "include"
+              credentials: "include",
             });
             if (res.ok) {
               const data = await res.json();
@@ -36,7 +35,7 @@ function ImageFormModal(projectId) {
 
 return (
     <>
-    <h1>Add an image to your project description</h1>
+    <h1>Add an image to your project reward</h1>
     <form onSubmit={handleSubmit}>
         <label>
             Description Image
@@ -52,4 +51,4 @@ return (
 );
 }
 
-export default ImageFormModal;
+export default RewardImageFormModal;

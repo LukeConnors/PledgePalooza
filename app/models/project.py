@@ -43,5 +43,6 @@ class Project(db.Model):
             'name': self.name,
             'description': self.description,
             "bannerImg": self.bannerImg,
+            "ownerId": self.ownerId,
             "ownerName" : self.user.username
         }
