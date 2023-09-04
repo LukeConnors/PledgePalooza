@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     fetch("/api/projects/")
       .then((res) => res.json())
       .then((data) => setProjects(data.project));
+    setIsLoaded(true);
   }, []);
   console.log(projects);
   return (
@@ -33,45 +35,49 @@ function Projects() {
       </div>
       <div>
         <h2>Featured Projects:</h2>
-        <div>
-          {projects.map((project, index) =>
-            index % 2 === 0 ? (
-              <Link to={`/projects/${project.id}`}>
-                <div className="project-card" key={project.id}>
-                  <div>
-                    <img
-                      className="main-project-image"
-                      alt={`${project.name}`}
-                      src={project.bannerImg}
-                    ></img>
+        {isLoaded ? (
+          <div>
+            {projects.map((project, index) =>
+              index % 2 === 0 ? (
+                <Link to={`/projects/${project.id}`}>
+                  <div className="project-card" key={project.id}>
+                    <div>
+                      <img
+                        className="main-project-image"
+                        alt={`${project.name}`}
+                        src={project.bannerImg}
+                      ></img>
+                    </div>
+                    <div className="home-project-details">
+                      <h1 key={project.id}>{project.name}</h1>
+                      <p>{project.description}</p>
+                      <p>By: {project.ownerName}</p>
+                    </div>
                   </div>
-                  <div className="home-project-details">
-                    <h1 key={project.id}>{project.name}</h1>
-                    <p>{project.description}</p>
-                    <p>By: {project.ownerName}</p>
+                </Link>
+              ) : (
+                <Link to={`/projects/${project.id}`}>
+                  <div className="project-card" key={project.id}>
+                    <div className="home-project-details">
+                      <h1 key={project.id}>{project.name}</h1>
+                      <p>{project.description}</p>
+                      <p>By: {project.ownerName}</p>
+                    </div>
+                    <div>
+                      <img
+                        className="main-project-image"
+                        alt={`${project.name}`}
+                        src={project.bannerImg}
+                      ></img>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ) : (
-              <Link to={`/projects/${project.id}`}>
-                <div className="project-card" key={project.id}>
-                  <div className="home-project-details">
-                    <h1 key={project.id}>{project.name}</h1>
-                    <p>{project.description}</p>
-                    <p>By: {project.ownerName}</p>
-                  </div>
-                  <div>
-                    <img
-                      className="main-project-image"
-                      alt={`${project.name}`}
-                      src={project.bannerImg}
-                    ></img>
-                  </div>
-                </div>
-              </Link>
-            )
-          )}
-        </div>
+                </Link>
+              )
+            )}
+          </div>
+        ) : (
+          <h1>Loading...</h1>
+        )}
       </div>
     </>
   );
