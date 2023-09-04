@@ -163,7 +163,7 @@
 
 .info-section {
     display: flex;
-    align-items: center; /* Align items vertically in the center */
+    align-items: center; 
     gap: 16px;   
 }
 
@@ -176,6 +176,7 @@
 
 @media (min-width: 600px) {
     .info-icon {
-        margin-bottom: 0;  /* Remove margin when in row layout */
+        margin-bottom: 0;  
     }
 }
+
