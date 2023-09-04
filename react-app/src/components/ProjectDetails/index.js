@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import "./ProjectDetails.css";
 import OpenModalButton from "../OpenModalButton";
 import ImageFormModal from "../DesImageFormModal";
 import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
+import chatLogo from "../../chat.png"
+import checkLogo from "../../check.png"
+import megaphoneLogo from "../../megaphone.png"
 
 import RewardImageFormModal from "../RewardImageModal";
 
 function ProjectDetails() {
+  const history = useHistory();
   const [project, setProject] = useState({});
   const [rewards, setRewards] = useState([]);
   const [rewardImages, setRewardImages] = useState({});
@@ -69,14 +73,22 @@ function ProjectDetails() {
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
           <div className="stats-and-rewards">
             <div className="project-stats">
-              <div>${pledgedAmount} pledged</div>
-              <div>{backerCount} backers</div>
-              <div>{daysLeft} days left</div>
+              <div>${pledgedAmount}</div> 
+              <div>pledged</div>
+              <div>{backerCount}</div>
+              <div> backers</div>
+              <div>{daysLeft}</div>
+              <div>days left</div>
               {user?.id !== project.ownerId ? (
-                <OpenModalButton
-                  buttonText={"Back this project"}
-                  modalComponent={<BackProjectModal projectId={projectId} />}
-                />
+                // Check if the user is logged in
+                user ? (
+                  <OpenModalButton
+                    buttonText={"Back this project"}
+                    modalComponent={<BackProjectModal projectId={projectId} />}
+                  />
+                ) : (
+                  <button onClick={() => history.push("/login")}>Back this project</button>
+                )
               ) : (
                 <OpenModalButton
                   buttonText={"Add a Description Image"}
@@ -84,6 +96,8 @@ function ProjectDetails() {
                 />
               )}
             </div>
+
+            
 
             <div className="reward-list">
               {rewards.map((reward) => (
@@ -97,10 +111,13 @@ function ProjectDetails() {
                       alt={`Reward for ${reward.name}`}
                     />
                   ) : (
-                    <OpenModalButton
-                      buttonText={"Add an Image"}
-                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                    />
+                    user &&
+                    user.id === reward.ownerId && (
+                      <OpenModalButton
+                        buttonText={"Add an Image"}
+                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                      />
+                    )
                   )}
                   <p>Price: ${reward.price}</p>
                 </div>
@@ -110,16 +127,16 @@ function ProjectDetails() {
         </div>
 
         <div className="grid-container flex">
-          <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 1" />
-            <p>Kickstarter connects creators with backers to fund projects.</p>
+          <div className="info-section">
+            <img className="info-icon" src={checkLogo} alt="Info Icon 1" />
+            <p>Pledge Palooza connects creators with backers to fund projects.</p>
           </div>
-          <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 2" />
+          <div className="info-section">
+            <img className="info-icon" src={chatLogo} alt="Info Icon 2" />
             <p>Rewards aren’t guaranteed, but creators must regularly update backers.</p>
           </div>
-          <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 3" />
+          <div className="info-section">
+            <img className="info-icon" src={megaphoneLogo} alt="Info Icon 3" />
             <p>
               You’re only charged if the project meets its funding goal by the campaign deadline.
             </p>

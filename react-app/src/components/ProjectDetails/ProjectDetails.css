@@ -51,7 +51,16 @@
 }
 
 .project-stats > div:first-child {
-    color: green;
+    font-size: 28px;
+    font-weight: 700;
+    color: #03731f;
+}
+
+.project-stats > div:nth-child(3),
+.project-stats > div:nth-child(5) {
+    font-size: 28px;
+    font-weight: 700;
+    color: #656969;
 }
 
 .project-stats > button {
@@ -107,12 +116,13 @@
 .grid-container {
     display: flex;
     justify-content: space-between;
-    max-width: 1366px;
+    max-width: 100vw;
     margin-left: auto;
     margin-right: auto;
     padding-left: 24px;
     padding-right: 24px;
     box-sizing: border-box;
+    background-color: beige;
 }
 
 @media (min-width: 600px) {
@@ -141,15 +151,31 @@
 }
 
 .flex-row-md {
-    flex-direction: row;
-}
-
-.flex-column {
     flex-direction: column;
 }
 
+@media (min-width: 600px) {
+    .flex-row-md {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.info-section {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    gap: 16px;   
+}
+
 .info-icon {
-    width: 60px;  
-    height: 60px;
-    margin-bottom: 10px;  
+    max-width: 24px; 
+    max-height: 2.0em; 
+    vertical-align: middle; 
+}
+
+
+@media (min-width: 600px) {
+    .info-icon {
+        margin-bottom: 0;  /* Remove margin when in row layout */
+    }
 }
