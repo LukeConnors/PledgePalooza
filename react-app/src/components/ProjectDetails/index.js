@@ -72,11 +72,18 @@ function ProjectDetails() {
                         <div>${pledgedAmount} pledged</div>
                         <div>{backerCount} backers</div>
                         <div>{daysLeft} days left</div>
-                        {user.id !== project.ownerId && (
+                        {user.id !== project.ownerId ? (
                             <OpenModalButton
                                 buttonText={"Back this project"}
                                 modalComponent={<BackProjectModal projectId={projectId} />}
                             />
+                        ): (
+                             
+                                <OpenModalButton
+                                    buttonText={"Add a Description Image"}
+                                    modalComponent={<ImageFormModal projectId={projectId} />}
+                                />
+                            
                         )}
                     </div>
 
@@ -120,12 +127,7 @@ function ProjectDetails() {
         </div>
     </div>
 
-            {user.id === project.ownerId && (
-                <OpenModalButton
-                    buttonText={"Add an Image"}
-                    modalComponent={<ImageFormModal projectId={projectId} />}
-                />
-            )}
+        
         </div>
     </div>
   );
