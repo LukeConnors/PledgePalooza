@@ -22,10 +22,10 @@ function RewardImageFormModal(rewardId) {
         body: info,
         credentials: "include",
       });
-
+      console.log(res)
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         closeModal();
       } else {
         const errorData = await res.json();
@@ -44,6 +44,7 @@ function RewardImageFormModal(rewardId) {
           Description Image
           <input
             type="file"
+            name="url"
             accept=".png, .jpeg, .jpg"
             onChange={(e) => setFormData({ ...formData, url: e.target.files[0] })}
           />

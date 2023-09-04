@@ -52,6 +52,14 @@ function ProjectFormPage() {
     }
   };
 
+  function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Create a Project</h1>
@@ -109,6 +117,7 @@ function ProjectFormPage() {
           <input
             type="date"
             value={formData.endDate}
+            min={getCurrentDate()}
             onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
           />
         </label>
