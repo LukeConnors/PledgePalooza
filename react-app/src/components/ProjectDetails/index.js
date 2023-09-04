@@ -73,9 +73,12 @@ function ProjectDetails() {
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
           <div className="stats-and-rewards">
             <div className="project-stats">
-              <div>${pledgedAmount} pledged</div>
-              <div>{backerCount} backers</div>
-              <div>{daysLeft} days left</div>
+              <div>${pledgedAmount}</div> 
+              <div>pledged</div>
+              <div>{backerCount}</div>
+              <div> backers</div>
+              <div>{daysLeft}</div>
+              <div>days left</div>
               {user?.id !== project.ownerId ? (
                 // Check if the user is logged in
                 user ? (
@@ -93,6 +96,8 @@ function ProjectDetails() {
                 />
               )}
             </div>
+
+            
 
             <div className="reward-list">
               {rewards.map((reward) => (
