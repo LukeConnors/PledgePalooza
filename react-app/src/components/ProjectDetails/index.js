@@ -104,6 +104,22 @@ function ProjectDetails() {
                 </div>
             </div>
 
+            
+            <div className="grid-container flex">
+                 <div className="flex-column flex-row-md">
+                    <img className="info-icon" src="" alt="Info Icon 1"/>
+                    <p>Kickstarter connects creators with backers to fund projects.</p>
+            </div>
+            <div className="flex-column flex-row-md">
+                <img className="info-icon" src="" alt="Info Icon 2"/>
+                <p>Rewards aren’t guaranteed, but creators must regularly update backers.</p>
+        </div>
+        <div className="flex-column flex-row-md">
+            <img className="info-icon" src="" alt="Info Icon 3"/>
+            <p>You’re only charged if the project meets its funding goal by the campaign deadline.</p>
+        </div>
+    </div>
+
             {user.id === project.ownerId && (
                 <OpenModalButton
                     buttonText={"Add an Image"}
@@ -112,7 +128,7 @@ function ProjectDetails() {
             )}
         </div>
     </div>
-);
+  );
 }
 
 export default ProjectDetails;
