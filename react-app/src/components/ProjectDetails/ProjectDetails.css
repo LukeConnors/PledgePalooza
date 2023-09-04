@@ -154,7 +154,7 @@
 .info-section {
     display: flex;
     align-items: center; /* Align items vertically in the center */
-    gap: 16px;   /* Spacing between the icon and the text */
+    gap: 16px;   
 }
 
 .info-icon {
