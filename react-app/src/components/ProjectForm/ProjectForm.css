@@ -39,7 +39,7 @@
 
 .project-form button {
   padding: 12px 20px;
-  background-color: #2b7a78;
+  background-color: green;
   color: #fff;
   border: solid;
   border-radius: 5px;
@@ -49,4 +49,10 @@
 
 .project-form button:hover {
   background-color: #1A5553;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 4px;
 }
