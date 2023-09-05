@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <div className="nav-bar">
-        <NavLink className="start-project" to="/">
+        <NavLink className="start-project" exact to="/new-project">
           Start a project
         </NavLink>
         <NavLink className="logo" exact to="/">
