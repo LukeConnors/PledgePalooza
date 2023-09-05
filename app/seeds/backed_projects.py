@@ -1,4 +1,4 @@
-from app.models import db, User, Project, Category, Reward, BackedProject, environment, SCHEMA
+from app.models import db, BackedProject, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
