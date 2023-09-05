@@ -39,7 +39,7 @@ function Projects() {
           <div>
             {projects.map((project, index) =>
               index % 2 === 0 ? (
-                <Link to={`/projects/${project.id}`}>
+                <Link to={`/projects/${project.id}`} key={project.id}>
                   <div className="project-card" key={project.id}>
                     <div>
                       <img
@@ -56,7 +56,7 @@ function Projects() {
                   </div>
                 </Link>
               ) : (
-                <Link to={`/projects/${project.id}`}>
+                <Link to={`/projects/${project.id}`} key={project.id}>
                   <div className="project-card" key={project.id}>
                     <div className="home-project-details">
                       <h1 key={project.id}>{project.name}</h1>
