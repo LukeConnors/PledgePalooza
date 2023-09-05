@@ -20,7 +20,7 @@ def post_image(id):
     if form.validate_on_submit():
             new_image = Image(
             url = img_url["url"],
-            imagable_id = id,
+            imageable_id = id,
             imageable_type = "reward"
             )
 

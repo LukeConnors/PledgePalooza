@@ -18,7 +18,7 @@ function ImageFormModal(projectId) {
         try {
             const res = await fetch(`/api/projects/${projectId.projectId}/des-images`, {
               method: "POST",
-              body: formData,
+              body: info,
               credentials: "include"
             });
             if (res.ok) {
