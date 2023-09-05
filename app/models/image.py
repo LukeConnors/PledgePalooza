@@ -16,6 +16,14 @@ class Image(db.Model):
     imageable_type = db.Column(db.String, nullable=False)
 
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'url': self.url,
+            'imageable_id': self.imageable_id,
+            'imageable_type': self.imageable_type
+        }
+
 
     # EXTERNAL-MODEL RELATIONSHIPS(FOREIGN-KEYS):
     #   Relates to projectId

@@ -135,24 +135,24 @@ def delete_project(id):
         return jsonify({"error": "Unauthorized Action", "form errors": form.errors}), 400
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
-@project_routes.route('/<int:id>/des-images')
+@project_routes.route('/<int:id>/des-images', methods=["POST"])
 @login_required
 def description_images(id):
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        img = request.files['image']
+        img = request.files['url']
         if img:
             img_url = upload_file_to_s3(img)
-
             new_image = Image(
             url = img_url["url"],
-            imagable_id = id,
+            imageable_id = id,
             imageable_type = "project"
             )
 
         db.session.add(new_image)
         db.session.commit()
+
         return new_image.to_dict()
 
 
