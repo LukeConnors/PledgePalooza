@@ -54,8 +54,8 @@ function ProjectFormPage() {
 
   return (
     <>
-      <h1>Create a Project</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 style={{ textAlign: "center" }}>Create a Project</h1>
+      <form onSubmit={handleSubmit} className="project-form">
         <label>
           Name
           <input

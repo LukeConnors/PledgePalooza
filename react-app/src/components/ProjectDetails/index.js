@@ -61,79 +61,73 @@ function ProjectDetails() {
 
   return (
     <div>
-        <div className="project-detail">
-            <h1>{project.name}</h1>
-            <p>{project.description}</p>
+      <div className="project-detail">
+        <h1>{project.name}</h1>
+        <p>{project.description}</p>
 
-            <div className="project-main-content">
-                <img className="project-banner" src={project.bannerImg} alt={project.name} />
-                <div className="stats-and-rewards">
-                    <div className="project-stats">
-                        <div>${pledgedAmount} pledged</div>
-                        <div>{backerCount} backers</div>
-                        <div>{daysLeft} days left</div>
-                        {user.id !== project.ownerId ? (
-                            <OpenModalButton
-                                buttonText={"Back this project"}
-                                modalComponent={<BackProjectModal projectId={projectId} />}
-                            />
-                        ): (
-                             
-                                <OpenModalButton
-                                    buttonText={"Add a Description Image"}
-                                    modalComponent={<ImageFormModal projectId={projectId} />}
-                                />
-                            
-                        )}
-                    </div>
+        <div className="project-main-content">
+          <img className="project-banner" src={project.bannerImg} alt={project.name} />
+          <div className="stats-and-rewards">
+            <div className="project-stats">
+              <div>${pledgedAmount} pledged</div>
+              <div>{backerCount} backers</div>
+              <div>{daysLeft} days left</div>
+              {user?.id !== project.ownerId ? (
+                <OpenModalButton
+                  buttonText={"Back this project"}
+                  modalComponent={<BackProjectModal projectId={projectId} />}
+                />
+              ) : (
+                <OpenModalButton
+                  buttonText={"Add a Description Image"}
+                  modalComponent={<ImageFormModal projectId={projectId} />}
+                />
+              )}
+            </div>
 
-                    <div className="reward-list">
-                        {rewards.map((reward) => (
-                            <div key={reward.id} className="reward-tile">
-                                <h3>{reward.name}</h3>
-                                <p>{reward.description}</p>
-                                {rewardImages[reward.id] ? (
-                                    <img
-                                        className="reward-img"
-                                        src={rewardImages[reward.id].url}
-                                        alt={`Reward for ${reward.name}`}
-                                    />
-                                ) : (
-                                    <OpenModalButton
-                                        buttonText={"Add an Image"}
-                                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                                    />
-                                )}
-                                <p>Price: ${reward.price}</p>
-                            </div>
-                        ))}
-                    </div>
+            <div className="reward-list">
+              {rewards.map((reward) => (
+                <div key={reward.id} className="reward-tile">
+                  <h3>{reward.name}</h3>
+                  <p>{reward.description}</p>
+                  {rewardImages[reward.id] ? (
+                    <img
+                      className="reward-img"
+                      src={rewardImages[reward.id].url}
+                      alt={`Reward for ${reward.name}`}
+                    />
+                  ) : (
+                    <OpenModalButton
+                      buttonText={"Add an Image"}
+                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                    />
+                  )}
+                  <p>Price: ${reward.price}</p>
                 </div>
+              ))}
             </div>
+          </div>
+        </div>
 
-            
-            <div className="grid-container flex">
-                 <div className="flex-column flex-row-md">
-                    <img className="info-icon" src="" alt="Info Icon 1"/>
-                    <p>Kickstarter connects creators with backers to fund projects.</p>
-            </div>
-            <div className="flex-column flex-row-md">
-                <img className="info-icon" src="" alt="Info Icon 2"/>
-                <p>Rewards aren’t guaranteed, but creators must regularly update backers.</p>
+        <div className="grid-container flex">
+          <div className="flex-column flex-row-md">
+            <img className="info-icon" src="" alt="Info Icon 1" />
+            <p>Kickstarter connects creators with backers to fund projects.</p>
+          </div>
+          <div className="flex-column flex-row-md">
+            <img className="info-icon" src="" alt="Info Icon 2" />
+            <p>Rewards aren’t guaranteed, but creators must regularly update backers.</p>
+          </div>
+          <div className="flex-column flex-row-md">
+            <img className="info-icon" src="" alt="Info Icon 3" />
+            <p>
+              You’re only charged if the project meets its funding goal by the campaign deadline.
+            </p>
+          </div>
         </div>
-        <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 3"/>
-            <p>You’re only charged if the project meets its funding goal by the campaign deadline.</p>
-        </div>
-    </div>
-
-        
-        </div>
+      </div>
     </div>
   );
 }
 
 export default ProjectDetails;
-
-
-
