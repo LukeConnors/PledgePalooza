@@ -78,16 +78,15 @@ def upgrade():
 
 
     if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE categories SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE projects SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE images SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE rewards SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE images SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE backed_projects SET SCHEMA {SCHEMA};")
 
 def downgrade():
     op.drop_table('categories')
     op.drop_table('projects')
-    op.drop_table('images')
     op.drop_table('rewards')
+    op.drop_table('images')
     op.drop_table('backed_projects')
