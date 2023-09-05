@@ -27,3 +27,17 @@ def reward_image(id):
         db.session.add(new_image)
         db.session.commit()
         return new_image.to_dict()
+
+@reward_routes.route("/<int:id>/image")
+def get_reward_image(id):
+    reward = Reward.query.get(id)
+    if reward:
+        image = Image.query.filter_by(imageable_id=reward.id, imageable_type='reward').all()
+
+        # Convert image to a list of dictionaries
+        image_data = [image.to_dict() for image in image]
+
+        return {"image": image_data}
+
+    # If the reward doesn't exist, return an appropriate response
+    return {'message': 'Reward not found'}, 404

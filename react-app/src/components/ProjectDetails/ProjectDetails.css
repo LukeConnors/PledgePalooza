@@ -1,63 +1,68 @@
 .project-detail {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 3px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative; /* Set to relative to position rewards-list at the bottom-right */
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Set to relative to position rewards-list at the bottom-right */
 }
 
 .project-detail h1 {
-    font-size: 40px;
-    margin-bottom: 16px;
+  font-size: 40px;
+  margin-bottom: 16px;
 }
 
 .project-detail p {
-    font-size: 18px;
-    line-height: 1.5;
-    color: #333;
-    margin-bottom: 16px; /* Add space below the description */
+  font-size: 18px;
+  line-height: 1.5;
+  color: #333;
+  margin-bottom: 16px; /* Add space below the description */
 }
 
 .project-detail img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 16px;
-    margin-bottom: 32px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  height: auto;
+  margin-top: 16px;
+  margin-bottom: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .reward-list {
-    position: absolute; /* Changed from 'fixed' to 'absolute' */
-    bottom: 0;  /* Set to bottom of the parent div */
-    right: 0;
-    width: 35%;
-    overflow-y: auto;
-    padding: 32px;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-    border-left: 1px solid #ddd;
+  position: absolute; /* Changed from 'fixed' to 'absolute' */
+  bottom: 0; /* Set to bottom of the parent div */
+  right: 0;
+  width: 35%;
+  overflow-y: auto;
+  padding: 32px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  border-left: 1px solid #ddd;
 }
 
 .reward-tile {
-    padding: 16px;
-    border: 1px solid #ddd;
-    margin-bottom: 16px;
-    border-radius: 4px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  border: 1px solid #ddd;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .reward-tile h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
+  font-size: 20px;
+  margin-bottom: 8px;
 }
 
 .reward-tile p {
-    font-size: 16px;
-    color: #666;
+  font-size: 16px;
+  color: #666;
+}
+
+.reward-img {
+  width: 50px;
+  height: 50px;
 }
