@@ -2,7 +2,6 @@ import boto3
 import botocore
 import os
 import uuid
-print("!!!!!!!!!!!!!!!!",boto3.__version__, "!!!!!!!!!!!!!!!!")
 
 # Added boto3 to pipfile
 

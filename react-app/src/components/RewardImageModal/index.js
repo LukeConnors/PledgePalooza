@@ -18,7 +18,7 @@ function RewardImageFormModal(rewardId) {
           console.log("REWARD ID!!!!!!!!!",rewardId)
             const res = await fetch(`/api/rewards/${rewardId.rewardId}/image`, {
               method: "POST",
-              body: formData,
+              body: info,
               credentials: "include",
             });
             if (res.ok) {
