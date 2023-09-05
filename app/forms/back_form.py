@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired
 from app.models import Category, Project
 
 class BackForm(FlaskForm):
-    cost = IntegerField('Amount', [validators.DataRequired()])
-    # submit = SubmitField("Back this project")
+    cost = IntegerField('Cost', [validators.DataRequired()])
+    submit = SubmitField("Back this project")

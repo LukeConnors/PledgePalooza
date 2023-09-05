@@ -26,8 +26,8 @@ class BackedProject(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "cost": self.cost,
             "projectId": self.projectId,
             "rewardId": self.rewardId,
-            "userId": self.userId
+            "userId": self.userId,
+            "cost": self.cost
         }
