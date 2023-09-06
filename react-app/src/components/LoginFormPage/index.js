@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import './LoginForm.css';
+import "./LoginForm.css";
+import { Link } from "react-router-dom/cjs/react-router-dom";
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -32,12 +33,7 @@ function LoginFormPage() {
         </ul>
         <label>
           Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </label>
         <label>
           Password
@@ -48,6 +44,9 @@ function LoginFormPage() {
             required
           />
         </label>
+        <p className="signup-here-btn">
+          Don't have an account? Sign up <Link to="/signup">here</Link>!
+        </p>
         <button type="submit">Log In</button>
       </form>
     </>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import "./ProjectDetails.css";
 import OpenModalButton from "../OpenModalButton";
 import ImageFormModal from "../DesImageFormModal";
@@ -10,6 +10,7 @@ import { userSelector } from "../../store/session";
 import RewardImageFormModal from "../RewardImageModal";
 
 function ProjectDetails() {
+  const history = useHistory();
   const [project, setProject] = useState({});
   const [rewards, setRewards] = useState([]);
   const [rewardImages, setRewardImages] = useState({});
@@ -73,10 +74,15 @@ function ProjectDetails() {
               <div>{backerCount} backers</div>
               <div>{daysLeft} days left</div>
               {user?.id !== project.ownerId ? (
-                <OpenModalButton
-                  buttonText={"Back this project"}
-                  modalComponent={<BackProjectModal projectId={projectId} />}
-                />
+                // Check if the user is logged in
+                user ? (
+                  <OpenModalButton
+                    buttonText={"Back this project"}
+                    modalComponent={<BackProjectModal projectId={projectId} />}
+                  />
+                ) : (
+                  <button onClick={() => history.push("/login")}>Back this project</button>
+                )
               ) : (
                 <OpenModalButton
                   buttonText={"Add a Description Image"}
@@ -97,10 +103,13 @@ function ProjectDetails() {
                       alt={`Reward for ${reward.name}`}
                     />
                   ) : (
-                    <OpenModalButton
-                      buttonText={"Add an Image"}
-                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                    />
+                    user &&
+                    user.id === reward.ownerId && (
+                      <OpenModalButton
+                        buttonText={"Add an Image"}
+                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                      />
+                    )
                   )}
                   <p>Price: ${reward.price}</p>
                 </div>
@@ -112,7 +121,7 @@ function ProjectDetails() {
         <div className="grid-container flex">
           <div className="flex-column flex-row-md">
             <img className="info-icon" src="" alt="Info Icon 1" />
-            <p>Kickstarter connects creators with backers to fund projects.</p>
+            <p>Pledge Palooza connects creators with backers to fund projects.</p>
           </div>
           <div className="flex-column flex-row-md">
             <img className="info-icon" src="" alt="Info Icon 2" />
