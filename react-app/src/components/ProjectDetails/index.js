@@ -102,8 +102,6 @@ function ProjectDetails() {
               <div className="reward-list">
                 {rewards.map((reward) => (
                   <div key={reward.id} className="reward-tile">
-                    <h3>{reward.name}</h3>
-                    <p>{reward.description}</p>
                     {rewardImages[reward.id] ? (
                       <img
                         className="reward-img"
@@ -119,6 +117,8 @@ function ProjectDetails() {
                         />
                       )
                     )}
+                    <h3>{reward.name}</h3>
+                    <p>{reward.description}</p>
                     <p>Price: ${reward.price}</p>
                   </div>
                 ))}
