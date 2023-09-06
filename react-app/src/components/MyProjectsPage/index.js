@@ -25,6 +25,7 @@ function MyProjects(){
             src={project.bannerImg}
             >
             </img>
+            <h2 key={project.id}>{project.name}</h2>
         </div>
     </Link>
     )}
