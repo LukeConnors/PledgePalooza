@@ -6,9 +6,9 @@ import OpenModalButton from "../OpenModalButton";
 import ImageFormModal from "../DesImageFormModal";
 import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
-import chatLogo from "../../chat.png"
-import checkLogo from "../../check.png"
-import megaphoneLogo from "../../megaphone.png"
+import chatLogo from "../../chat.png";
+import checkLogo from "../../check.png";
+import megaphoneLogo from "../../megaphone.png";
 
 import RewardImageFormModal from "../RewardImageModal";
 
@@ -63,6 +63,7 @@ function ProjectDetails() {
     });
   }, [rewards]);
 
+  console.log(rewards);
   return (
     <div>
       <div className="project-detail">
@@ -73,7 +74,7 @@ function ProjectDetails() {
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
           <div className="stats-and-rewards">
             <div className="project-stats">
-              <div>${pledgedAmount}</div> 
+              <div>${pledgedAmount}</div>
               <div>pledged</div>
               <div>{backerCount}</div>
               <div> backers</div>
@@ -97,32 +98,32 @@ function ProjectDetails() {
               )}
             </div>
 
-            
-
-            <div className="reward-list">
-              {rewards.map((reward) => (
-                <div key={reward.id} className="reward-tile">
-                  <h3>{reward.name}</h3>
-                  <p>{reward.description}</p>
-                  {rewardImages[reward.id] ? (
-                    <img
-                      className="reward-img"
-                      src={rewardImages[reward.id].url}
-                      alt={`Reward for ${reward.name}`}
-                    />
-                  ) : (
-                    user &&
-                    user.id === reward.ownerId && (
-                      <OpenModalButton
-                        buttonText={"Add an Image"}
-                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+            <>
+              <div className="reward-list">
+                {rewards.map((reward) => (
+                  <div key={reward.id} className="reward-tile">
+                    <h3>{reward.name}</h3>
+                    <p>{reward.description}</p>
+                    {rewardImages[reward.id] ? (
+                      <img
+                        className="reward-img"
+                        src={rewardImages[reward.id].url}
+                        alt={`Reward for ${reward.name}`}
                       />
-                    )
-                  )}
-                  <p>Price: ${reward.price}</p>
-                </div>
-              ))}
-            </div>
+                    ) : (
+                      user &&
+                      user.id === project.ownerId && (
+                        <OpenModalButton
+                          buttonText={"Add an Image"}
+                          modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                        />
+                      )
+                    )}
+                    <p>Price: ${reward.price}</p>
+                  </div>
+                ))}
+              </div>
+            </>
           </div>
         </div>
 
