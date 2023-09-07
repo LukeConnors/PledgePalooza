@@ -1,26 +1,28 @@
-.reward-form-page-container{
+.rew-img-page-container{
     width: 1000px;
 }
 
-.project-form{
+.rew-img-form{
     display: flex;
     flex-direction: column;
     background-color: white;
     width: 40%;
     margin: 0 auto;
     padding: 20px 40px;
-    height: auto;
+    height: 280px;
     box-shadow: 0px 2px 17px 1px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
 }
 
-.rew-form-amount{
+
+.rew-img-amount{
     display: flex;
     margin: 20px 0px;
     flex-direction: column;
 }
 
-.reward-name-input{
+
+.rew-img-input{
     padding-left: 30px;
     padding: 10px 0px;
     width: 100%;
@@ -28,37 +30,7 @@
 }
 
 
-.reward-des-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-
-.reward-price-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-.reward-est-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-.reward-qty-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-
-.reward-submit{
+.submitting{
     background: none;
     margin-top: 20px;
     padding: 15px 5px;
@@ -70,7 +42,7 @@
     border: none;
 }
 
-.reward-submit:hover{
+.submitting:hover{
     transform: translateY(-5px);
     background-color: #1a5553;
 }
