@@ -10,9 +10,16 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <div className="nav-bar">
-        <NavLink className="start-project" exact to="/new-project">
-          Start a project
-        </NavLink>
+        {sessionUser ? (
+          <NavLink className="start-project" exact to="/new-project">
+            Start a project
+          </NavLink>
+        ) : (
+          <NavLink exact to="/login" className="start-project">
+            Start a project
+          </NavLink>
+        )}
+
         <NavLink className="logo" exact to="/">
           <img alt="pledge palooza" src={logo}></img>
         </NavLink>
