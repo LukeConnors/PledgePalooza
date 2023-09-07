@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { setImages } from "../../store/images";
+import './RewardImage.css'
 
 function RewardImageFormModal(rewardId) {
   const dispatch = useDispatch();
@@ -47,23 +48,28 @@ function RewardImageFormModal(rewardId) {
 
   return (
     <>
-      <h1>Add an image to your project reward</h1>
       {submitted ? (
         <p>Submitted!</p>
-      ) : (
-        <form onSubmit={handleSubmit}>
+        ) : (
+          <div className="rew-img-page-container">
+          <form onSubmit={handleSubmit} className="rew-img-form">
+          <h2>Add an image to your project reward</h2>
+          <div className="rew-img-amount">
           <label>
             Description Image
             <input
               type="file"
               accept=".png, .jpeg, .jpg"
               onChange={(e) => setFormData({ ...formData, url: e.target.files[0] })}
+              className="rew-img-input"
             />
           </label>
+          </div>
           <button type="submit" className="submitting" disabled={loading}>
             {loading ? "Submitting..." : "Submit"}
           </button>
         </form>
+        </div>
       )}
     </>
   );

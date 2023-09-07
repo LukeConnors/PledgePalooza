@@ -32,6 +32,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False, primary_key=True),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
+    sa.Column('summary', sa.String(), nullable=False),
     sa.Column('location', sa.String(), nullable=False),
     sa.Column('ownerId', sa.Integer(), sa.ForeignKey('users.id'), nullable=False),
     sa.Column('categoryId', sa.Integer(), sa.ForeignKey('categories.id'), nullable=False),
@@ -46,8 +47,9 @@ def upgrade():
     op.create_table('images',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False, primary_key=True),
     sa.Column('url', sa.String(), nullable=False),
-    sa.Column('imageable_id', sa.Integer(), nullable=False),
-    sa.Column('imageable_type', sa.String(), nullable=False),
+    sa.Column('caption', sa.String(), nullable=True),
+    sa.Column('imageable_id', sa.Integer(), nullable=True),
+    sa.Column('imageable_type', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
 

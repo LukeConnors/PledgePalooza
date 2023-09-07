@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useModal } from "../../context/Modal";
+import './DesImageModal.css'
 
 
 function ImageFormModal(projectId) {
@@ -36,18 +37,23 @@ function ImageFormModal(projectId) {
 
 return (
     <>
-    <h1>Add an image to your project description</h1>
-    <form onSubmit={handleSubmit}>
+    <div className="des-form-page-container">
+    <form onSubmit={handleSubmit} className="modal-des-form">
+    <h2>Add an image to your project description</h2>
+    <div className="des-form-page-amount">
         <label>
-            Description Image
+            Description Image:
             <input
             type="file"
             accept=".png, .jpeg, .jpg"
             onChange={(e) => setFormData({...formData, url: e.target.files[0]})}
+            className="modal-file-input"
             />
         </label>
-        <button type="submit">Submit</button>
+        </div>
+        <button className="des-form-page-btn" type="submit">Submit</button>
     </form>
+    </div>
     </>
 );
 }

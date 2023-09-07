@@ -1,55 +1,28 @@
-.sign-form-container{
+.back-form-page-container{
     width: 1000px;
 }
 
-.sign-form-page{
+
+.modal-back-form{
     display: flex;
     flex-direction: column;
     background-color: white;
     width: 40%;
     margin: 0 auto;
     padding: 20px 40px;
-    height: auto;
+    height: 280px;
     box-shadow: 0px 2px 17px 1px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
 }
 
-.sign-form-amount{
+.back-form-page-amount{
     display: flex;
     margin: 20px 0px;
     flex-direction: column;
 }
 
-.sign-email-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
 
-
-.sign-user-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-.sign-pass-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-.sign-conf-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-.sign-submit{
+.back-form-page-btn{
     background: none;
     margin-top: 20px;
     padding: 15px 5px;
@@ -61,7 +34,18 @@
     border: none;
 }
 
-.sign-submit:hover{
+.back-form-page-btn:hover{
     transform: translateY(-5px);
     background-color: #1a5553;
+}
+
+.modal-num-input{
+    padding-left: 30px;
+    padding: 10px 0px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.modal-num-input[type='number']{
+    font-size: 20px
 }

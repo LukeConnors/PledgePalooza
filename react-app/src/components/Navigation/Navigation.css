@@ -88,3 +88,7 @@
 .no-user {
   margin-bottom: 70px;
 }
+
+.logo * a {
+  text-decoration: none;
+}

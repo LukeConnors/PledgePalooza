@@ -53,6 +53,7 @@ def post_form():
                 description=form.data["description"],
                 location=form.data["location"],
                 categoryId=form.data["categoryId"],
+                summary=form.data["summary"],
                 bannerImg=image_url["url"],  # Use the S3 URL here
                 endDate=form.data["endDate"],
                 ownerId=current_user.id
@@ -104,6 +105,8 @@ def edit_project_form(id):
                 project.description = form.data["description"]
             if form.data.get("location"):
                 project.location = form.data["location"]
+            if form.data.get("summary"):
+                project.summary = form.data["summary"]
             if form.data.get("categoryId"):
                 project.categoryId = form.data["categoryId"]
             if banner_img:
@@ -162,13 +165,12 @@ def description_images(id):
         db.session.commit()
 
         return new_image.to_dict()
-    
-#  Get all description images route 
-    
+
+#  Get all description images route
+
 @project_routes.route('/<int:id>/des-images')
-@login_required
 def get_all_description_images(id):
-    
+
     project = Project.query.get(id)
     if project:
         descImage = Image.query.filter_by(imageable_id=project.id, imageable_type="project").all()
@@ -216,13 +218,14 @@ def add_reward_form(id):
 @login_required
 def update_reward(projectId, rewardId):
     form = RewardForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         reward = Reward.query.get(rewardId)
         if reward:
             reward.name = form.data["name"]
             reward.description = form.data["description"]
             reward.price = form.data["price"]
-            reward.estDelivery = form.data["est_delivery"]
+            reward.est_delivery = form.data["est_delivery"]
             reward.quantity = form.data["quantity"]
 
             db.session.commit()

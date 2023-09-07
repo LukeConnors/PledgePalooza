@@ -13,9 +13,12 @@ import { userSelector } from "../../store/session";
 import RewardImageFormModal from "../RewardImageModal";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AddRewardModal from "../AddRewardModal";
+import DeleteRewardModal from "../DeleteRewardModal";
+import EditRewardModal from "../EditRewardModal";
 
 function ProjectDetails() {
   const [project, setProject] = useState({});
+  const [backedProjects, setBackedProjects] = useState([]);
   const [rewards, setRewards] = useState([]);
   const [rewardImages, setRewardImages] = useState({});
   const { projectId } = useParams();
@@ -55,16 +58,16 @@ function ProjectDetails() {
       });
   }, [projectId]);
 
+
   useEffect(() => {
     // Fetch reward images for each reward
     rewards.forEach((reward) => {
       fetch(`/api/rewards/${reward.id}/image`)
         .then((response) => response.json())
         .then((data) => {
-          // Update the rewardImages state with the fetched image data
           setRewardImages((prevRewardImages) => ({
             ...prevRewardImages,
-            [reward.id]: data.image[0], // Store the image data with the reward ID as the key
+            [reward.id]: data.image[0],
           }));
         })
         .catch((error) => {
@@ -72,6 +75,21 @@ function ProjectDetails() {
         });
     });
   }, [rewards]);
+
+  useEffect(() => {
+    fetch("/api/users/current/backed-projects")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.backed_projects) {
+          setBackedProjects(data.backed_projects);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [projectId]);
+
+  console.log("BACKED PROJECT", backedProjects);
 
   useEffect(() => {
     const fetchDescriptionImages = async () => {
@@ -85,7 +103,6 @@ function ProjectDetails() {
     };
     fetchDescriptionImages();
   }, [projectId]);
-  console.log("descriptionImages:", descriptionImages);
 
   showSlides(slideIndex);
 
@@ -122,6 +139,44 @@ function ProjectDetails() {
     }
   }
 
+  let renderComponent = null;
+
+  if (!user) {
+    console.log("REACHED HERE! 1");
+    // User is not logged in
+    renderComponent = (
+      <button className="back-this-project">
+        <Link to="/login">Back this project</Link>
+      </button>
+    );
+  } else if (user.id === project.ownerId) {
+    // User is the owner of the project
+    console.log("REACHED HERE! 2");
+    renderComponent = (
+      <OpenModalButton
+        buttonText={"Add a Description Image"}
+        modalComponent={<ImageFormModal projectId={projectId} />}
+      />
+    );
+    // Hide the "Back this project" button for project owner
+  } else if (
+    backedProjects.some(
+      (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
+    )
+  ) {
+    console.log("REACHED HERE! 3", user.id);
+    renderComponent = <></>;
+  } else {
+    // User can back the project
+    console.log("REACHED HERE! 4");
+    renderComponent = (
+      <OpenModalButton
+        buttonText={"Back this project"}
+        modalComponent={<BackProjectModal projectId={projectId} />}
+      />
+    );
+  }
+
   // console.log(rewards);
   return (
     <div>
@@ -134,26 +189,13 @@ function ProjectDetails() {
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
           <div className="stats-and-rewards">
             <div className="project-stats">
-              <div>${pledgedAmount} pledged</div>
-              <div>{backerCount} backers</div>
-              <div>{daysLeft} days left</div>
-              {user ? (
-                user.id === project.ownerId ? (
-                  <OpenModalButton
-                    buttonText={"Add a Description Image"}
-                    modalComponent={<ImageFormModal projectId={projectId} />}
-                  />
-                ) : (
-                  <OpenModalButton
-                    buttonText={"Back this project"}
-                    modalComponent={<BackProjectModal projectId={projectId} />}
-                  />
-                )
-              ) : (
-                <button className="back-this-project">
-                  <Link to="/login">back this project</Link>
-                </button>
-              )}
+              <div>${pledgedAmount}</div>
+              <div>pledged</div>
+              <div>{backerCount}</div>
+              <div>backers</div>
+              <div>{daysLeft}</div>
+              <div>days left</div>
+              {renderComponent}
             </div>
           </div>
         </div>
@@ -202,6 +244,7 @@ function ProjectDetails() {
                 <span key={index} className="dot" onClick={() => currentSlide(index + 1)}></span>
               ))}
             </div>
+            <p>{project.summary}</p>
           </div>
           <div className="reward-list">
             {rewards.map((reward) => (
@@ -215,10 +258,20 @@ function ProjectDetails() {
                 ) : (
                   user &&
                   user.id === project.ownerId && (
+                    <>
                     <OpenModalButton
                       buttonText={"Add an Image"}
                       modalComponent={<RewardImageFormModal rewardId={reward.id} />}
                     />
+                    <OpenModalButton
+                    buttonText={"Delete Reward"}
+                    modalComponent={<DeleteRewardModal projectId={project.id} rewardId={reward.id}/>}
+                     />
+                     <OpenModalButton
+                     buttonText={"Edit Reward"}
+                     modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
+                     />
+                     </>
                   )
                 )}
                 <h3>{reward.name}</h3>

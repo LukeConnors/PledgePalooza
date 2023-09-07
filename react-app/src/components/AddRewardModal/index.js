@@ -47,14 +47,17 @@ function AddRewardModal({ projectId }) {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Create a Project</h1>
-      <form onSubmit={handleSubmit} className="project-form">
+    <div className="reward-form-page-container">
+      <form onSubmit={handleSubmit} className="reward-form">
+      <h1 style={{ textAlign: "center" }}>Create a Reward</h1>
+      <div className="rew-form-amount">
         <label>
           Name
           <input
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className="reward-name-input"
           />
         </label>
         <label>
@@ -63,6 +66,7 @@ function AddRewardModal({ projectId }) {
             type="textarea"
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            className="reward-des-input"
           />
         </label>
         <label>
@@ -71,6 +75,7 @@ function AddRewardModal({ projectId }) {
             type="number"
             value={formData.price}
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+            className="reward-price-input"
           />
         </label>
         <label>
@@ -79,6 +84,7 @@ function AddRewardModal({ projectId }) {
             type="date"
             value={formData.est_delivery}
             onChange={(e) => setFormData({ ...formData, est_delivery: e.target.value })}
+            className="reward-est-input"
           />
         </label>
         <label>
@@ -87,10 +93,13 @@ function AddRewardModal({ projectId }) {
             type="number"
             value={formData.quantity}
             onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
+            className="reward-qty-input"
           />
         </label>
-        <button type="submit">Submit</button>
+        </div>
+        <button className="reward-submit" type="submit">Submit</button>
       </form>
+      </div>
     </>
   );
 }
