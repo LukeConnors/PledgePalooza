@@ -226,6 +226,24 @@ function ProjectDetails() {
                 <p>Price: ${reward.price}</p>
               </div>
             ))}
+            <>
+              {user && user.id === project.ownerId && rewards.length === 0 && (
+                <>
+                  <p>No rewards created for this project yet! Click the button below to add one.</p>
+                </>
+              )}
+            </>
+
+            <div className="modal-button">
+              {rewards.length < 4 ? (
+                <OpenModalButton
+                  buttonText={"Add a Reward"}
+                  modalComponent={<AddRewardModal projectId={project.id} />}
+                />
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
       </div>
