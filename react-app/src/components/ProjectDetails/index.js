@@ -153,54 +153,6 @@ function ProjectDetails() {
                 </button>
               )}
             </div>
-
-            <div className="reward-list">
-              {rewards.map((reward) => (
-                <div key={reward.id} className="reward-tile">
-                  <h3>{reward.name}</h3>
-                  <p>{reward.description}</p>
-                  {rewardImages[reward.id] ? (
-                    <img
-                      className="reward-img"
-                      src={rewardImages[reward.id].url}
-                      alt={`Reward for ${reward.name}`}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                  {user?.id === project.ownerId && !rewardImages[reward.id] ? (
-                    <OpenModalButton
-                      buttonText={"Add an Image"}
-                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                  <p>Price: ${reward.price}</p>
-                </div>
-              ))}
-
-              {/* <>
-                  {user && user.id === project.ownerId && (
-                    <>
-                      <p>
-                        No rewards created for this project yet! Click the button below to add one.
-                      </p>
-                    </>
-                  )}
-                </> */}
-
-              <div className="modal-button">
-                {rewards.length < 4 ? (
-                  <OpenModalButton
-                    buttonText={"Add a Reward"}
-                    modalComponent={<AddRewardModal projectId={project.id} />}
-                  />
-                ) : (
-                  ""
-                )}
-              </div>
-            </div>
           </div>
         </div>
 
