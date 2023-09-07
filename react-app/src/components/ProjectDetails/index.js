@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
+import chatLogo from "../../assets/chat.png";
+import checkLogo from "../../assets/check.png";
+import megaphoneLogo from "../../assets/megaphone.png";
 import "./ProjectDetails.css";
 import OpenModalButton from "../OpenModalButton";
 import ImageFormModal from "../DesImageFormModal";
 import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
-import chatLogo from "../../assets/chat.png";
-import checkLogo from "../../assets/check.png";
-import megaphoneLogo from "../../assets/megaphone.png";
 
 import RewardImageFormModal from "../RewardImageModal";
 
@@ -114,15 +114,15 @@ function ProjectDetails() {
 
         <div className="grid-container flex">
           <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 1" />
+            <img className="info-icon" src={checkLogo} alt="Info Icon 1" />
             <p>Kickstarter connects creators with backers to fund projects.</p>
           </div>
           <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 2" />
+            <img className="info-icon" src={chatLogo} alt="Info Icon 2" />
             <p>Rewards aren’t guaranteed, but creators must regularly update backers.</p>
           </div>
           <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 3" />
+            <img className="info-icon" src={megaphoneLogo} alt="Info Icon 3" />
             <p>
               You’re only charged if the project meets its funding goal by the campaign deadline.
             </p>
