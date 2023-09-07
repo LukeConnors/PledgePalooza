@@ -23,6 +23,7 @@ function ProjectDetails() {
   const [pledgedAmount, setPledgedAmount] = useState(Math.floor(Math.random() * 10000));
   const [backerCount, setBackerCount] = useState(Math.floor(Math.random() * 5000));
   const [daysLeft, setDaysLeft] = useState(Math.floor(Math.random() * 65));
+  const [descriptionImages, setDescriptionImages] = useState([])
 
   useEffect(() => {
     fetch(`/api/projects/${projectId}`)
@@ -63,7 +64,23 @@ function ProjectDetails() {
     });
   }, [rewards]);
 
-  console.log(rewards);
+  useEffect(() => {
+    const fetchDescriptionImages = async () => {
+      try {
+        const res = await fetch(`/api/projects/${projectId}/des-images`);
+        const data = await res.json();
+        setDescriptionImages(data)
+      } catch (err){
+        console.error("Error fetching description images:", err)
+      }
+    };
+    fetchDescriptionImages()
+  }, [projectId])
+    console.log("descriptionImages:", descriptionImages);
+
+  
+
+  // console.log(rewards);
   return (
     <div>
       <div className="project-detail">
@@ -142,6 +159,11 @@ function ProjectDetails() {
               You’re only charged if the project meets its funding goal by the campaign deadline.
             </p>
           </div>
+        </div>
+        <div className="description-images-container">
+          {descriptionImages.map((image) => (
+            <img key={image.id} src={image.url} alt="Description" />
+         ))}
         </div>
       </div>
     </div>
