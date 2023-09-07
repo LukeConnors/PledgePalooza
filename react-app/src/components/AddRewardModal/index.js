@@ -48,7 +48,7 @@ function AddRewardModal({ projectId }) {
   return (
     <>
     <div className="reward-form-page-container">
-      <form onSubmit={handleSubmit} className="project-form">
+      <form onSubmit={handleSubmit} className="reward-form">
       <h1 style={{ textAlign: "center" }}>Create a Reward</h1>
       <div className="rew-form-amount">
         <label>
