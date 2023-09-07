@@ -14,7 +14,7 @@ function EditProject() {
     name: "",
     description: "",
     location: "",
-    category: "",
+    categoryId: "",
     bannerImg: "",
     endDate: "",
     summary: "",
@@ -62,6 +62,54 @@ function EditProject() {
     formDataToSend.append("endDate", formData.endDate);
 
     formDataToSend.append("bannerImg", formData.bannerImg);
+
+    let formErrors = {};
+    if (!formData.name) {
+      formErrors.name = "Name is required.";
+    }
+    if (!formData.description || formData.description.length < 25) {
+      formErrors.description = "Description needs to be 25 or more characters";
+    }
+    if (!formData.location) {
+      formErrors.location = "Location is required";
+    }
+    if (!formData.categoryId) {
+      formErrors.categoryId = "Category is required";
+    }
+    if (!formData.endDate) {
+      formErrors.endDate = "End Date is required";
+    } else {
+      const selectedEndDate = new Date(formData.endDate);
+      const currentDate = new Date(getCurrentDate());
+      const oneYearLater = new Date(getOneYearLaterDate());
+
+      if (selectedEndDate < currentDate) {
+        formErrors.endDate = "End Date cannot be before current date";
+      } else if (selectedEndDate > oneYearLater) {
+        formErrors.endDate = "End Date cannot be more than one year from current date";
+      }
+    }
+
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
+    function getCurrentDate() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+      const day = String(currentDate.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+  
+    function getOneYearLaterDate() {
+      const oneYearLaterDate = new Date();
+      oneYearLaterDate.setFullYear(oneYearLaterDate.getFullYear() + 1);
+      return oneYearLaterDate.toISOString().split("T")[0];
+    }
+  
+
 
     try {
       const res = await fetch(`/api/projects/${projectId}`, {
@@ -126,6 +174,7 @@ function EditProject() {
             name="name"
             value={formData.name}
           />
+          {errors.name && <div className="error-message">{errors.name}</div>}
         </div>
         <div className="edit-project-form-description">
           <label htmlFor="description">Description</label>
@@ -137,6 +186,7 @@ function EditProject() {
             name="description"
             value={formData.description}
           />
+          {errors.description && <div className="error-message">{errors.description}</div>}
         </div>
         <div className="edit-project-form-location">
           <label htmlFor="location">Location</label>
@@ -147,6 +197,7 @@ function EditProject() {
             name="location"
             value={formData.location}
           />
+          {errors.location && <div className="error-message">{errors.location}</div>}
         </div>
         <div className="edit-project-form-summary">
           <label htmlFor="summary">Summary</label>
@@ -168,6 +219,7 @@ function EditProject() {
             id="bannerImg"
             name="bannerImg"
           />
+           {errors.bannerImg && <div className="error-message">{errors.bannerImg}</div>}
         </div>
         <div className="edit-project-form-category">
           <label htmlFor="categories">Categories</label>
@@ -179,6 +231,7 @@ function EditProject() {
             ))}
           </select>
         </div>
+        {errors.categoryId && <div className="error-message">{errors.categoryId}</div>}
         <div className="edit-project-form-date">
           <label htmlFor="endDate">Project end date</label>
           <input
@@ -188,6 +241,7 @@ function EditProject() {
             name="endDate"
             value={formData.endDate}
           />
+           {errors.endDate && <div className="error-message">{errors.endDate}</div>}
         </div>
         <button type="submit">Save Changes</button>
       </form>
