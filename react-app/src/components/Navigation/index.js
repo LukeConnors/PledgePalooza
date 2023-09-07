@@ -7,6 +7,7 @@ import logo from "../../assets/LOGO.png";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+  console.log('!!!!!!!SESSION USER',sessionUser)
   return (
     <>
       <div className="nav-bar">

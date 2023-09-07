@@ -109,15 +109,20 @@ function ProjectDetails() {
                         alt={`Reward for ${reward.name}`}
                       />
                     ) : (
+                    <></>
+                  )}
+                {user?.id === project.ownerId && !rewardImages[reward.id] ? (
                       <>
                         {!user
                           ? ""
                           : user.id === project.ownerId && (
-                              <OpenModalButton
-                                buttonText={"Add an Image"}
-                                modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                              />
-                            )}
+                           <OpenModalButton
+                           buttonText={"Add an Image"}
+                          modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                          />
+                ) : (
+                  <></>
+                          )}
                       </>
                     )}
                     <p>Price: ${reward.price}</p>
