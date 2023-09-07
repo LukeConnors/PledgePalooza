@@ -1,0 +1,99 @@
+.modal-signup-here-btn > a {
+    color: green;
+  }
+
+  .modal-login-form-page-container {
+    width: 1000px;
+  }
+
+  .modal-signup-here-btn {
+    text-align: center;
+  }
+
+  .modal-login-form-page {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 40%;
+    margin: 0 auto;
+    padding: 20px 40px;
+    height: 500px;
+    box-shadow: 0px 2px 17px 1px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+  }
+
+  .modal-login-form-page > h1 {
+    text-align: center;
+  }
+
+  .modal-login-form-page-email {
+    display: flex;
+    margin: 20px 0px;
+    flex-direction: column;
+  }
+
+  .modal-login-form-page-email > label {
+    margin-bottom: 5px;
+  }
+  .modal-login-form-page-password {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    flex-direction: column;
+  }
+
+  .modal-login-page-email {
+    position: relative;
+  }
+
+  .modal-email-input {
+    padding-left: 30px;
+    padding: 10px 0px;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .modal-email-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+  }
+
+  .modal-login-page-password {
+    position: relative;
+  }
+
+  .modal-password-input {
+    padding-left: 30px;
+    padding: 10px 0px;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+
+  .modal-lock-icon {
+    position: absolute;
+    top: 74%;
+    left: 10px;
+    transform: translateY(-74%);
+    font-size: 18px;
+  }
+
+  .modal-login-form-page-btn {
+    background: none;
+    margin-top: 20px;
+    padding: 15px 5px;
+    color: white;
+    background-color: #006400;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: none;
+  }
+
+  .modal-login-form-page-btn:hover {
+    transform: translateY(-5px);
+    background-color: #1a5553;
+  }

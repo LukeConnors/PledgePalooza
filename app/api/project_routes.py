@@ -63,7 +63,7 @@ def post_form():
         return new_project.to_dict()
 
     else:
-        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
+        return jsonify({"error": "Invalid form data", "form_errors": form.errors}), 400
 
 
 # GET all projects owned by current user '/projects/my-projects'
@@ -110,7 +110,7 @@ def edit_project_form(id):
         else:
             return jsonify({"error": "Project not found"}), 404
     else:
-        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
+        return jsonify({"error": "Invalid form data", "form_errors": form.errors}), 400
 
 # DELETE a project by projectId '/projects/:id'
 @project_routes.route('/<int:id>', methods=["DELETE"])
@@ -132,7 +132,7 @@ def delete_project(id):
         return jsonify({"Message": "Successfully Deleted!"})
 
     else:
-        return jsonify({"error": "Unauthorized Action", "form errors": form.errors}), 400
+        return jsonify({"error": "Unauthorized Action", "form_errors": form.errors}), 400
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
 @project_routes.route('/<int:id>/des-images', methods=["POST"])
@@ -189,7 +189,7 @@ def add_reward_form(id):
 
         return new_reward.to_dict()
     else:
-        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
+        return jsonify({"error": "Invalid form data", "form_errors": form.errors}), 400
 # UPDATE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
 @project_routes.route('/<int:projectId>/rewards/<int:rewardId>', methods=['PUT'])
 @login_required
@@ -210,7 +210,7 @@ def update_reward(projectId, rewardId):
         else:
             return jsonify({"error": "Reward not found"}), 404
     else:
-        return jsonify({"error": "Invalid form data", "form errors": form.errors})
+        return jsonify({"error": "Invalid form data", "form_errors": form.errors})
 
 # DELETE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
 
