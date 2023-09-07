@@ -33,6 +33,7 @@ function ProjectDetails() {
 
   let slideIndex = 1;
 
+
   useEffect(() => {
     showSlides(slideIndex);
   }, [descriptionImages, slideIndex]);
@@ -179,6 +180,7 @@ function ProjectDetails() {
 
   rewards.sort((a, b) => a.price - b.price);
   // console.log(rewards);
+    console.log("!!!!!!!:",project)
   return (
     <div>
       <div className="project-detail">

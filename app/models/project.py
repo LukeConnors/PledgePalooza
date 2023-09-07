@@ -36,7 +36,7 @@ class Project(db.Model):
     # INTERNAL-MODEL RELATIONS(PRIMARY-KEY):
     reward = db.relationship('Reward', back_populates='project', cascade="all, delete-orphan" )
     image = db.relationship('Image', primaryjoin="and_(Image.imageable_type=='project', foreign(Image.imageable_id)==Project.id)", cascade="all, delete-orphan")
-    backed_project = db.relationship('BackedProject', back_populates='project', cascade="all, delete-orphan" )
+    backed_project = db.relationship('BackedProject',back_populates='project', cascade="all, delete-orphan" )
 
     def to_dict(self):
         return {
@@ -49,5 +49,5 @@ class Project(db.Model):
             "category": self.category.name,
             "endDate": self.endDate,
             "location": self.location,
-            "summary": self.summary
+            "summary": self.summary,
         }
