@@ -1,0 +1,151 @@
+.login-here > a {
+  color: green;
+}
+
+.signup-page-container {
+  margin-top: 90px;
+}
+
+.signup-page {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px 40px;
+  height: 620px;
+  box-shadow: 0px 2px 17px 1px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+.signup-page > h1 {
+  text-align: center;
+}
+
+.signup-page > p {
+  text-align: center;
+}
+
+.signup-form-page-btn {
+  background: none;
+  margin-top: 20px;
+  padding: 15px 5px;
+  color: white;
+  background-color: #006400;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border: none;
+}
+
+.signup-form-page-btn:hover {
+  transform: translateY(-5px);
+  background-color: #1a5553;
+}
+
+.signup-form-page-email {
+  display: flex;
+  margin: 20px 0px;
+  flex-direction: column;
+}
+
+.signup-form-page-email > label {
+  margin-bottom: 5px;
+}
+
+.signup-page-email {
+  position: relative;
+}
+
+.signup-email-input {
+  padding-left: 30px;
+  padding: 10px 0px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.signup-email-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+.signup-form-page-password {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.signup-page-password {
+  position: relative;
+}
+
+.signup-password-input {
+  padding-left: 30px;
+  padding: 10px 0px;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.signup-password-icon {
+  position: absolute;
+  top: 55%;
+  left: 10px;
+  transform: translateY(-55%);
+  font-size: 18px;
+}
+
+.signup-form-page-confirm-password {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.signup-page-confirm-password {
+  position: relative;
+}
+
+.signup-confirm-password-input {
+  padding-left: 30px;
+  padding: 10px 0px;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.signup-confirm-password-icon {
+  position: absolute;
+  top: 55%;
+  left: 10px;
+  transform: translateY(-55%);
+  font-size: 18px;
+}
+
+.signup-form-page-username {
+  display: flex;
+  margin: 20px 0px;
+  flex-direction: column;
+}
+
+.signup-page-username {
+  position: relative;
+}
+
+.signup-username-input {
+  padding-left: 30px;
+  padding: 10px 0px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.signup-username-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+}

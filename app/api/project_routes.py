@@ -63,7 +63,7 @@ def post_form():
         return new_project.to_dict()
 
     else:
-        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
+        return jsonify({"error": "Invalid form data", "form_errors": form.errors}), 400
 
 
 # GET all projects owned by current user '/projects/my-projects'
@@ -92,17 +92,25 @@ def edit_project_form(id):
     Update an existing project for an authenticated user
     """
     form = ProjectForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         project = Project.query.get(id)  # Get the existing project by its ID
+        banner_img = request.files.get("bannerImg")  # Use get() to make it optional
         if project:
             # Update the project's attributes with the new data
-            project.name = form.data["name"]
-            project.description = form.data["description"]
-            project.location = form.data["location"]
-            project.categoryId = form.data["categoryId"]
-            project.bannerImg = form.data["bannerImg"]
-            project.endDate = form.data["endDate"]
-            # No need to update ownerId; it should remain the same
+            if form.data.get("name"):
+                project.name = form.data["name"]
+            if form.data.get("description"):
+                project.description = form.data["description"]
+            if form.data.get("location"):
+                project.location = form.data["location"]
+            if form.data.get("categoryId"):
+                project.categoryId = form.data["categoryId"]
+            if banner_img:
+                image_url = upload_file_to_s3(banner_img)
+                project.bannerImg = image_url["url"]
+            if form.data.get("endDate"):
+                project.endDate = form.data["endDate"]
 
             db.session.commit()
 
@@ -110,7 +118,7 @@ def edit_project_form(id):
         else:
             return jsonify({"error": "Project not found"}), 404
     else:
-        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
+        return jsonify({"error": "Invalid form data", "form_errors": form.errors}), 400
 
 # DELETE a project by projectId '/projects/:id'
 @project_routes.route('/<int:id>', methods=["DELETE"])
@@ -132,7 +140,7 @@ def delete_project(id):
         return jsonify({"Message": "Successfully Deleted!"})
 
     else:
-        return jsonify({"error": "Unauthorized Action", "form errors": form.errors}), 400
+        return jsonify({"error": "Unauthorized Action", "form_errors": form.errors}), 400
 # POST description images to a project (authenticated user) '/projects/:id/description-images'
 
 @project_routes.route('/<int:id>/des-images', methods=["POST"])
@@ -154,6 +162,18 @@ def description_images(id):
         db.session.commit()
 
         return new_image.to_dict()
+    
+#  Get all description images route 
+    
+@project_routes.route('/<int:id>/des-images')
+@login_required
+def get_all_description_images(id):
+    
+    project = Project.query.get(id)
+    if project:
+        descImage = Image.query.filter_by(imageable_id=project.id, imageable_type="project").all()
+        descImages = [descImage.to_dict() for descImage in descImage]
+        return descImages
 
 
 # !!!!!!!!!!!!! Rewards CRUD !!!!!!!!!!!!!!!!!!!
@@ -172,6 +192,7 @@ def add_reward_form(id):
     Add a reward for an existing project for an authenticated user
     """
     form = RewardForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         project = Project.query.get(id)
         if project:
@@ -181,7 +202,7 @@ def add_reward_form(id):
             name = form.data["name"],
             description = form.data["description"],
             price = form.data["price"],
-            estDelivery = form.data["est_delivery"],
+            est_delivery = form.data["est_delivery"],
             quantity = form.data["quantity"],
             )
         db.session.add(new_reward)
@@ -189,7 +210,7 @@ def add_reward_form(id):
 
         return new_reward.to_dict()
     else:
-        return jsonify({"error": "Invalid form data", "form errors": form.errors}), 400
+        return jsonify({"error": "Invalid form data", "form_errors": form.errors}), 400
 # UPDATE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
 @project_routes.route('/<int:projectId>/rewards/<int:rewardId>', methods=['PUT'])
 @login_required
@@ -210,7 +231,7 @@ def update_reward(projectId, rewardId):
         else:
             return jsonify({"error": "Reward not found"}), 404
     else:
-        return jsonify({"error": "Invalid form data", "form errors": form.errors})
+        return jsonify({"error": "Invalid form data", "form_errors": form.errors})
 
 # DELETE a reward by rewardId at '/projects/:project-id/rewards/:reward-id' (auth user)
 

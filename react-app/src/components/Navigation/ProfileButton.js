@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { logout, login } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
@@ -55,8 +56,16 @@ function ProfileButton({ user }) {
           <>
             <li className="user-details">Hi, {user.username}!</li>
             <li className="user-details">{user.email}</li>
-            <li className="user-details">View Projects</li>
-            <li className="user-details">View Backed Projects</li>
+            <li className="user-details">
+              <Link to='/api/projects/my-projects'>
+                View Projects
+              </Link>
+            </li>
+            <li className="user-details">
+              <Link to='/api/users/current/backed-projects'>
+              View Backed Projects
+              </Link>
+            </li>
             <li className="list-btn">
               <button onClick={handleLogout}>Log Out</button>
             </li>

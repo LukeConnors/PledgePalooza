@@ -8,6 +8,9 @@ import Navigation from "./components/Navigation";
 import ProjectFormPage from "./components/ProjectForm";
 import ProjectDetails from "./components/ProjectDetails";
 import Projects from "./components/Projects";
+import MyProjects from "./components/MyProjectsPage";
+import MyBackedProjects from "./components/MyBackedProjects";
+import EditProject from "./components/EditProject";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,8 +36,17 @@ function App() {
           <Route path="/new-project">
             <ProjectFormPage />
           </Route>
+          <Route path="/edit-project/:projectId">
+            <EditProject />
+          </Route>
           <Route path="/projects/:projectId">
             <ProjectDetails />
+          </Route>
+          <Route path="/api/projects/my-projects">
+            <MyProjects />
+          </Route>
+          <Route path="/api/users/current/backed-projects">
+            <MyBackedProjects />
           </Route>
         </Switch>
       )}
