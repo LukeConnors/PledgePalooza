@@ -162,6 +162,18 @@ def description_images(id):
         db.session.commit()
 
         return new_image.to_dict()
+    
+#  Get all description images route 
+    
+@project_routes.route('/<int:id>/des-images')
+@login_required
+def get_all_description_images(id):
+    
+    project = Project.query.get(id)
+    if project:
+        descImage = Image.query.filter_by(imageable_id=project.id, imageable_type="project").all()
+        descImages = [descImage.to_dict() for descImage in descImage]
+        return descImages
 
 
 # !!!!!!!!!!!!! Rewards CRUD !!!!!!!!!!!!!!!!!!!

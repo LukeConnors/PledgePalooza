@@ -1,8 +1,24 @@
+.content-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 32px; /* Or adjust as needed */
+  }
+  
+.description-images-container {
+    max-width: 500px;
+    flex: 2; /* 2/3 of the space */
+    margin-right: 20px; /* Space between the slideshow and the reward list */
+    margin-left: 175px
+  }
+
 .project-detail {
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   position: relative;
 }
@@ -53,6 +69,7 @@
   text-align: left;
   font-weight: bold;
   margin-bottom: 10px;
+    border-top: 5px solid green
 }
 
 .project-stats > div:first-child {
@@ -75,14 +92,14 @@
 }
 
 .reward-list {
-  width: 100%;
-  height: 400px;
-  overflow-y: auto;
-  padding: 32px;
-  box-sizing: border-box;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ddd;
-  margin-top: 32px;
+    width: 100%; 
+    height: 400px;
+    overflow-y: auto;
+    padding: 32px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+    margin-top: 32px;
 }
 
 .reward-tile {
@@ -105,8 +122,8 @@
 }
 
 .reward-img {
-  width: 200px;
-  height: 200px;
+    width: 50px;
+    height: 50px;
 }
 
 .grid-container {
@@ -115,6 +132,7 @@
   max-width: 1366px;
   margin-left: auto;
   margin-right: auto;
+    margin-top: 20px;
   padding-left: 24px;
   padding-right: 24px;
   box-sizing: border-box;
@@ -149,8 +167,10 @@
   flex-direction: row;
 }
 
-.flex-column {
-  flex-direction: column;
+.info-section {
+    display: flex;
+    align-items: center; 
+    gap: 16px;   
 }
 
 .info-icon {
@@ -159,6 +179,9 @@
   margin-bottom: 10px;
 }
 
-.back-this-project > a:hover {
-  text-decoration: none;
+
+@media (min-width: 600px) {
+    .info-icon {
+        margin-bottom: 0;  /* Remove margin when in row layout */
+    }
 }

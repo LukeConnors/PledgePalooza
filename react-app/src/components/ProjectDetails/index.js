@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import chatLogo from "../../assets/chat.png";
@@ -24,6 +24,17 @@ function ProjectDetails() {
   const [pledgedAmount, setPledgedAmount] = useState(Math.floor(Math.random() * 10000));
   const [backerCount, setBackerCount] = useState(Math.floor(Math.random() * 5000));
   const [daysLeft, setDaysLeft] = useState(Math.floor(Math.random() * 65));
+  const [descriptionImages, setDescriptionImages] = useState([]);
+  const slidesReference = useRef(null);
+  const dotsReference = useRef(null);
+
+  let slideIndex = 1;
+
+  useEffect(() => {
+    showSlides(slideIndex);
+  }, [descriptionImages, slideIndex])
+
+  
 
   useEffect(() => {
     fetch(`/api/projects/${projectId}`)
@@ -64,6 +75,53 @@ function ProjectDetails() {
     });
   }, [rewards]);
 
+  useEffect(() => {
+    const fetchDescriptionImages = async () => {
+      try {
+        const res = await fetch(`/api/projects/${projectId}/des-images`);
+        const data = await res.json();
+        setDescriptionImages(data)
+      } catch (err){
+        console.error("Error fetching description images:", err)
+      }
+    };
+    fetchDescriptionImages()
+  }, [projectId])
+    console.log("descriptionImages:", descriptionImages);
+
+    
+    showSlides(slideIndex)
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+  }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    let slides = slidesReference.current ? slidesReference.current.getElementsByClassName("mySlides") : [];
+    let dots = dotsReference.current ? dotsReference.current.getElementsByClassName("dot") : [];
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    if (slides[slideIndex - 1]) {
+      slides[slideIndex - 1].style.display = "block";
+    }
+    if (dots[slideIndex - 1]) {
+      dots[slideIndex - 1].className += " active";
+    }
+  }
+
+  
+
+  // console.log(rewards);
   return (
     <div>
       <div className="project-detail">
@@ -162,6 +220,54 @@ function ProjectDetails() {
               You’re only charged if the project meets its funding goal by the campaign deadline.
             </p>
           </div>
+        </div>
+
+        <div className="content-row">
+          <div className="description-images-container">
+            <div className="slideshow-container" ref={slidesReference}>
+                {descriptionImages.map((image, index) => (
+                  <div key={image.id} className="mySlides fade">
+                  <div className="numbertext">{index + 1} / {descriptionImages.length}</div>
+                  <img src={image.url} style={{width: '100%'}} alt={`Description ${index + 1}`} />
+                  <div className="text">Caption for Image {index + 1}</div>
+      </div>
+    ))}
+
+        {/* Next and previous buttons */}
+        <a className="prev" onClick={() => plusSlides(-1)}>&#10094;</a>
+        <a className="next" onClick={() => plusSlides(1)}>&#10095;</a>
+        </div>
+
+        <div style={{textAlign: 'center'}} ref={dotsReference}>
+          {descriptionImages.map((_, index) => (
+          <span key={index} className="dot" onClick={() => currentSlide(index + 1)}></span>
+         ))}
+          </div>
+         </div>
+          <div className="reward-list">
+                {rewards.map((reward) => (
+                  <div key={reward.id} className="reward-tile">
+                    {rewardImages[reward.id] ? (
+                      <img
+                        className="reward-img"
+                        src={rewardImages[reward.id].url}
+                        alt={`Reward for ${reward.name}`}
+                      />
+                    ) : (
+                      user &&
+                      user.id === project.ownerId && (
+                        <OpenModalButton
+                          buttonText={"Add an Image"}
+                          modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                        />
+                      )
+                    )}
+                    <h3>{reward.name}</h3>
+                    <p>{reward.description}</p>
+                    <p>Price: ${reward.price}</p>
+                  </div>
+                ))}
+              </div>
         </div>
       </div>
     </div>
