@@ -57,7 +57,7 @@ function LoginFormPage() {
           <div className="login-form-page-password">
             <div className="login-page-password">
               <label htmlFor="password">Password:</label>
-              <CiLock className="signup-lock-icon" />
+              <CiLock className="lock-icon" />
               <input
                 type="password"
                 id="password"

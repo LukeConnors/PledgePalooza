@@ -172,6 +172,7 @@ def add_reward_form(id):
     Add a reward for an existing project for an authenticated user
     """
     form = RewardForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         project = Project.query.get(id)
         if project:
@@ -181,7 +182,7 @@ def add_reward_form(id):
             name = form.data["name"],
             description = form.data["description"],
             price = form.data["price"],
-            estDelivery = form.data["est_delivery"],
+            est_delivery = form.data["est_delivery"],
             quantity = form.data["quantity"],
             )
         db.session.add(new_reward)

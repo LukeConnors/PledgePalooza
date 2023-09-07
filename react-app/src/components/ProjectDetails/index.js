@@ -11,6 +11,8 @@ import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
 
 import RewardImageFormModal from "../RewardImageModal";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import AddRewardModal from "../../AddRewardModal";
 
 function ProjectDetails() {
   const [project, setProject] = useState({});
@@ -75,39 +77,82 @@ function ProjectDetails() {
               <div>${pledgedAmount} pledged</div>
               <div>{backerCount} backers</div>
               <div>{daysLeft} days left</div>
-              {user?.id !== project.ownerId ? (
-                <OpenModalButton
-                  buttonText={"Back this project"}
-                  modalComponent={<BackProjectModal projectId={projectId} />}
-                />
+              {user ? (
+                user.id === project.ownerId ? (
+                  <OpenModalButton
+                    buttonText={"Add a Description Image"}
+                    modalComponent={<ImageFormModal projectId={projectId} />}
+                  />
+                ) : (
+                  <OpenModalButton
+                    buttonText={"Back this project"}
+                    modalComponent={<BackProjectModal projectId={projectId} />}
+                  />
+                )
               ) : (
-                <OpenModalButton
-                  buttonText={"Add a Description Image"}
-                  modalComponent={<ImageFormModal projectId={projectId} />}
-                />
+                <button className="back-this-project">
+                  <Link to="/login">back this project</Link>
+                </button>
               )}
             </div>
 
             <div className="reward-list">
-              {rewards.map((reward) => (
-                <div key={reward.id} className="reward-tile">
-                  <h3>{reward.name}</h3>
-                  <p>{reward.description}</p>
-                  {rewardImages[reward.id] ? (
-                    <img
-                      className="reward-img"
-                      src={rewardImages[reward.id].url}
-                      alt={`Reward for ${reward.name}`}
-                    />
-                  ) : (
-                    <OpenModalButton
-                      buttonText={"Add an Image"}
-                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                    />
+              {rewards.length > 0 ? (
+                rewards.map((reward) => (
+                  <div key={reward.id} className="reward-tile">
+                    <h3>{reward.name}</h3>
+                    <p>{reward.description}</p>
+                    {rewardImages[reward.id] ? (
+                      <img
+                        className="reward-img"
+                        src={rewardImages[reward.id].url}
+                        alt={`Reward for ${reward.name}`}
+                      />
+                    ) : (
+                      <>
+                        {!user
+                          ? ""
+                          : user.id === project.ownerId && (
+                              <OpenModalButton
+                                buttonText={"Add an Image"}
+                                modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                              />
+                            )}
+                      </>
+                    )}
+                    <p>Price: ${reward.price}</p>
+                  </div>
+                ))
+              ) : (
+                <>
+                  {user && user.id === project.ownerId && (
+                    <>
+                      <p>
+                        No rewards created for this project yet! Click the button below to add one.
+                      </p>
+                      <div className="modal-button">
+                        {rewards.length < 4 && (
+                          <OpenModalButton
+                            buttonText={"Add a Reward"}
+                            modalComponent={<AddRewardModal projectId={project.id} />}
+                          />
+                        )}
+                      </div>
+                    </>
                   )}
-                  <p>Price: ${reward.price}</p>
-                </div>
-              ))}
+                </>
+              )}
+
+              <div className="modal-button">
+                {rewards.length < 4 ? (
+                  <OpenModalButton
+                    buttonText={"Add a Reward"}
+                    modalComponent={<AddRewardModal projectId={project.id} />}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           </div>
         </div>
