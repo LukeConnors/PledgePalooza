@@ -7,6 +7,7 @@ import { userSelector } from "../../store/session";
 function EditProject() {
   const history = useHistory();
   const { projectId } = useParams();
+  const [selectedCategory, setSelectedCategory] = useState("");
   const user = useSelector(userSelector);
   const [project, setProject] = useState({});
   const [formData, setFormData] = useState({
@@ -28,13 +29,21 @@ function EditProject() {
       .then((res) => res.json())
       .then((data) => {
         setProject(data);
+        const existingEndDate = data.endDate
+          ? new Date(data.endDate).toISOString().split("T")[0]
+          : "";
+
+        const selectedCategory = categories.find((category) => category.name === data.category);
+
+        // Set the initial value for selectedCategory
+        setSelectedCategory(selectedCategory ? selectedCategory.id : "");
         setFormData({
           name: data.name,
           description: data.description,
           location: data.location,
-          categoryId: data.category,
+          categoryId: selectedCategory.id,
           bannerImg: data.bannerImg,
-          endDate: data.endDate,
+          endDate: existingEndDate,
         });
       });
   }, [projectId]);
@@ -50,6 +59,8 @@ function EditProject() {
     formDataToSend.append("endDate", formData.endDate);
 
     formDataToSend.append("bannerImg", formData.bannerImg);
+
+    console.log(formData);
 
     try {
       const res = await fetch(`/api/projects/${projectId}`, {
@@ -85,6 +96,13 @@ function EditProject() {
       setFormData({
         ...formData,
         [name]: files[0], // Set the selected file
+      });
+    } else if (name === "categoryId") {
+      // Update the selectedCategory separately with the category ID
+      setSelectedCategory(value);
+      setFormData({
+        ...formData,
+        [name]: value,
       });
     } else {
       setFormData({
@@ -139,7 +157,7 @@ function EditProject() {
         </div>
         <div>
           <label htmlFor="categories">Categories</label>
-          <select onChange={handleInputChange} name="categoryId" value={formData.categoryId || ""}>
+          <select onChange={handleInputChange} name="categoryId" value={selectedCategory}>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}

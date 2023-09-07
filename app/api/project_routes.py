@@ -95,17 +95,22 @@ def edit_project_form(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         project = Project.query.get(id)  # Get the existing project by its ID
-        banner_img = request.files["bannerImg"]
+        banner_img = request.files.get("bannerImg")  # Use get() to make it optional
         if project:
             # Update the project's attributes with the new data
-            image_url = upload_file_to_s3(banner_img)
-            project.name = form.data["name"]
-            project.description = form.data["description"]
-            project.location = form.data["location"]
-            project.categoryId = form.data["categoryId"]
-            project.bannerImg = image_url["url"]
-            project.endDate = form.data["endDate"]
-            # No need to update ownerId; it should remain the same
+            if form.data.get("name"):
+                project.name = form.data["name"]
+            if form.data.get("description"):
+                project.description = form.data["description"]
+            if form.data.get("location"):
+                project.location = form.data["location"]
+            if form.data.get("categoryId"):
+                project.categoryId = form.data["categoryId"]
+            if banner_img:
+                image_url = upload_file_to_s3(banner_img)
+                project.bannerImg = image_url["url"]
+            if form.data.get("endDate"):
+                project.endDate = form.data["endDate"]
 
             db.session.commit()
 
