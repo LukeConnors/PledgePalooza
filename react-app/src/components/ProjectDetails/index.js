@@ -6,9 +6,9 @@ import OpenModalButton from "../OpenModalButton";
 import ImageFormModal from "../DesImageFormModal";
 import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
-import chatLogo from "../../chat.png";
-import checkLogo from "../../check.png";
-import megaphoneLogo from "../../megaphone.png";
+import chatLogo from "../../assets/chat.png";
+import checkLogo from "../../assets/check.png";
+import megaphoneLogo from "../../assets/megaphone.png";
 
 import RewardImageFormModal from "../RewardImageModal";
 

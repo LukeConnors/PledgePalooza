@@ -1,3 +1,98 @@
 .signup-here-btn > a {
   color: green;
 }
+
+.login-form-page-container {
+  margin-top: 90px;
+}
+
+.signup-here-btn {
+  text-align: center;
+}
+
+.login-form-page {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px 40px;
+  height: 500px;
+  box-shadow: 0px 2px 17px 1px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+.login-form-page > h1 {
+  text-align: center;
+}
+
+.login-form-page-email {
+  display: flex;
+  margin: 20px 0px;
+  flex-direction: column;
+}
+
+.login-form-page-email > label {
+  margin-bottom: 5px;
+}
+.login-form-page-password {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.login-page-email {
+  position: relative;
+}
+
+.email-input {
+  padding-left: 30px;
+  padding: 10px 0px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.email-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+.login-page-password {
+  position: relative;
+}
+
+.password-input {
+  padding-left: 30px;
+  padding: 10px 0px;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.lock-icon {
+  position: absolute;
+  top: 74%;
+  left: 10px;
+  transform: translateY(-74%);
+  font-size: 18px;
+}
+
+.login-form-page-btn {
+  background: none;
+  margin-top: 20px;
+  padding: 15px 5px;
+  color: white;
+  background-color: #006400;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border: none;
+}
+
+.login-form-page-btn:hover {
+  transform: translateY(-5px);
+  background-color: #1a5553;
+}

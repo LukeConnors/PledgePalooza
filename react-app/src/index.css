@@ -18,3 +18,7 @@ a:hover {
   color: #4e9487;
   text-decoration: underline;
 }
+
+input {
+  outline-color: #006400;
+}
