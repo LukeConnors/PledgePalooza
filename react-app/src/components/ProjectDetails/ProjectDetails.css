@@ -70,7 +70,7 @@
 }
 
 .reward-list {
-    width: 100%; 
+    width: 80%; 
     height: 400px;
     overflow-y: auto;
     padding: 32px;
@@ -100,8 +100,9 @@
 }
 
 .reward-img {
-    width: 50px;
-    height: 50px;
+    max-width: 100%; 
+    height: 150px !important; 
+    margin-top: 10px; 
 }
 
 .grid-container {
@@ -148,8 +149,33 @@
     flex-direction: column;
 }
 
-.info-icon {
-    width: 60px;  
-    height: 60px;
-    margin-bottom: 10px;  
+@media (min-width: 600px) {
+    .flex-row-md {
+        flex-direction: row;
+        align-items: center;
+    }
 }
+
+.info-section {
+    display: flex;
+    align-items: center; 
+    gap: 16px;   
+}
+
+.info-icon {
+    max-width: 24px; 
+    max-height: 2.0em; 
+    vertical-align: middle; 
+}
+
+
+@media (min-width: 600px) {
+    .info-icon {
+        margin-bottom: 0;  
+    }
+}
+
+.description-images-container img {
+    margin-top: 10px;
+}
+

@@ -22,8 +22,7 @@ def reward_image(id):
             new_image = Image(
             url = img_url["url"],
             imageable_id = id,
-            imageable_type = "reward"
-            )
+            imageable_type = "reward") 
         db.session.add(new_image)
         db.session.commit()
         return new_image.to_dict()

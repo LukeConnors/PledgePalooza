@@ -22,6 +22,7 @@ function ProjectDetails() {
   const [pledgedAmount, setPledgedAmount] = useState(Math.floor(Math.random() * 10000));
   const [backerCount, setBackerCount] = useState(Math.floor(Math.random() * 5000));
   const [daysLeft, setDaysLeft] = useState(Math.floor(Math.random() * 65));
+  const [descriptionImages, setDescriptionImages] = useState([])
 
   useEffect(() => {
     fetch(`/api/projects/${projectId}`)
@@ -62,6 +63,7 @@ function ProjectDetails() {
     });
   }, [rewards]);
 
+  console.log(rewards);
   return (
     <div>
       <div className="project-detail">
@@ -88,27 +90,32 @@ function ProjectDetails() {
               )}
             </div>
 
-            <div className="reward-list">
-              {rewards.map((reward) => (
-                <div key={reward.id} className="reward-tile">
-                  <h3>{reward.name}</h3>
-                  <p>{reward.description}</p>
-                  {rewardImages[reward.id] ? (
-                    <img
-                      className="reward-img"
-                      src={rewardImages[reward.id].url}
-                      alt={`Reward for ${reward.name}`}
-                    />
-                  ) : (
-                    <OpenModalButton
-                      buttonText={"Add an Image"}
-                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                    />
-                  )}
-                  <p>Price: ${reward.price}</p>
-                </div>
-              ))}
-            </div>
+            <>
+              <div className="reward-list">
+                {rewards.map((reward) => (
+                  <div key={reward.id} className="reward-tile">
+                    {rewardImages[reward.id] ? (
+                      <img
+                        className="reward-img"
+                        src={rewardImages[reward.id].url}
+                        alt={`Reward for ${reward.name}`}
+                      />
+                    ) : (
+                      user &&
+                      user.id === project.ownerId && (
+                        <OpenModalButton
+                          buttonText={"Add an Image"}
+                          modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                        />
+                      )
+                    )}
+                    <h3>{reward.name}</h3>
+                    <p>{reward.description}</p>
+                    <p>Price: ${reward.price}</p>
+                  </div>
+                ))}
+              </div>
+            </>
           </div>
         </div>
 
@@ -127,6 +134,11 @@ function ProjectDetails() {
               You’re only charged if the project meets its funding goal by the campaign deadline.
             </p>
           </div>
+        </div>
+        <div className="description-images-container">
+          {descriptionImages.map((image) => (
+            <img key={image.id} src={image.url} alt="Description" />
+         ))}
         </div>
       </div>
     </div>
