@@ -17,10 +17,14 @@
 }
 
 .project-detail {
-  width: 700px;
-  height: 400px;
+  width: 100%;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-banner {
+  width: 700px;
+  height: 400px;
 }
 
 .project-detail h1 {
