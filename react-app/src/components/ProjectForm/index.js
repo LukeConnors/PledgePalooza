@@ -41,6 +41,39 @@ function ProjectFormPage() {
     formDataToSend.append("endDate", formData.endDate);
     formDataToSend.append("bannerImg", formData.bannerImg);
 
+    let formErrors = {};
+    if(!formData.name){
+      formErrors.name = "Name is required.";
+    }
+    if(!formData.description || formData.description.length < 25){
+      formErrors.description = "Description needs to be 25 or more characters"
+    }
+    if(!formData.location){
+      formErrors.location = "Location is required"
+    }
+    if(!formData.categoryId){
+      formErrors.categoryId = "Category is required"
+    }
+    if(!formData.endDate){
+      formErrors.endDate = "End Date is required"
+    } else {
+      const selectedEndDate = new Date(formData.endDate);
+      const currentDate = new Date(getCurrentDate());
+      const oneYearLater = new Date(getOneYearLaterDate());
+
+      if(selectedEndDate < currentDate){
+        formErrors.endDate = "End Date cannot be before current date";
+      } else if (selectedEndDate > oneYearLater){
+        formErrors.endDate = "End Date cannot be more than one year from current date"
+      }
+    }
+
+    if(Object.keys(formErrors).length > 0){
+      setErrors(formErrors);
+      return;
+    }
+
+
     try {
       const res = await fetch("/api/projects/", {
         method: "POST",
@@ -61,83 +94,102 @@ function ProjectFormPage() {
   };
 
   console.log("!!!!!!!!!!MY ERRORS!!!!!", errors);
+
+  function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function getOneYearLaterDate() {
+    const oneYearLaterDate = new Date();
+    oneYearLaterDate.setFullYear(oneYearLaterDate.getFullYear() + 1);
+    return oneYearLaterDate.toISOString().split('T')[0];
+  }
+
+
   return (
-    <>
-      <h1 style={{ textAlign: "center" }}>Create a Project: </h1>
-      <form onSubmit={handleSubmit} className="project-box">
-        <div className="project-errors">{errors?.name}</div>
-        <label className="project-form">
-          Name
-          <input
-            type="text"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-        </label>
-        <div className="project-errors">{errors?.description}</div>
-        <label className="project-form">
-          Description:
-          <input
-            type="textarea"
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          />
-        </label>
-        <div className="project-errors">{errors?.location}</div>
-        <label className="project-form">
-          Location:
-          <input
-            type="text"
-            value={formData.location}
-            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-          />
-        </label>
-        <div className="project-errors">{errors?.categoryId}</div>
-        <label className="project-form">
-          <select
-            name="categories"
-            value={formData.categoryId}
-            onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
-          >
-            <option disabled value="">
-              Select a category:
-            </option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
+  <>
+  <div className="form-container">
+    <div className="form-content">
+    <h1 style={{ textAlign: "center" }}>Create a Project</h1>
+    <form onSubmit={handleSubmit} className="project-form">
+      <label>
+        Name
+        <input
+          type="text"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        />
+        {errors.name && <div className="error-message">{errors.name}</div>}
+      </label>
+
+      <label>
+        Description
+        <input
+          type="textarea"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+        />
+        {errors.description && <div className="error-message">{errors.description}</div>}
+      </label>
+
+      <label>
+        Location
+        <input
+          type="text"
+          value={formData.location}
+          onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+        />
+        {errors.location && <div className="error-message">{errors.location}</div>}
+      </label>
+
+      <label>
+        <select
+          name="categories"
+          value={formData.categoryId}
+          onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
+        >
+          <option value="" disabled>Select a Category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
               </option>
-            ))}
-          </select>
-        </label>
-        <div className="project-errors">{errors?.bannerImg}</div>
-        <label className="project-form">
-          Banner Image:
-          <input
-            type="file"
-            accept=".png, .jpeg, .jpg"
-            onChange={(e) => setFormData({ ...formData, bannerImg: e.target.files[0] })}
-          />
-        </label>
-        <div className="project-errors">{errors?.endDate}</div>
-        <label className="project-form">
-          Project Closing Date:
-          <input
-            type="date"
-            value={formData.endDate}
-            onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-          />
-        </label>
-        <div className="project-buttons">
-          <button className="project-submit" type="submit">
-            Submit
-          </button>
-          <button className="project-cancel" onClick={handleCancelClick}>
-            Cancel
-          </button>
-        </div>
-      </form>
-    </>
-  );
+             ))}
+             </select>
+             {errors.categoryId && <div className="error-message">{errors.categoryId}</div>}
+           </label>
+     
+           <label>
+             Banner Image
+             <input
+               type="file"
+               accept=".png, .jpeg, .jpg"
+               onChange={(e) => setFormData({ ...formData, bannerImg: e.target.files[0] })}
+             />
+             {errors.bannerImg && <div className="error-message">{errors.bannerImg}</div>}
+           </label>
+     
+           <label>
+             Project Closing Date
+             <input
+               type="date"
+               value={formData.endDate}
+               min={getCurrentDate()}
+               max={getOneYearLaterDate()}
+               onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
+             />
+             {errors.endDate && <div className="error-message">{errors.endDate}</div>}
+           </label>
+     
+           <button type="submit">Submit</button>
+         </form>
+          </div>
+         </div>
+       </>
+     );
 }
 
 export default ProjectFormPage;
