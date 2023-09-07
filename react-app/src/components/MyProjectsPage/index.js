@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import './MyProjects.css'
 
 function MyProjects(){
   const [projects, setProjects] = useState([]);
@@ -15,7 +16,8 @@ function MyProjects(){
 
   return (
     <>
-    <h1>My Projects:</h1>
+    <h1 className="my-project-title">My Projects:</h1>
+    <div className="my-project-box">
     {projects.map((project) =>
     <Link to={`/projects/${project.id}`} key={project.id}>
         <div className="my-project-card" key={project.id}>
@@ -25,10 +27,13 @@ function MyProjects(){
             src={project.bannerImg}
             >
             </img>
-            <h2 key={project.id}>{project.name}</h2>
+            <div className="name-holder">
+            <h2 className="my-project-name" key={project.id}>{project.name}</h2>
+            </div>
         </div>
     </Link>
     )}
+    </div>
     </>
   )
 

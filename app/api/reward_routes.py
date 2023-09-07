@@ -9,6 +9,14 @@ from datetime import date
 
 reward_routes = Blueprint('rewards', __name__)
 
+# GET all rewards
+@reward_routes.route('/')
+def all_rewards():
+   rewards = Reward.query.all()
+
+   return {"rewards": [reward.to_dict() for reward in rewards]}
+
+
 #  POST an Image to a reward by reward ID '/rewards/:rewardId'
 @reward_routes.route('/<int:id>/image', methods=["POST"])
 @login_required

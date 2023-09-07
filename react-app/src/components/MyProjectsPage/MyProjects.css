@@ -1,0 +1,36 @@
+.my-project-box{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.my-project-card{
+    border-radius: 20px;
+    padding: 20px;
+    transition: transform 0.2s ease-in-out;
+    background-color: rgb(225, 223, 223);
+    flex-basis: auto;
+    height: 600px;
+    width: 540px;
+
+}
+
+.my-project-card:hover{
+    transform: scale(1.02);
+}
+
+.my-project-image{
+    height: 500px;
+    width: 500px;
+    border-radius: 20px;
+}
+
+.my-project-title{
+    padding-bottom: 50px;
+}
+
+
+.name-holder{
+    display: flex;
+    justify-content: center;
+}

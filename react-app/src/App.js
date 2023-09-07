@@ -9,6 +9,7 @@ import ProjectFormPage from "./components/ProjectForm";
 import ProjectDetails from "./components/ProjectDetails";
 import Projects from "./components/Projects";
 import MyProjects from "./components/MyProjectsPage";
+import MyBackedProjects from "./components/MyBackedProjects";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function App() {
             <MyProjects/>
           </Route>
           <Route path="/api/users/current/backed-projects">
-
+            <MyBackedProjects/>
           </Route>
 
         </Switch>

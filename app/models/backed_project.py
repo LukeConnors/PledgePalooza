@@ -29,5 +29,9 @@ class BackedProject(db.Model):
             "projectId": self.projectId,
             "rewardId": self.rewardId,
             "userId": self.userId,
-            "cost": self.cost
+            "cost": self.cost,
+            "rewardName": self.reward.name,
+            "projectImg": self.project.bannerImg,
+            "projectName": self.project.name
+
         }

@@ -60,8 +60,12 @@ function ProfileButton({ user }) {
               <Link to='/api/projects/my-projects'>
                 View Projects
               </Link>
-              </li>
-            <li className="user-details">View Backed Projects</li>
+            </li>
+            <li className="user-details">
+              <Link to='/api/users/current/backed-projects'>
+              View Backed Projects
+              </Link>
+            </li>
             <li className="list-btn">
               <button onClick={handleLogout}>Log Out</button>
             </li>
