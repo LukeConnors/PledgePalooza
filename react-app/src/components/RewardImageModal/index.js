@@ -11,8 +11,13 @@ function RewardImageFormModal(rewardId) {
     url: "",
   });
 
+  const [loading, setLoading] = useState(false); // State to track loading
+  const [submitted, setSubmitted] = useState(false); // State to track submission status
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading when the fetch begins
+
     const info = new FormData();
     info.append("url", formData.url);
     try {
@@ -22,35 +27,44 @@ function RewardImageFormModal(rewardId) {
         body: info,
         credentials: "include",
       });
-      console.log(res);
+
       if (res.ok) {
         const data = await res.json();
         console.log(data);
         closeModal();
+        setSubmitted(true);
+        window.location.reload();
       } else {
         const errorData = await res.json();
         console.log(errorData);
       }
     } catch (e) {
       console.log("fetch error:", e);
+    } finally {
+      setLoading(false); // Stop loading when the fetch is done
     }
   };
 
   return (
     <>
       <h1>Add an image to your project reward</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Description Image
-          <input
-            type="file"
-            name="url"
-            accept=".png, .jpeg, .jpg"
-            onChange={(e) => setFormData({ ...formData, url: e.target.files[0] })}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
+      {submitted ? (
+        <p>Submitted!</p>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Description Image
+            <input
+              type="file"
+              accept=".png, .jpeg, .jpg"
+              onChange={(e) => setFormData({ ...formData, url: e.target.files[0] })}
+            />
+          </label>
+          <button type="submit" className="submitting" disabled={loading}>
+            {loading ? "Submitting..." : "Submit"}
+          </button>
+        </form>
+      )}
     </>
   );
 }

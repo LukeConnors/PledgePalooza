@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useParams } from "react-router-dom";
+import chatLogo from "../../assets/chat.png";
+import checkLogo from "../../assets/check.png";
+import megaphoneLogo from "../../assets/megaphone.png";
 import "./ProjectDetails.css";
 import OpenModalButton from "../OpenModalButton";
 import ImageFormModal from "../DesImageFormModal";
 import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
-import chatLogo from "../../chat.png";
-import checkLogo from "../../check.png";
-import megaphoneLogo from "../../megaphone.png";
 
 import RewardImageFormModal from "../RewardImageModal";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import AddRewardModal from "../../AddRewardModal";
 
 function ProjectDetails() {
-  const history = useHistory();
   const [project, setProject] = useState({});
   const [rewards, setRewards] = useState([]);
   const [rewardImages, setRewardImages] = useState({});
@@ -131,43 +132,88 @@ function ProjectDetails() {
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
           <div className="stats-and-rewards">
             <div className="project-stats">
-              <div>${pledgedAmount}</div>
-              <div>pledged</div>
-              <div>{backerCount}</div>
-              <div> backers</div>
-              <div>{daysLeft}</div>
-              <div>days left</div>
-              {user?.id !== project.ownerId ? (
-                // Check if the user is logged in
-                user ? (
+              <div>${pledgedAmount} pledged</div>
+              <div>{backerCount} backers</div>
+              <div>{daysLeft} days left</div>
+              {user ? (
+                user.id === project.ownerId ? (
+                  <OpenModalButton
+                    buttonText={"Add a Description Image"}
+                    modalComponent={<ImageFormModal projectId={projectId} />}
+                  />
+                ) : (
                   <OpenModalButton
                     buttonText={"Back this project"}
                     modalComponent={<BackProjectModal projectId={projectId} />}
                   />
-                ) : (
-                  <button onClick={() => history.push("/login")}>Back this project</button>
                 )
               ) : (
-                <OpenModalButton
-                  buttonText={"Add a Description Image"}
-                  modalComponent={<ImageFormModal projectId={projectId} />}
-                />
+                <button className="back-this-project">
+                  <Link to="/login">back this project</Link>
+                </button>
               )}
             </div>
 
+            <div className="reward-list">
+              {rewards.map((reward) => (
+                <div key={reward.id} className="reward-tile">
+                  <h3>{reward.name}</h3>
+                  <p>{reward.description}</p>
+                  {rewardImages[reward.id] ? (
+                    <img
+                      className="reward-img"
+                      src={rewardImages[reward.id].url}
+                      alt={`Reward for ${reward.name}`}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                  {user?.id === project.ownerId && !rewardImages[reward.id] ? (
+                    <OpenModalButton
+                      buttonText={"Add an Image"}
+                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                  <p>Price: ${reward.price}</p>
+                </div>
+              ))}
+
+              {/* <>
+                  {user && user.id === project.ownerId && (
+                    <>
+                      <p>
+                        No rewards created for this project yet! Click the button below to add one.
+                      </p>
+                    </>
+                  )}
+                </> */}
+
+              <div className="modal-button">
+                {rewards.length < 4 ? (
+                  <OpenModalButton
+                    buttonText={"Add a Reward"}
+                    modalComponent={<AddRewardModal projectId={project.id} />}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="grid-container flex">
-          <div className="info-section">
+          <div className="flex-column flex-row-md">
             <img className="info-icon" src={checkLogo} alt="Info Icon 1" />
             <p>Pledge Palooza connects creators with backers to fund projects.</p>
           </div>
-          <div className="info-section">
+          <div className="flex-column flex-row-md">
             <img className="info-icon" src={chatLogo} alt="Info Icon 2" />
             <p>Rewards aren’t guaranteed, but creators must regularly update backers.</p>
           </div>
-          <div className="info-section">
+          <div className="flex-column flex-row-md">
             <img className="info-icon" src={megaphoneLogo} alt="Info Icon 3" />
             <p>
               You’re only charged if the project meets its funding goal by the campaign deadline.

@@ -29,5 +29,7 @@ class Reward(db.Model):
             'name': self.name,
             'projectId': self.projectId,
             'description': self.description,
-            'price': self.price
+            'price': self.price,
+            'estDelivery': self.est_delivery,
+            'quantity': self.quantity
         }
