@@ -33,5 +33,4 @@ class BackedProject(db.Model):
             "rewardName": self.reward.name,
             "projectImg": self.project.bannerImg,
             "projectName": self.project.name
-
         }
