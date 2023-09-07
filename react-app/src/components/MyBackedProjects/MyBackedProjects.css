@@ -1,0 +1,40 @@
+.back-project-box{
+   display: grid;
+   grid-template-columns: repeat(3,1fr);
+   gap: 20px;
+}
+
+.back-project-card{
+border-radius: 20px;
+padding: 20px;
+transition: transform 0.2s ease-in-out;
+background-color: #36d892;
+flex-basis: auto;
+height: 650px;
+width: 540px;
+
+}
+
+.back-project-card:hover{
+    transform: scale(1.02);
+}
+
+.back-project-image{
+    height: 500px;
+    width: 500px;
+    border-radius: 20px;
+}
+
+.back-project-title{
+    padding-bottom: 50px;
+}
+
+
+.back-name-holder{
+    display: flex;
+    justify-content: center;
+}
+
+.amount-div{
+    padding-top: 10px;
+}

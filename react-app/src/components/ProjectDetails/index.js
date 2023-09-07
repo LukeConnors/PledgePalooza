@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
+import chatLogo from "../../assets/chat.png";
+import checkLogo from "../../assets/check.png";
+import megaphoneLogo from "../../assets/megaphone.png";
 import "./ProjectDetails.css";
 import OpenModalButton from "../OpenModalButton";
 import ImageFormModal from "../DesImageFormModal";
 import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
-import chatLogo from "../../assets/chat.png";
-import checkLogo from "../../assets/check.png";
-import megaphoneLogo from "../../assets/megaphone.png";
 
 import RewardImageFormModal from "../RewardImageModal";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import AddRewardModal from "../../AddRewardModal";
 
 function ProjectDetails() {
   const [project, setProject] = useState({});
@@ -63,7 +65,23 @@ function ProjectDetails() {
     });
   }, [rewards]);
 
-  console.log(rewards);
+  useEffect(() => {
+    const fetchDescriptionImages = async () => {
+      try {
+        const res = await fetch(`/api/projects/${projectId}/des-images`);
+        const data = await res.json();
+        setDescriptionImages(data)
+      } catch (err){
+        console.error("Error fetching description images:", err)
+      }
+    };
+    fetchDescriptionImages()
+  }, [projectId])
+    console.log("descriptionImages:", descriptionImages);
+
+  
+
+  // console.log(rewards);
   return (
     <div>
       <div className="project-detail">
@@ -77,16 +95,22 @@ function ProjectDetails() {
               <div>${pledgedAmount} pledged</div>
               <div>{backerCount} backers</div>
               <div>{daysLeft} days left</div>
-              {user?.id !== project.ownerId ? (
-                <OpenModalButton
-                  buttonText={"Back this project"}
-                  modalComponent={<BackProjectModal projectId={projectId} />}
-                />
+              {user ? (
+                user.id === project.ownerId ? (
+                  <OpenModalButton
+                    buttonText={"Add a Description Image"}
+                    modalComponent={<ImageFormModal projectId={projectId} />}
+                  />
+                ) : (
+                  <OpenModalButton
+                    buttonText={"Back this project"}
+                    modalComponent={<BackProjectModal projectId={projectId} />}
+                  />
+                )
               ) : (
-                <OpenModalButton
-                  buttonText={"Add a Description Image"}
-                  modalComponent={<ImageFormModal projectId={projectId} />}
-                />
+                <button className="back-this-project">
+                  <Link to="/login">back this project</Link>
+                </button>
               )}
             </div>
 
@@ -94,6 +118,8 @@ function ProjectDetails() {
               <div className="reward-list">
                 {rewards.map((reward) => (
                   <div key={reward.id} className="reward-tile">
+                    <h3>{reward.name}</h3>
+                    <p>{reward.description}</p>
                     {rewardImages[reward.id] ? (
                       <img
                         className="reward-img"
@@ -109,8 +135,6 @@ function ProjectDetails() {
                         />
                       )
                     )}
-                    <h3>{reward.name}</h3>
-                    <p>{reward.description}</p>
                     <p>Price: ${reward.price}</p>
                   </div>
                 ))}
@@ -121,15 +145,15 @@ function ProjectDetails() {
 
         <div className="grid-container flex">
           <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 1" />
-            <p>Kickstarter connects creators with backers to fund projects.</p>
+            <img className="info-icon" src={checkLogo} alt="Info Icon 1" />
+            <p>Pledge Palooza connects creators with backers to fund projects.</p>
           </div>
           <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 2" />
+            <img className="info-icon" src={chatLogo} alt="Info Icon 2" />
             <p>Rewards aren’t guaranteed, but creators must regularly update backers.</p>
           </div>
           <div className="flex-column flex-row-md">
-            <img className="info-icon" src="" alt="Info Icon 3" />
+            <img className="info-icon" src={megaphoneLogo} alt="Info Icon 3" />
             <p>
               You’re only charged if the project meets its funding goal by the campaign deadline.
             </p>
