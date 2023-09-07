@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import "./ProjectForm.css";
 
 function ProjectFormPage() {
-  const history = useHistory()
-  const [errors, setErrors] = useState({})
+  const history = useHistory();
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -27,7 +27,7 @@ function ProjectFormPage() {
   // const csrf = document.querySelector("[name=csrf_token]").value
 
   const handleCancelClick = (e) => {
-    history.push('/')
+    history.push("/");
   };
 
   const handleSubmit = async (e) => {
@@ -49,23 +49,23 @@ function ProjectFormPage() {
       });
       if (res.ok) {
         const data = await res.json();
-        history.push(`/projects/${data.id}`)
+        history.push(`/projects/${data.id}`);
       } else {
         const e = await res.json();
-        setErrors(e.form_errors)
-        console.log("!!!!!!!!!!!ERROR!!!!!!!!",e, "!!!!!!!!ERROR!!!!!!!!!!");
+        setErrors(e.form_errors);
+        console.log("!!!!!!!!!!!ERROR!!!!!!!!", e, "!!!!!!!!ERROR!!!!!!!!!!");
       }
     } catch (e) {
       console.log("fetch error:", e);
     }
   };
 
-  console.log("!!!!!!!!!!MY ERRORS!!!!!",errors)
+  console.log("!!!!!!!!!!MY ERRORS!!!!!", errors);
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Create a Project: </h1>
       <form onSubmit={handleSubmit} className="project-box">
-      <div className="project-errors">{errors?.name}</div>
+        <div className="project-errors">{errors?.name}</div>
         <label className="project-form">
           Name
           <input
@@ -128,8 +128,12 @@ function ProjectFormPage() {
           />
         </label>
         <div className="project-buttons">
-        <button className="project-submit" type="submit">Submit</button>
-        <button className="project-cancel" onClick={handleCancelClick}>Cancel</button>
+          <button className="project-submit" type="submit">
+            Submit
+          </button>
+          <button className="project-cancel" onClick={handleCancelClick}>
+            Cancel
+          </button>
         </div>
       </form>
     </>

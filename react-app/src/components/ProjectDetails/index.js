@@ -12,7 +12,7 @@ import { userSelector } from "../../store/session";
 
 import RewardImageFormModal from "../RewardImageModal";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import AddRewardModal from "../../AddRewardModal";
+import AddRewardModal from "../AddRewardModal";
 
 function ProjectDetails() {
   const [project, setProject] = useState({});
@@ -32,9 +32,7 @@ function ProjectDetails() {
 
   useEffect(() => {
     showSlides(slideIndex);
-  }, [descriptionImages, slideIndex])
-
-  
+  }, [descriptionImages, slideIndex]);
 
   useEffect(() => {
     fetch(`/api/projects/${projectId}`)
@@ -80,31 +78,36 @@ function ProjectDetails() {
       try {
         const res = await fetch(`/api/projects/${projectId}/des-images`);
         const data = await res.json();
-        setDescriptionImages(data)
-      } catch (err){
-        console.error("Error fetching description images:", err)
+        setDescriptionImages(data);
+      } catch (err) {
+        console.error("Error fetching description images:", err);
       }
     };
-    fetchDescriptionImages()
-  }, [projectId])
-    console.log("descriptionImages:", descriptionImages);
+    fetchDescriptionImages();
+  }, [projectId]);
+  console.log("descriptionImages:", descriptionImages);
 
-    
-    showSlides(slideIndex)
+  showSlides(slideIndex);
 
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
+  function plusSlides(n) {
+    showSlides((slideIndex += n));
   }
 
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
+  function currentSlide(n) {
+    showSlides((slideIndex = n));
   }
 
   function showSlides(n) {
-    let slides = slidesReference.current ? slidesReference.current.getElementsByClassName("mySlides") : [];
+    let slides = slidesReference.current
+      ? slidesReference.current.getElementsByClassName("mySlides")
+      : [];
     let dots = dotsReference.current ? dotsReference.current.getElementsByClassName("dot") : [];
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
     for (let i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
     }
@@ -119,14 +122,13 @@ function ProjectDetails() {
     }
   }
 
-  
-
   // console.log(rewards);
   return (
     <div>
       <div className="project-detail">
         <h1>{project.name}</h1>
         <p>{project.description}</p>
+        <p>{project.category}</p>
 
         <div className="project-main-content">
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
@@ -176,49 +178,73 @@ function ProjectDetails() {
         <div className="content-row">
           <div className="description-images-container">
             <div className="slideshow-container" ref={slidesReference}>
-                {descriptionImages.map((image, index) => (
-                  <div key={image.id} className="mySlides fade">
-                  <div className="numbertext">{index + 1} / {descriptionImages.length}</div>
-                  <img src={image.url} style={{width: '100%'}} alt={`Description ${index + 1}`} />
-                  <div className="text">Caption for Image {index + 1}</div>
-      </div>
-    ))}
-
-        {/* Next and previous buttons */}
-        <a className="prev" onClick={() => plusSlides(-1)}>&#10094;</a>
-        <a className="next" onClick={() => plusSlides(1)}>&#10095;</a>
-        </div>
-
-        <div style={{textAlign: 'center'}} ref={dotsReference}>
-          {descriptionImages.map((_, index) => (
-          <span key={index} className="dot" onClick={() => currentSlide(index + 1)}></span>
-         ))}
-          </div>
-         </div>
-          <div className="reward-list">
-                {rewards.map((reward) => (
-                  <div key={reward.id} className="reward-tile">
-                    <h3>{reward.name}</h3>
-                    <p>{reward.description}</p>
-                    {rewardImages[reward.id] ? (
-                      <img
-                        className="reward-img"
-                        src={rewardImages[reward.id].url}
-                        alt={`Reward for ${reward.name}`}
-                      />
-                    ) : (
-                      user &&
-                      user.id === project.ownerId && (
-                        <OpenModalButton
-                          buttonText={"Add an Image"}
-                          modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                        />
-                      )
-                    )}
-                    <p>Price: ${reward.price}</p>
+              {descriptionImages.map((image, index) => (
+                <div key={image.id} className="mySlides fade">
+                  <div className="numbertext">
+                    {index + 1} / {descriptionImages.length}
                   </div>
-                ))}
+                  <img src={image.url} style={{ width: "100%" }} alt={`Description ${index + 1}`} />
+                  <div className="text">Caption for Image {index + 1}</div>
+                </div>
+              ))}
+
+              {/* Next and previous buttons */}
+              <a className="prev" onClick={() => plusSlides(-1)}>
+                &#10094;
+              </a>
+              <a className="next" onClick={() => plusSlides(1)}>
+                &#10095;
+              </a>
+            </div>
+
+            <div style={{ textAlign: "center" }} ref={dotsReference}>
+              {descriptionImages.map((_, index) => (
+                <span key={index} className="dot" onClick={() => currentSlide(index + 1)}></span>
+              ))}
+            </div>
+          </div>
+          <div className="reward-list">
+            {rewards.map((reward) => (
+              <div key={reward.id} className="reward-tile">
+                {rewardImages[reward.id] ? (
+                  <img
+                    className="reward-img"
+                    src={rewardImages[reward.id].url}
+                    alt={`Reward for ${reward.name}`}
+                  />
+                ) : (
+                  user &&
+                  user.id === project.ownerId && (
+                    <OpenModalButton
+                      buttonText={"Add an Image"}
+                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                    />
+                  )
+                )}
+                <h3>{reward.name}</h3>
+                <p>{reward.description}</p>
+                <p>Price: ${reward.price}</p>
               </div>
+            ))}
+            <>
+              {user && user.id === project.ownerId && rewards.length === 0 && (
+                <>
+                  <p>No rewards created for this project yet! Click the button below to add one.</p>
+                </>
+              )}
+            </>
+
+            <div className="modal-button">
+              {rewards.length < 4 ? (
+                <OpenModalButton
+                  buttonText={"Add a Reward"}
+                  modalComponent={<AddRewardModal projectId={project.id} />}
+                />
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
