@@ -1,64 +1,33 @@
-.reward-form-page-container{
+.des-form-page-container{
     width: 1000px;
 }
 
-.project-form{
+.modal-des-form{
     display: flex;
     flex-direction: column;
     background-color: white;
     width: 40%;
     margin: 0 auto;
     padding: 20px 40px;
-    height: auto;
+    height: 280px;
     box-shadow: 0px 2px 17px 1px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
 }
 
-.rew-form-amount{
+.des-form-page-amount{
     display: flex;
     margin: 20px 0px;
     flex-direction: column;
 }
 
-.reward-name-input{
+.modal-file-input{
     padding-left: 30px;
     padding: 10px 0px;
     width: 100%;
     font-size: 16px;
 }
 
-
-.reward-des-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-
-.reward-price-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-.reward-est-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-.reward-qty-input{
-    padding-left: 30px;
-    padding: 10px 0px;
-    width: 100%;
-    font-size: 16px;
-}
-
-
-.reward-submit{
+.des-form-page-btn{
     background: none;
     margin-top: 20px;
     padding: 15px 5px;
@@ -68,9 +37,10 @@
     cursor: pointer;
     transition: transform 0.2s;
     border: none;
+
 }
 
-.reward-submit:hover{
+.des-form-page-btn:hover{
     transform: translateY(-5px);
     background-color: #1a5553;
 }
