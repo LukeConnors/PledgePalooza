@@ -130,14 +130,6 @@ function ProjectDetails() {
                       <p>
                         No rewards created for this project yet! Click the button below to add one.
                       </p>
-                      <div className="modal-button">
-                        {rewards.length < 4 && (
-                          <OpenModalButton
-                            buttonText={"Add a Reward"}
-                            modalComponent={<AddRewardModal projectId={project.id} />}
-                          />
-                        )}
-                      </div>
                     </>
                   )}
                 </>
