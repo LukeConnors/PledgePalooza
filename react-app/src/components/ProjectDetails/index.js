@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import "./ProjectDetails.css";
@@ -23,7 +23,17 @@ function ProjectDetails() {
   const [pledgedAmount, setPledgedAmount] = useState(Math.floor(Math.random() * 10000));
   const [backerCount, setBackerCount] = useState(Math.floor(Math.random() * 5000));
   const [daysLeft, setDaysLeft] = useState(Math.floor(Math.random() * 65));
-  const [descriptionImages, setDescriptionImages] = useState([])
+  const [descriptionImages, setDescriptionImages] = useState([]);
+  const slidesReference = useRef(null);
+  const dotsReference = useRef(null);
+
+  let slideIndex = 1;
+
+  useEffect(() => {
+    showSlides(slideIndex);
+  }, [descriptionImages, slideIndex])
+
+  
 
   useEffect(() => {
     fetch(`/api/projects/${projectId}`)
@@ -78,6 +88,36 @@ function ProjectDetails() {
   }, [projectId])
     console.log("descriptionImages:", descriptionImages);
 
+    
+    showSlides(slideIndex)
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+  }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    let slides = slidesReference.current ? slidesReference.current.getElementsByClassName("mySlides") : [];
+    let dots = dotsReference.current ? dotsReference.current.getElementsByClassName("dot") : [];
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    if (slides[slideIndex - 1]) {
+      slides[slideIndex - 1].style.display = "block";
+    }
+    if (dots[slideIndex - 1]) {
+      dots[slideIndex - 1].className += " active";
+    }
+  }
+
   
 
   // console.log(rewards);
@@ -115,8 +155,49 @@ function ProjectDetails() {
               )}
             </div>
 
-            <>
-              <div className="reward-list">
+          </div>
+        </div>
+
+        <div className="grid-container flex">
+          <div className="info-section">
+            <img className="info-icon" src={checkLogo} alt="Info Icon 1" />
+            <p>Pledge Palooza connects creators with backers to fund projects.</p>
+          </div>
+          <div className="info-section">
+            <img className="info-icon" src={chatLogo} alt="Info Icon 2" />
+            <p>Rewards aren’t guaranteed, but creators must regularly update backers.</p>
+          </div>
+          <div className="info-section">
+            <img className="info-icon" src={megaphoneLogo} alt="Info Icon 3" />
+            <p>
+              You’re only charged if the project meets its funding goal by the campaign deadline.
+            </p>
+          </div>
+        </div>
+
+        <div className="content-row">
+          <div className="description-images-container">
+            <div className="slideshow-container" ref={slidesReference}>
+                {descriptionImages.map((image, index) => (
+                  <div key={image.id} className="mySlides fade">
+                  <div className="numbertext">{index + 1} / {descriptionImages.length}</div>
+                  <img src={image.url} style={{width: '100%'}} alt={`Description ${index + 1}`} />
+                  <div className="text">Caption for Image {index + 1}</div>
+      </div>
+    ))}
+
+        {/* Next and previous buttons */}
+        <a className="prev" onClick={() => plusSlides(-1)}>&#10094;</a>
+        <a className="next" onClick={() => plusSlides(1)}>&#10095;</a>
+        </div>
+
+        <div style={{textAlign: 'center'}} ref={dotsReference}>
+          {descriptionImages.map((_, index) => (
+          <span key={index} className="dot" onClick={() => currentSlide(index + 1)}></span>
+         ))}
+          </div>
+         </div>
+          <div className="reward-list">
                 {rewards.map((reward) => (
                   <div key={reward.id} className="reward-tile">
                     {rewardImages[reward.id] ? (
@@ -140,30 +221,6 @@ function ProjectDetails() {
                   </div>
                 ))}
               </div>
-            </>
-          </div>
-        </div>
-
-        <div className="grid-container flex">
-          <div className="info-section">
-            <img className="info-icon" src={checkLogo} alt="Info Icon 1" />
-            <p>Pledge Palooza connects creators with backers to fund projects.</p>
-          </div>
-          <div className="info-section">
-            <img className="info-icon" src={chatLogo} alt="Info Icon 2" />
-            <p>Rewards aren’t guaranteed, but creators must regularly update backers.</p>
-          </div>
-          <div className="info-section">
-            <img className="info-icon" src={megaphoneLogo} alt="Info Icon 3" />
-            <p>
-              You’re only charged if the project meets its funding goal by the campaign deadline.
-            </p>
-          </div>
-        </div>
-        <div className="description-images-container">
-          {descriptionImages.map((image) => (
-            <img key={image.id} src={image.url} alt="Description" />
-         ))}
         </div>
       </div>
     </div>
