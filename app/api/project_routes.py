@@ -92,15 +92,18 @@ def edit_project_form(id):
     Update an existing project for an authenticated user
     """
     form = ProjectForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         project = Project.query.get(id)  # Get the existing project by its ID
+        banner_img = request.files["bannerImg"]
         if project:
             # Update the project's attributes with the new data
+            image_url = upload_file_to_s3(banner_img)
             project.name = form.data["name"]
             project.description = form.data["description"]
             project.location = form.data["location"]
             project.categoryId = form.data["categoryId"]
-            project.bannerImg = form.data["bannerImg"]
+            project.bannerImg = image_url["url"]
             project.endDate = form.data["endDate"]
             # No need to update ownerId; it should remain the same
 

@@ -12,7 +12,7 @@ import { userSelector } from "../../store/session";
 
 import RewardImageFormModal from "../RewardImageModal";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import AddRewardModal from "../../AddRewardModal";
+import AddRewardModal from "../AddRewardModal";
 
 function ProjectDetails() {
   const [project, setProject] = useState({});
@@ -69,6 +69,7 @@ function ProjectDetails() {
       <div className="project-detail">
         <h1>{project.name}</h1>
         <p>{project.description}</p>
+        <p>{project.category}</p>
 
         <div className="project-main-content">
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
@@ -122,15 +123,15 @@ function ProjectDetails() {
                 </div>
               ))}
 
-              {/* <>
-                  {user && user.id === project.ownerId && (
-                    <>
-                      <p>
-                        No rewards created for this project yet! Click the button below to add one.
-                      </p>
-                    </>
-                  )}
-                </> */}
+              <>
+                {user && user.id === project.ownerId && rewards.length === 0 && (
+                  <>
+                    <p>
+                      No rewards created for this project yet! Click the button below to add one.
+                    </p>
+                  </>
+                )}
+              </>
 
               <div className="modal-button">
                 {rewards.length < 4 ? (
