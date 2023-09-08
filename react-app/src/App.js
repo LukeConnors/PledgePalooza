@@ -42,10 +42,10 @@ function App() {
           <Route path="/projects/:projectId">
             <ProjectDetails />
           </Route>
-          <Route path="/api/projects/my-projects">
+          <Route path="/projects/my-projects">
             <MyProjects />
           </Route>
-          <Route path="/api/users/current/backed-projects">
+          <Route path="/users/current/backed-projects">
             <MyBackedProjects />
           </Route>
         </Switch>
