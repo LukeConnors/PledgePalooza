@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BiCategory, BiSolidMap } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import chatLogo from "../../assets/chat.png";
@@ -58,6 +57,7 @@ function ProjectDetails() {
         console.error("Error fetching rewards", error);
       });
   }, [projectId]);
+
 
   useEffect(() => {
     // Fetch reward images for each reward
@@ -139,12 +139,6 @@ function ProjectDetails() {
     }
   }
 
-  const backed = backedProjects.filter(
-    (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
-  );
-
-  console.log("BACKED", backed);
-
   let renderComponent = null;
 
   if (!user) {
@@ -171,13 +165,7 @@ function ProjectDetails() {
     )
   ) {
     console.log("REACHED HERE! 3", user.id);
-    renderComponent = (
-      <>
-        <p>
-          Thank you for supporting this project 🎉 You contributed the amount of ${backed[0].cost}.
-        </p>
-      </>
-    );
+    renderComponent = <></>;
   } else {
     // User can back the project
     console.log("REACHED HERE! 4");
@@ -193,8 +181,9 @@ function ProjectDetails() {
   return (
     <div>
       <div className="project-detail">
-        <h1 className="title-and-desc">{project.name}</h1>
-        <p className="title-and-desc">{project.description}</p>
+        <h1>{project.name}</h1>
+        <p>{project.description}</p>
+        <p>{project.category}</p>
 
         <div className="project-main-content">
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
@@ -209,16 +198,6 @@ function ProjectDetails() {
               {renderComponent}
             </div>
           </div>
-        </div>
-        <div className="project-cat">
-          <p>
-            <BiCategory />
-            {project.category}
-          </p>
-          <p>
-            <BiSolidMap />
-            {project.location}
-          </p>
         </div>
 
         <div className="grid-container flex">
@@ -252,12 +231,12 @@ function ProjectDetails() {
               ))}
 
               {/* Next and previous buttons */}
-              <button className="prev" onClick={() => plusSlides(-1)}>
+              <a className="prev" onClick={() => plusSlides(-1)}>
                 &#10094;
-              </button>
-              <button className="next" onClick={() => plusSlides(1)}>
+              </a>
+              <a className="next" onClick={() => plusSlides(1)}>
                 &#10095;
-              </button>
+              </a>
             </div>
 
             <div style={{ textAlign: "center" }} ref={dotsReference}>
@@ -265,11 +244,8 @@ function ProjectDetails() {
                 <span key={index} className="dot" onClick={() => currentSlide(index + 1)}></span>
               ))}
             </div>
-            <h2>About this project:</h2>
-
-            <p className="project-summary">{project.summary}</p>
+            <p>{project.summary}</p>
           </div>
-
           <div className="reward-list">
             {rewards.map((reward) => (
               <div key={reward.id} className="reward-tile">
@@ -293,40 +269,21 @@ function ProjectDetails() {
                   user &&
                   user.id === project.ownerId && (
                     <>
-                {user && user.id === project.ownerId ? (
-                  <>
-                    {rewardImages[reward.id] && (
-                      <img
-                        className="reward-img"
-                        src={rewardImages[reward.id].url}
-                        alt={`Reward for ${reward.name}`}
-                      />
-                    )}
-                    <OpenModalButton
-                      buttonText={"Edit Reward"}
-                      modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
-                    />
                     <OpenModalButton
                       buttonText={"Add an Image"}
                       modalComponent={<RewardImageFormModal rewardId={reward.id} />}
                     />
                     <OpenModalButton
-                      buttonText={"Delete Reward"}
-                      modalComponent={
-                        <DeleteRewardModal projectId={project.id} rewardId={reward.id} />
-                      }
-                    />
-                  </>
-                ) : (
-                  rewardImages[reward.id] && (
-                    <img
-                      className="reward-img"
-                      src={rewardImages[reward.id].url}
-                      alt={`Reward for ${reward.name}`}
-                    />
+                    buttonText={"Delete Reward"}
+                    modalComponent={<DeleteRewardModal projectId={project.id} rewardId={reward.id}/>}
+                     />
+                     <OpenModalButton
+                     buttonText={"Edit Reward"}
+                     modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
+                     />
+                     </>
                   )
                 )}
-
                 <h3>{reward.name}</h3>
                 <p>{reward.description}</p>
                 <p>Price: ${reward.price}</p>
