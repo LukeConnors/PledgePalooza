@@ -193,8 +193,8 @@ function ProjectDetails() {
   return (
     <div>
       <div className="project-detail">
-        <h1>{project.name}</h1>
-        <p>{project.description}</p>
+        <h1 className="title-and-desc">{project.name}</h1>
+        <p className="title-and-desc">{project.description}</p>
 
         <div className="project-main-content">
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
@@ -273,12 +273,22 @@ function ProjectDetails() {
           <div className="reward-list">
             {rewards.map((reward) => (
               <div key={reward.id} className="reward-tile">
-                {rewardImages[reward.id] ? (
+                {user && user.id === project.ownerId ? (
                   <>
-                    <img
-                      className="reward-img"
-                      src={rewardImages[reward.id].url}
-                      alt={`Reward for ${reward.name}`}
+                    {rewardImages[reward.id] && (
+                      <img
+                        className="reward-img"
+                        src={rewardImages[reward.id].url}
+                        alt={`Reward for ${reward.name}`}
+                      />
+                    )}
+                    <OpenModalButton
+                      buttonText={"Edit Reward"}
+                      modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
+                    />
+                    <OpenModalButton
+                      buttonText={"Add an Image"}
+                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
                     />
                     <OpenModalButton
                       buttonText={"Delete Reward"}
@@ -288,26 +298,15 @@ function ProjectDetails() {
                     />
                   </>
                 ) : (
-                  user &&
-                  user.id === project.ownerId && (
-                    <>
-                      <OpenModalButton
-                        buttonText={"Edit Reward"}
-                        modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
-                      />
-                      <OpenModalButton
-                        buttonText={"Add an Image"}
-                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                      />
-                      <OpenModalButton
-                        buttonText={"Delete Reward"}
-                        modalComponent={
-                          <DeleteRewardModal projectId={project.id} rewardId={reward.id} />
-                        }
-                      />
-                    </>
+                  rewardImages[reward.id] && (
+                    <img
+                      className="reward-img"
+                      src={rewardImages[reward.id].url}
+                      alt={`Reward for ${reward.name}`}
+                    />
                   )
                 )}
+
                 <h3>{reward.name}</h3>
                 <p>{reward.description}</p>
                 <p>Price: ${reward.price}</p>
