@@ -13,6 +13,8 @@ import { userSelector } from "../../store/session";
 import RewardImageFormModal from "../RewardImageModal";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AddRewardModal from "../AddRewardModal";
+import DeleteRewardModal from "../DeleteRewardModal";
+import EditRewardModal from "../EditRewardModal";
 
 function ProjectDetails() {
   const [project, setProject] = useState({});
@@ -56,7 +58,6 @@ function ProjectDetails() {
       });
   }, [projectId]);
 
-  console.log(project);
 
   useEffect(() => {
     // Fetch reward images for each reward
@@ -102,7 +103,6 @@ function ProjectDetails() {
     };
     fetchDescriptionImages();
   }, [projectId]);
-  console.log("descriptionImages:", descriptionImages);
 
   showSlides(slideIndex);
 
@@ -258,10 +258,20 @@ function ProjectDetails() {
                 ) : (
                   user &&
                   user.id === project.ownerId && (
+                    <>
                     <OpenModalButton
                       buttonText={"Add an Image"}
                       modalComponent={<RewardImageFormModal rewardId={reward.id} />}
                     />
+                    <OpenModalButton
+                    buttonText={"Delete Reward"}
+                    modalComponent={<DeleteRewardModal projectId={project.id} rewardId={reward.id}/>}
+                     />
+                     <OpenModalButton
+                     buttonText={"Edit Reward"}
+                     modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
+                     />
+                     </>
                   )
                 )}
                 <h3>{reward.name}</h3>

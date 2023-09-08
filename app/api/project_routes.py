@@ -215,13 +215,14 @@ def add_reward_form(id):
 @login_required
 def update_reward(projectId, rewardId):
     form = RewardForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         reward = Reward.query.get(rewardId)
         if reward:
             reward.name = form.data["name"]
             reward.description = form.data["description"]
             reward.price = form.data["price"]
-            reward.estDelivery = form.data["est_delivery"]
+            reward.est_delivery = form.data["est_delivery"]
             reward.quantity = form.data["quantity"]
 
             db.session.commit()
