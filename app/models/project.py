@@ -19,6 +19,7 @@ class Project(db.Model):
     name = db.Column(db.String(100), nullable=False, unique=True)
     description = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False)
+    summary =db.Column(db.String, nullable=False)
     ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     categoryId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=False)
     bannerImg = db.Column(db.String, nullable=False)
@@ -33,9 +34,9 @@ class Project(db.Model):
     category = db.relationship('Category', back_populates='project')
 
     # INTERNAL-MODEL RELATIONS(PRIMARY-KEY):
-    reward = db.relationship('Reward', back_populates='project')
-    image = db.relationship('Image', primaryjoin="and_(Image.imageable_type=='project', foreign(Image.imageable_id)==Project.id)",)
-    backed_project = db.relationship('BackedProject', back_populates='project')
+    reward = db.relationship('Reward', back_populates='project', cascade="all, delete-orphan" )
+    image = db.relationship('Image', primaryjoin="and_(Image.imageable_type=='project', foreign(Image.imageable_id)==Project.id)", cascade="all, delete-orphan")
+    backed_project = db.relationship('BackedProject', back_populates='project', cascade="all, delete-orphan" )
 
     def to_dict(self):
         return {
@@ -47,5 +48,6 @@ class Project(db.Model):
             "ownerName" : self.user.username,
             "category": self.category.name,
             "endDate": self.endDate,
-            "location": self.location
+            "location": self.location,
+            "summary": self.summary
         }

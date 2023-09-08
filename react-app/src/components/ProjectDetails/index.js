@@ -55,6 +55,8 @@ function ProjectDetails() {
       });
   }, [projectId]);
 
+  console.log(project);
+
   useEffect(() => {
     // Fetch reward images for each reward
     rewards.forEach((reward) => {
@@ -135,11 +137,11 @@ function ProjectDetails() {
           <div className="stats-and-rewards">
             <div className="project-stats">
               <div>${pledgedAmount}</div>
-                <div>pledged</div>
+              <div>pledged</div>
               <div>{backerCount}</div>
-                <div>backers</div>
+              <div>backers</div>
               <div>{daysLeft}</div>
-                <div>days left</div>
+              <div>days left</div>
               {user ? (
                 user.id === project.ownerId ? (
                   <OpenModalButton
@@ -205,6 +207,7 @@ function ProjectDetails() {
                 <span key={index} className="dot" onClick={() => currentSlide(index + 1)}></span>
               ))}
             </div>
+            <p>{project.summary}</p>
           </div>
           <div className="reward-list">
             {rewards.map((reward) => (
