@@ -114,10 +114,10 @@ function EditProject() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="edit-form-content">
+      <form className="edit-project-form" onSubmit={handleSubmit}>
         <h1>Edit your project here!</h1>
-        <div>
+        <div className="edit-project-form-name">
           <label htmlFor="name">Name</label>
           <input
             onChange={handleInputChange}
@@ -127,16 +127,18 @@ function EditProject() {
             value={formData.name}
           />
         </div>
-        <div>
+        <div className="edit-project-form-description">
           <label htmlFor="description">Description</label>
           <textarea
+            cols="30"
+            rows="5"
             onChange={handleInputChange}
             id="description"
             name="description"
             value={formData.description}
           />
         </div>
-        <div>
+        <div className="edit-project-form-location">
           <label htmlFor="location">Location</label>
           <input
             onChange={handleInputChange}
@@ -146,16 +148,18 @@ function EditProject() {
             value={formData.location}
           />
         </div>
-        <div>
+        <div className="edit-project-form-summary">
           <label htmlFor="summary">Summary</label>
           <textarea
+            cols="30"
+            rows="5"
             onChange={handleInputChange}
             id="summary"
             name="summary"
             value={formData.summary}
           />
         </div>
-        <div>
+        <div className="edit-project-form-image">
           <label htmlFor="bannerImg">Banner Image</label>
           <input
             onChange={handleInputChange}
@@ -165,7 +169,7 @@ function EditProject() {
             name="bannerImg"
           />
         </div>
-        <div>
+        <div className="edit-project-form-category">
           <label htmlFor="categories">Categories</label>
           <select onChange={handleInputChange} name="categoryId" value={selectedCategory}>
             {categories.map((category) => (
@@ -175,7 +179,7 @@ function EditProject() {
             ))}
           </select>
         </div>
-        <div>
+        <div className="edit-project-form-date">
           <label htmlFor="endDate">Project end date</label>
           <input
             onChange={handleInputChange}

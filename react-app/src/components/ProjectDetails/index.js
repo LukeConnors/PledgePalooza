@@ -58,7 +58,6 @@ function ProjectDetails() {
       });
   }, [projectId]);
 
-
   useEffect(() => {
     // Fetch reward images for each reward
     rewards.forEach((reward) => {
@@ -231,12 +230,12 @@ function ProjectDetails() {
               ))}
 
               {/* Next and previous buttons */}
-              <a className="prev" onClick={() => plusSlides(-1)}>
+              <button className="prev" onClick={() => plusSlides(-1)}>
                 &#10094;
-              </a>
-              <a className="next" onClick={() => plusSlides(1)}>
+              </button>
+              <button className="next" onClick={() => plusSlides(1)}>
                 &#10095;
-              </a>
+              </button>
             </div>
 
             <div style={{ textAlign: "center" }} ref={dotsReference}>
@@ -250,28 +249,38 @@ function ProjectDetails() {
             {rewards.map((reward) => (
               <div key={reward.id} className="reward-tile">
                 {rewardImages[reward.id] ? (
-                  <img
-                    className="reward-img"
-                    src={rewardImages[reward.id].url}
-                    alt={`Reward for ${reward.name}`}
-                  />
+                  <>
+                    <img
+                      className="reward-img"
+                      src={rewardImages[reward.id].url}
+                      alt={`Reward for ${reward.name}`}
+                    />
+                    <OpenModalButton
+                      buttonText={"Delete Reward"}
+                      modalComponent={
+                        <DeleteRewardModal projectId={project.id} rewardId={reward.id} />
+                      }
+                    />
+                  </>
                 ) : (
                   user &&
                   user.id === project.ownerId && (
                     <>
-                    <OpenModalButton
-                      buttonText={"Add an Image"}
-                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                    />
-                    <OpenModalButton
-                    buttonText={"Delete Reward"}
-                    modalComponent={<DeleteRewardModal projectId={project.id} rewardId={reward.id}/>}
-                     />
-                     <OpenModalButton
-                     buttonText={"Edit Reward"}
-                     modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
-                     />
-                     </>
+                      <OpenModalButton
+                        buttonText={"Edit Reward"}
+                        modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
+                      />
+                      <OpenModalButton
+                        buttonText={"Add an Image"}
+                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                      />
+                      <OpenModalButton
+                        buttonText={"Delete Reward"}
+                        modalComponent={
+                          <DeleteRewardModal projectId={project.id} rewardId={reward.id} />
+                        }
+                      />
+                    </>
                   )
                 )}
                 <h3>{reward.name}</h3>

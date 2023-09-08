@@ -116,50 +116,54 @@ function ProjectFormPage() {
     <>
       <div className="form-container">
         <div className="form-content">
-          <h1 style={{ textAlign: "center" }}>Create a Project</h1>
           <form onSubmit={handleSubmit} className="project-form">
-            <label>
-              Name
+            <h1 style={{ textAlign: "center" }}>Create a Project</h1>
+            <div className="project-form-name">
+              <label htmlFor="name">Name:</label>
               <input
                 type="text"
+                id="name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               />
               {errors.name && <div className="error-message">{errors.name}</div>}
-            </label>
-
-            <label>
-              Description
-              <input
-                type="textarea"
+            </div>
+            <div className="project-form-description">
+              <label htmlFor="description">Description:</label>
+              <textarea
+                cols="30"
+                rows="5"
+                id="description"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               />
               {errors.description && <div className="error-message">{errors.description}</div>}
-            </label>
-
-            <label>
-              Location
+            </div>
+            <div className="project-form-location">
+              <label htmlFor="location">Location:</label>
               <input
                 type="text"
+                id="location"
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
               />
               {errors.location && <div className="error-message">{errors.location}</div>}
-            </label>
-
-            <label>
-              Summary
-              <input
-                type="textarea"
+            </div>
+            <div className="project-form-summary">
+              <label htmlFor="summary">Summary:</label>
+              <textarea
+                cols="30"
+                rows="5"
+                id="summary"
                 value={formData.summary}
                 onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
               />
-            </label>
-
-            <label>
+            </div>
+            <div className="project-form-category">
+              <label htmlFor="category">Select a category:</label>
               <select
                 name="categories"
+                id="category"
                 value={formData.categoryId}
                 onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
               >
@@ -173,29 +177,29 @@ function ProjectFormPage() {
                 ))}
               </select>
               {errors.categoryId && <div className="error-message">{errors.categoryId}</div>}
-            </label>
-
-            <label>
-              Banner Image
+            </div>
+            <div className="project-form-image">
+              <label htmlFor="image">Banner Image:</label>
               <input
                 type="file"
+                id="image"
                 accept=".png, .jpeg, .jpg"
                 onChange={(e) => setFormData({ ...formData, bannerImg: e.target.files[0] })}
               />
               {errors.bannerImg && <div className="error-message">{errors.bannerImg}</div>}
-            </label>
-
-            <label>
-              Project Closing Date
+            </div>
+            <div className="project-form-date">
+              <label htmlFor="date">Project Closing Date:</label>
               <input
                 type="date"
+                id="date"
                 value={formData.endDate}
                 min={getCurrentDate()}
                 max={getOneYearLaterDate()}
                 onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
               />
               {errors.endDate && <div className="error-message">{errors.endDate}</div>}
-            </label>
+            </div>
 
             <button type="submit">Submit</button>
           </form>
