@@ -16,6 +16,7 @@ import AddRewardModal from "../AddRewardModal";
 
 function ProjectDetails() {
   const [project, setProject] = useState({});
+  const [backedProjects, setBackedProjects] = useState([]);
   const [rewards, setRewards] = useState([]);
   const [rewardImages, setRewardImages] = useState({});
   const { projectId } = useParams();
@@ -76,6 +77,21 @@ function ProjectDetails() {
   }, [rewards]);
 
   useEffect(() => {
+    fetch("/api/users/current/backed-projects")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.backed_projects) {
+          setBackedProjects(data.backed_projects);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [projectId]);
+
+  console.log("BACKED PROJECT", backedProjects);
+
+  useEffect(() => {
     const fetchDescriptionImages = async () => {
       try {
         const res = await fetch(`/api/projects/${projectId}/des-images`);
@@ -124,6 +140,44 @@ function ProjectDetails() {
     }
   }
 
+  let renderComponent = null;
+
+  if (!user) {
+    console.log("REACHED HERE! 1");
+    // User is not logged in
+    renderComponent = (
+      <button className="back-this-project">
+        <Link to="/login">Back this project</Link>
+      </button>
+    );
+  } else if (user.id === project.ownerId) {
+    // User is the owner of the project
+    console.log("REACHED HERE! 2");
+    renderComponent = (
+      <OpenModalButton
+        buttonText={"Add a Description Image"}
+        modalComponent={<ImageFormModal projectId={projectId} />}
+      />
+    );
+    // Hide the "Back this project" button for project owner
+  } else if (
+    backedProjects.some(
+      (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
+    )
+  ) {
+    console.log("REACHED HERE! 3", user.id);
+    renderComponent = <></>;
+  } else {
+    // User can back the project
+    console.log("REACHED HERE! 4");
+    renderComponent = (
+      <OpenModalButton
+        buttonText={"Back this project"}
+        modalComponent={<BackProjectModal projectId={projectId} />}
+      />
+    );
+  }
+
   // console.log(rewards);
   return (
     <div>
@@ -142,23 +196,7 @@ function ProjectDetails() {
               <div>backers</div>
               <div>{daysLeft}</div>
               <div>days left</div>
-              {user ? (
-                user.id === project.ownerId ? (
-                  <OpenModalButton
-                    buttonText={"Add a Description Image"}
-                    modalComponent={<ImageFormModal projectId={projectId} />}
-                  />
-                ) : (
-                  <OpenModalButton
-                    buttonText={"Back this project"}
-                    modalComponent={<BackProjectModal projectId={projectId} />}
-                  />
-                )
-              ) : (
-                <button className="back-this-project">
-                  <Link to="/login">back this project</Link>
-                </button>
-              )}
+              {renderComponent}
             </div>
           </div>
         </div>
