@@ -1,0 +1,174 @@
+.edit-project-form {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 70%;
+  margin: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 17px 1px rgba(0, 0, 0, 0.4);
+  align-items: center;
+  margin: 0 auto;
+}
+
+.edit-form-content h1 {
+  margin-bottom: 30px;
+}
+
+.edit-form-content {
+  margin: 50px 0px;
+}
+
+.edit-project-form-name {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+.edit-project-form-name > input {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.edit-project-form-name > label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.edit-project-form-description {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+.edit-project-form-description > textarea {
+  resize: none;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.edit-project-form-description > label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.edit-project-form-location {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+.edit-project-form-location > input {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.edit-project-form-location > label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.edit-project-form-summary {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+.edit-project-form-summary > textarea {
+  resize: none;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.edit-project-form-summary > label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.edit-project-form-category {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+.edit-project-form-category > select {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.edit-project-form-category > label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.edit-project-form-image {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+.edit-project-form-image > input {
+  padding: 8px;
+}
+
+.edit-project-form-image > input::file-selector-button {
+  padding: 12px 20px;
+  background-color: green;
+  color: #fff;
+  border: solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  width: 50%;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.edit-project-form-image > input[type="file"] {
+  font-size: 16px;
+}
+
+.edit-project-form-image > label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.edit-project-form-date {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 25px;
+}
+
+.edit-project-form-date > input[type="date"] {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.edit-project-form-date > label {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.edit-project-form button {
+  padding: 12px 20px;
+  background-color: green;
+  color: #fff;
+  border: solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  width: 50%;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.edit-project-form button:hover {
+  background-color: #1a5553;
+}
+
+.error-message {
+  color: red;
+}

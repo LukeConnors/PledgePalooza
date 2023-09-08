@@ -89,6 +89,7 @@
   margin-bottom: 70px;
 }
 
-.logo * a {
+a {
   text-decoration: none;
+  background-color: transparent;
 }

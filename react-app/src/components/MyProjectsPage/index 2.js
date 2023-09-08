@@ -37,7 +37,7 @@ function MyProjects() {
                   </div>
                 </div>
               </Link>
-              <div className="view-project-btn">
+              <div>
                 <button
                   onClick={() => {
                     history.push(`/edit-project/${project.id}`);

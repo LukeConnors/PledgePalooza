@@ -7,11 +7,21 @@
 }
 body {
   background-color: #faf9f6;
+  outline-color: #006400;
+}
+
+textarea {
+  outline-color: #006400;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  background-color: transparent;
+}
+
+a:active {
+  background-color: transparent;
 }
 
 a:hover {

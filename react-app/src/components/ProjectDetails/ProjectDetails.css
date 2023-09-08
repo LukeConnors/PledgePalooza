@@ -1,341 +1,390 @@
 .content-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 32px; 
-    margin-left: 80;
-  }
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 90px;
+  margin-left: 80;
+}
+
 .description-images-container {
-    max-width: 500px;
-    flex: 2; /* 2/3 of the space */
-    margin-right: 50px; /* Space between the slideshow and the reward list */
-    margin-left: 300px
-  }
+  max-width: 500px;
+  flex: 2; /* 2/3 of the space */
+  margin-right: 50px; /* Space between the slideshow and the reward list */
+  margin-left: 300px;
+}
 
 .project-detail {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
 }
 
 .project-main-content {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    gap: 50px;
-    width: 100%;
-    height: 100%;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 50px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin-bottom: 60px;
 }
 
 .project-detail img {
-    width: 700px;
-    height: 400px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
 }
 
 .project-detail h1 {
-    font-size: 40px;
-    margin-bottom: 16px;
+  font-size: 24px;
+  margin-bottom: 16px;
 }
 
 .project-detail p {
-    font-size: 18px;
-    line-height: 1.5;
-    color: #333;
-    margin-bottom: 16px;
+  font-size: 18px;
+
+  line-height: 1.5;
+  color: #333;
+  margin-bottom: 16px;
 }
 
 .stats-and-rewards {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    height: 100%
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
 }
 
 .project-stats {
-    display: grid;
-    grid-template-rows: repeat(3, auto);
-    gap: 22px;
-    text-align: left;
-    font-weight: bold;
-    margin-bottom: 10px;
-    height: 100%;
-    border-top: 5px solid green
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  gap: 22px;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 10px;
+  height: 100%;
+  border-top: 5px solid green;
 }
 
 .project-stats > div:first-child {
-    font-size: 28px;
-    font-weight: 700;
-    color: #03731f;
+  font-size: 28px;
+  font-weight: 700;
+  color: #03731f;
 }
 
 .project-stats > div:nth-child(3),
 .project-stats > div:nth-child(5) {
-    font-size: 28px;
-    font-weight: 700;
-    color: #656969;
+  font-size: 28px;
+  font-weight: 700;
+  color: #656969;
 }
 
 .project-stats > button {
-    margin-top: 16px;
-    padding: 10px 20px;
-    background-color: green;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .project-stats > button:hover {
-    background-color: #006400;  /* Slightly darker green on hover */
+  background-color: #006400; /* Slightly darker green on hover */
 }
 
 .reward-list {
-    display: flex;
-    flex-direction: column;
-    flex: .25;
-    height: 400px; /* Retaining 400px height */
-    width: 400px; /* Adjust this value as per your requirement */
-    overflow-y: auto;
-    padding: 32px;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
-    margin-top: 10px;
-    margin-right: 150px;
+  display: flex;
+  flex-direction: column;
+  flex: 0.25;
+  height: 400px; /* Retaining 400px height */
+  width: 400px; /* Adjust this value as per your requirement */
+  overflow-y: auto;
+  padding: 32px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+  margin-right: 150px;
+}
+
+.reward-list * button {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .reward-tile {
-    padding: 16px;
-    border: 1px solid #ddd;
-    margin-bottom: 16px;
-    border-radius: 4px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  border: 1px solid #ddd;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .reward-tile h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
+  font-size: 20px;
+  margin-bottom: 8px;
 }
 
 .reward-tile p {
-    font-size: 16px;
-    color: #666;
+  font-size: 16px;
+  color: #666;
 }
 
 .reward-img {
-    max-width: 100%; 
-    height: 150px !important; 
-    margin-top: 10px;
-    object-fit: contain; 
+  max-width: 100%;
+  height: 150px !important;
+  margin-top: 10px;
+  object-fit: cover;
 }
 
 .grid-container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 100vw;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    padding-left: 24px;
-    padding-right: 24px;
-    box-sizing: border-box;
-    background-color: beige;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  padding-top: 20px;
+  margin-top: 20px;
+  background-color: beige;
 }
 
 @media (min-width: 600px) {
-    .grid-container {
-        padding-left: 24px;
-        padding-right: 24px;
-    }
+  .grid-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
 @media (min-width: 795px) {
-    .grid-container {
-        padding-left: 60px;
-        padding-right: 60px;
-    }
+  .grid-container {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
 }
 
 @media (min-width: 1025px) {
-    .grid-container {
-        padding-left: 60px;
-        padding-right: 60px;
-    }
+  .grid-container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .flex-row-md {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 @media (min-width: 600px) {
-    .flex-row-md {
-        flex-direction: row;
-        align-items: center;
-    }
+  .flex-row-md {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .info-section {
-    display: flex;
-    align-items: center; 
-    gap: 16px;   
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .info-icon {
-    max-width: 24px; 
-    max-height: 2.0em; 
-    vertical-align: middle; 
+  max-width: 24px;
+  max-height: 2em;
+  vertical-align: middle;
 }
 
-
 @media (min-width: 600px) {
-    .info-icon {
-        margin-bottom: 0;  
-    }
+  .info-icon {
+    margin-bottom: 0;
+  }
 }
 
 .description-images-container img {
-    margin-top: 10px;
-    width: 100%;
-    max-width: 800px;
-    height: 300px;
-    object-fit: cover;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  object-fit: cover;
 }
 
 /* Slideshow container */
 .slideshow-container {
-    width: 700px;
-    max-width: 100%;
-    position: relative;
-    margin: auto;
-    overflow: hidden
-  }
-  
-  /* Hide the images by default */
-  .mySlides img {
-    width: 100%;
-    height: auto;
+  width: 700px;
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
 }
-  
-  /* Next & previous buttons */
-  .prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-  }
-  
-  /* Position the "next button" to the right */
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-  }
-  
-  /* On hover, add a black background color with a little bit see-through */
-  .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
-  }
-  
-  /* Caption text */
-  .text {
-    color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  /* Number text (1/3 etc) */
-  .numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-  }
-  
-  /* The dots/bullets/indicators */
-  .dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-  }
-  
-  .active, .dot:hover {
-    background-color: #717171;
-  }
-  
-  /* Fading animation */
-  .fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-  }
-  
-  @keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-  }
 
-  @media (min-width: 1400px) {
-    .project-detail{
-        width: 80%
-    }
+/* Hide the images by default */
+.mySlides img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: rgb(173, 173, 173);
+  /* background-color: rgb(84, 83, 83); */
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border: none;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.795);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #696868;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+/* .active,
+.dot:hover {
+  background-color: #717171;
+} */
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 1400px) {
+  .project-detail {
+    width: 80%;
+  }
 }
 
 @media only screen and (max-width: 960px) {
-    .project-main-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 32px; 
-    }
+  .project-main-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
 }
 
-.description-images-container, .reward-list {
-    width: 100%; 
-    max-width: 500px;
-    margin: 0 auto; 
+.description-images-container,
+.reward-list {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .reward-list {
-    width: 400px;
-    height: 400px;
-    overflow-y: auto;
-    padding: 32px;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
-    margin-top: 10px;
-    margin-right: 150px;
+  width: 400px;
+  height: 400px;
+  overflow-y: auto;
+  padding: 32px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+  margin-right: 150px;
 }
 
+.reward-button {
+  padding: 12px 20px;
+  background-color: green;
+  color: #fff;
+  border: solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  width: 50%;
+  margin-top: 20px;
+  border-radius: 10px;
+}
 
+.project-summary {
+  text-align: justify;
+  width: 650px;
+}
 
+.project-cat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 450px;
+  margin-right: 700px;
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
+
+.project-cat p {
+  margin-bottom: -3px;
+  font-size: 14px;
+}
