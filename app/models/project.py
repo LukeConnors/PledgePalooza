@@ -48,5 +48,6 @@ class Project(db.Model):
             "ownerName" : self.user.username,
             "category": self.category.name,
             "endDate": self.endDate,
-            "location": self.location
+            "location": self.location,
+            "summary": self.summary
         }
