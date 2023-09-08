@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  margin-top: 32px;
+  margin-top: 90px;
   margin-left: 80;
 }
 
@@ -31,6 +31,7 @@
   width: 100%;
   height: 100%;
   position: relative;
+  margin-bottom: 60px;
 }
 
 .project-detail img {
@@ -154,12 +155,9 @@
 .grid-container {
   display: flex;
   justify-content: space-between;
-  max-width: 100vw;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100vw;
+  padding-top: 20px;
   margin-top: 20px;
-  padding-left: 24px;
-  padding-right: 24px;
   box-sizing: border-box;
   background-color: beige;
 }
@@ -368,4 +366,24 @@
   width: 50%;
   margin-top: 20px;
   border-radius: 10px;
+}
+
+.project-summary {
+  text-align: justify;
+  width: 650px;
+}
+
+.project-cat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  margin-right: 700px;
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
+
+.project-cat p {
+  margin-bottom: -3px;
+  font-size: 14px;
 }
