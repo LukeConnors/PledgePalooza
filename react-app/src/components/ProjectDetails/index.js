@@ -138,6 +138,12 @@ function ProjectDetails() {
     }
   }
 
+  const backed = backedProjects.filter(
+    (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
+  );
+
+  console.log("BACKED", backed);
+
   let renderComponent = null;
 
   if (!user) {
@@ -164,7 +170,13 @@ function ProjectDetails() {
     )
   ) {
     console.log("REACHED HERE! 3", user.id);
-    renderComponent = <></>;
+    renderComponent = (
+      <>
+        <p>
+          Thank you for supporting this project 🎉 You contributed the amount of ${backed[0].cost}.
+        </p>
+      </>
+    );
   } else {
     // User can back the project
     console.log("REACHED HERE! 4");
