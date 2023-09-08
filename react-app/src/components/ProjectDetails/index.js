@@ -64,10 +64,9 @@ function ProjectDetails() {
       fetch(`/api/rewards/${reward.id}/image`)
         .then((response) => response.json())
         .then((data) => {
-          // Update the rewardImages state with the fetched image data
           setRewardImages((prevRewardImages) => ({
             ...prevRewardImages,
-            [reward.id]: data.image[0], // Store the image data with the reward ID as the key
+            [reward.id]: data.image[0],
           }));
         })
         .catch((error) => {
