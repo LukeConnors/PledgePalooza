@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { setImages } from "../../store/images";
@@ -12,12 +12,19 @@ function RewardImageFormModal(rewardId) {
     url: "",
   });
 
-  const [loading, setLoading] = useState(false); // State to track loading
+  const [loading, setLoading] = useState(true); // State to track loading
   const [submitted, setSubmitted] = useState(false); // State to track submission status
+
+
+  useEffect(() => {
+    if(formData.url){
+      setLoading(false)
+    }
+  }, [formData.url])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading when the fetch begins
+    // setLoading(true); // Start loading when the fetch begins
 
     const info = new FormData();
     info.append("url", formData.url);
@@ -41,8 +48,6 @@ function RewardImageFormModal(rewardId) {
       }
     } catch (e) {
       console.log("fetch error:", e);
-    } finally {
-      setLoading(false); // Stop loading when the fetch is done
     }
   };
 
@@ -56,7 +61,7 @@ function RewardImageFormModal(rewardId) {
           <h2>Add an image to your project reward</h2>
           <div className="rew-img-amount">
           <label>
-            Description Image
+            Reward Image
             <input
               type="file"
               accept=".png, .jpeg, .jpg"
@@ -66,7 +71,7 @@ function RewardImageFormModal(rewardId) {
           </label>
           </div>
           <button type="submit" className="submitting" disabled={loading}>
-            {loading ? "Submitting..." : "Submit"}
+            {loading ? "Select an image..." : "Submit"}
           </button>
         </form>
         </div>
