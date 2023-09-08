@@ -183,6 +183,15 @@ function ProjectFormPage() {
              />
              {errors.endDate && <div className="error-message">{errors.endDate}</div>}
            </label>
+
+           <label>
+        Summary
+        <input
+          type="textarea"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+        />
+      </label>
      
            <button type="submit">Submit</button>
          </form>
