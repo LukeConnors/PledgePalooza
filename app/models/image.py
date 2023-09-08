@@ -12,14 +12,16 @@ class Image(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     url = db.Column(db.String, nullable=False)
-    imageable_id = db.Column(db.Integer, nullable=False)
-    imageable_type = db.Column(db.String, nullable=False)
+    caption = db.Column(db.String, nullable=True)
+    imageable_id = db.Column(db.Integer, nullable=True)
+    imageable_type = db.Column(db.String, nullable=True)
 
 
     def to_dict(self):
         return {
             'id': self.id,
             'url': self.url,
+            "caption": self.caption,
             'imageable_id': self.imageable_id,
             'imageable_type': self.imageable_type
         }

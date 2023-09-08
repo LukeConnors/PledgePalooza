@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton";
+import DeleteProjectModal from "../DeleteProjectModal";
 import "./MyProjects.css";
 
 function MyProjects() {
@@ -43,7 +45,10 @@ function MyProjects() {
                 >
                   Edit Project
                 </button>
-                <button>Delete Project</button>
+                <OpenModalButton
+                  buttonText={"Delete this project"}
+                  modalComponent={<DeleteProjectModal projectId={project.id} />}
+                />
               </div>
             </div>
           </>
