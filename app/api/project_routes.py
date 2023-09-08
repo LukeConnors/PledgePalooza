@@ -53,6 +53,7 @@ def post_form():
                 description=form.data["description"],
                 location=form.data["location"],
                 categoryId=form.data["categoryId"],
+                summary=form.data["summary"],
                 bannerImg=image_url["url"],  # Use the S3 URL here
                 endDate=form.data["endDate"],
                 ownerId=current_user.id
@@ -104,6 +105,8 @@ def edit_project_form(id):
                 project.description = form.data["description"]
             if form.data.get("location"):
                 project.location = form.data["location"]
+            if form.data.get("summary"):
+                project.summary = form.data["summary"]
             if form.data.get("categoryId"):
                 project.categoryId = form.data["categoryId"]
             if banner_img:
