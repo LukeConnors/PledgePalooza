@@ -7,7 +7,7 @@ import logo from "../../assets/LOGO.png";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-  console.log('!!!!!!!SESSION USER',sessionUser)
+  console.log("!!!!!!!SESSION USER", sessionUser);
   return (
     <>
       <div className="nav-bar">
@@ -20,10 +20,11 @@ function Navigation({ isLoaded }) {
             Start a project
           </NavLink>
         )}
-
-        <NavLink className="logo" exact to="/">
-          <img alt="pledge palooza" src={logo}></img>
-        </NavLink>
+        <div className="logo">
+          <NavLink className="logo" exact to="/">
+            <img alt="pledge palooza" src={logo}></img>
+          </NavLink>
+        </div>
         {isLoaded && <ProfileButton user={sessionUser} />}
       </div>
     </>

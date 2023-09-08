@@ -17,6 +17,7 @@ function EditProject() {
     category: "",
     bannerImg: "",
     endDate: "",
+    summary: "",
   });
   const [errors, setErrors] = useState([]);
 
@@ -41,6 +42,7 @@ function EditProject() {
           name: data.name,
           description: data.description,
           location: data.location,
+          summary: data.summary,
           categoryId: selectedCategory.id,
           bannerImg: data.bannerImg,
           endDate: existingEndDate,
@@ -55,12 +57,11 @@ function EditProject() {
     formDataToSend.append("name", formData.name);
     formDataToSend.append("description", formData.description);
     formDataToSend.append("location", formData.location);
+    formDataToSend.append("summary", formData.summary);
     formDataToSend.append("categoryId", formData.categoryId);
     formDataToSend.append("endDate", formData.endDate);
 
     formDataToSend.append("bannerImg", formData.bannerImg);
-
-    console.log(formData);
 
     try {
       const res = await fetch(`/api/projects/${projectId}`, {
@@ -143,6 +144,15 @@ function EditProject() {
             id="location"
             name="location"
             value={formData.location}
+          />
+        </div>
+        <div>
+          <label htmlFor="summary">Summary</label>
+          <textarea
+            onChange={handleInputChange}
+            id="summary"
+            name="summary"
+            value={formData.summary}
           />
         </div>
         <div>
