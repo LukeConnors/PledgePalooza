@@ -12,7 +12,6 @@ def users():
     Query for all users and returns them in a list of user dictionaries
     """
     users = User.query.all()
-    print(users)
     return {'users': [user.to_dict() for user in users]}
 
 
@@ -36,4 +35,3 @@ def get_all_backed():
         return {"backed_projects":[project.to_dict() for project in backed_projects]}
     else:
         return jsonify({"error":"This user has not backed any projects"})
-

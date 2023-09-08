@@ -250,11 +250,21 @@ function ProjectDetails() {
             {rewards.map((reward) => (
               <div key={reward.id} className="reward-tile">
                 {rewardImages[reward.id] ? (
+                  <>
                   <img
                     className="reward-img"
                     src={rewardImages[reward.id].url}
                     alt={`Reward for ${reward.name}`}
                   />
+                    <OpenModalButton
+                    buttonText={"Delete Reward"}
+                    modalComponent={<DeleteRewardModal projectId={project.id} rewardId={reward.id}/>}
+                     />
+                     <OpenModalButton
+                     buttonText={"Edit Reward"}
+                     modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
+                     />
+                  </>
                 ) : (
                   user &&
                   user.id === project.ownerId && (
