@@ -199,9 +199,10 @@ function ProjectDetails() {
       renderComponent = <></>;
     } else {
       renderComponent = (
-        <button className="back-this-project">
-          <Link to="/login">Back this project</Link>
-        </button>
+        <OpenModalButton
+          buttonText={"Back this project"}
+          modalComponent={<BackProjectModal projectId={project.id} />}
+        />
       );
     }
   }
