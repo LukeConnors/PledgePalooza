@@ -303,10 +303,14 @@ function ProjectDetails() {
                       buttonText={"Edit Reward"}
                       modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
                     />
-                    <OpenModalButton
-                      buttonText={"Add an Image"}
-                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                    />
+                    {rewardImages[reward.id] ? (
+                      ""
+                    ) : (
+                      <OpenModalButton
+                        buttonText={"Add an Image"}
+                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                      />
+                    )}
                     <OpenModalButton
                       buttonText={"Delete Reward"}
                       modalComponent={
