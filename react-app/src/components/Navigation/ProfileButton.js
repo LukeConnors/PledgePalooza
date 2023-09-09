@@ -59,12 +59,12 @@ function ProfileButton({ user }) {
             <li className="user-details">Hi, {user.username}!</li>
             <li className="user-details">{user.email}</li>
             <li className="user-details">
-              <Link to='/api/projects/my-projects'>
+              <Link to='/my-projects'>
                 View Projects
               </Link>
             </li>
             <li className="user-details">
-              <Link to='/api/users/current/backed-projects'>
+              <Link to='/users/current/backed-projects'>
               View Backed Projects
               </Link>
             </li>
