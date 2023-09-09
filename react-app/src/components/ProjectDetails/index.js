@@ -34,7 +34,6 @@ function ProjectDetails() {
 
   let slideIndex = 1;
 
-
   useEffect(() => {
     showSlides(slideIndex);
   }, [descriptionImages, slideIndex]);
@@ -59,7 +58,6 @@ function ProjectDetails() {
         console.error("Error fetching rewards", error);
       });
   }, [projectId]);
-
 
   useEffect(() => {
     // Fetch reward images for each reward
@@ -90,7 +88,6 @@ function ProjectDetails() {
         console.error("Error fetching data:", error);
       });
   }, [projectId]);
-
 
   useEffect(() => {
     const fetchDescriptionImages = async () => {
@@ -139,6 +136,9 @@ function ProjectDetails() {
       dots[slideIndex - 1].className += " active";
     }
   }
+  const backed = backedProjects.filter(
+    (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
+  );
 
   let renderComponent = null;
 
@@ -163,7 +163,13 @@ function ProjectDetails() {
       (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
     )
   ) {
-    renderComponent = <></>;
+    renderComponent = (
+      <>
+        <p>
+          Thank you for supporting this project 🎉 You contributed the amount of ${backed[0].cost}.
+        </p>
+      </>
+    );
   } else {
     // User can back the project
     renderComponent = (
@@ -173,29 +179,27 @@ function ProjectDetails() {
       />
     );
   }
-  let pledged = project?.cost?.reduce((x, y) => x + y)
+  let pledged = project?.cost?.reduce((x, y) => x + y, 0);
 
   const existingEndDate = project.endDate
-  ? new Date(project.endDate).toISOString().split("T")[0]
-  : "";
+    ? new Date(project.endDate).toISOString().split("T")[0]
+    : "";
 
-function calculateDaysLeft(targetDate) {
-  // Create Date objects for the target date and current date
-  const currentDate = new Date();
-  const targetDateObj = new Date(targetDate);
+  function calculateDaysLeft(targetDate) {
+    // Create Date objects for the target date and current date
+    const currentDate = new Date();
+    const targetDateObj = new Date(targetDate);
 
-  // Calculate the time difference in milliseconds
-  const timeDifference = targetDateObj - currentDate;
+    // Calculate the time difference in milliseconds
+    const timeDifference = targetDateObj - currentDate;
 
-  // Convert milliseconds to days
-  const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+    // Convert milliseconds to days
+    const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
-  return daysLeft;
-}
+    return daysLeft;
+  }
 
-const daysLeftNew = calculateDaysLeft(existingEndDate);
-
-
+  const daysLeftNew = calculateDaysLeft(existingEndDate);
 
   rewards.sort((a, b) => a.price - b.price);
   // console.log(rewards);
@@ -204,7 +208,6 @@ const daysLeftNew = calculateDaysLeft(existingEndDate);
       <div className="project-detail">
         <h1>{project.name}</h1>
         <p>{project.description}</p>
-        <p>{project.category}</p>
 
         <div className="project-main-content">
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
@@ -218,7 +221,7 @@ const daysLeftNew = calculateDaysLeft(existingEndDate);
               <div>days left</div>
               {renderComponent}
             </div>
-          </div>  
+          </div>
         </div>
         <div className="project-cat">
           <p>
@@ -230,7 +233,6 @@ const daysLeftNew = calculateDaysLeft(existingEndDate);
             {project.location}
           </p>
         </div>
-
 
         <div className="grid-container flex">
           <div className="flex-column flex-row-md">
@@ -283,37 +285,41 @@ const daysLeftNew = calculateDaysLeft(existingEndDate);
               <div key={reward.id} className="reward-tile">
                 {rewardImages[reward.id] ? (
                   <>
-                  <img
-                    className="reward-img"
-                    src={rewardImages[reward.id].url}
-                    alt={`Reward for ${reward.name}`}
-                  />
+                    <img
+                      className="reward-img"
+                      src={rewardImages[reward.id].url}
+                      alt={`Reward for ${reward.name}`}
+                    />
                     <OpenModalButton
-                    buttonText={"Delete Reward"}
-                    modalComponent={<DeleteRewardModal projectId={project.id} rewardId={reward.id}/>}
-                     />
-                     <OpenModalButton
-                     buttonText={"Edit Reward"}
-                     modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
-                     />
+                      buttonText={"Delete Reward"}
+                      modalComponent={
+                        <DeleteRewardModal projectId={project.id} rewardId={reward.id} />
+                      }
+                    />
+                    <OpenModalButton
+                      buttonText={"Edit Reward"}
+                      modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
+                    />
                   </>
                 ) : (
                   user &&
                   user.id === project.ownerId && (
                     <>
-                    <OpenModalButton
-                      buttonText={"Add an Image"}
-                      modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                    />
-                    <OpenModalButton
-                    buttonText={"Delete Reward"}
-                    modalComponent={<DeleteRewardModal projectId={project.id} rewardId={reward.id}/>}
-                     />
-                     <OpenModalButton
-                     buttonText={"Edit Reward"}
-                     modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
-                     />
-                     </>
+                      <OpenModalButton
+                        buttonText={"Add an Image"}
+                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                      />
+                      <OpenModalButton
+                        buttonText={"Delete Reward"}
+                        modalComponent={
+                          <DeleteRewardModal projectId={project.id} rewardId={reward.id} />
+                        }
+                      />
+                      <OpenModalButton
+                        buttonText={"Edit Reward"}
+                        modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
+                      />
+                    </>
                   )
                 )}
                 <h3>{reward.name}</h3>

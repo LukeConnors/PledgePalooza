@@ -37,8 +37,12 @@ function DeleteRewardModal({ projectId, rewardId }) {
       ) : (
         <>
           <h1>Are you sure you want to delete this reward?</h1>
-          <button onClick={handleCancel}>No, cancel</button>
-          <button onClick={handleDelete}>Yes, delete</button>
+          <div className="delete-modal-btn">
+            <button onClick={handleCancel}>No, cancel</button>
+            <button className="delete-btn" onClick={handleDelete}>
+              Yes, delete
+            </button>
+          </div>
         </>
       )}
     </div>

@@ -12,7 +12,26 @@ function Projects() {
       .then((data) => setProjects(data.project));
     setIsLoaded(true);
   }, []);
-  
+
+  let pledged = 0;
+  let backers = 0;
+  for (let i = 0; i < projects.length; i++) {
+    const project = projects[i];
+
+    for (let j = 0; j < project?.cost?.length; j++) {
+      let cost = project?.cost[j];
+      if (parseInt(cost !== 0 && cost)) {
+        pledged += parseInt(cost);
+      }
+    }
+  }
+
+  for (let i = 0; i < projects.length; i++) {
+    const project = projects[i];
+    backers = backers + parseInt(project.backers.length);
+  }
+  console.log(backers);
+
   return (
     <>
       <div className="home-hero-main-text">
@@ -21,15 +40,15 @@ function Projects() {
       </div>
       <div className="home-hero-card">
         <div className="hero-card-1">
-          <p className="hero-card-main-text">1,000</p>
+          <p className="hero-card-main-text">{projects?.length}</p>
           <p className="hero-card-sub-text">projects funded</p>
         </div>
         <div className="hero-card-2">
-          <p className="hero-card-main-text">$1,000,000</p>
+          <p className="hero-card-main-text">${pledged}</p>
           <p className="hero-card-sub-text">towards creative work</p>
         </div>
         <div className="hero-card-3">
-          <p className="hero-card-main-text">100,000</p>
+          <p className="hero-card-main-text">{backers}</p>
           <p className="hero-card-sub-text">pledges</p>
         </div>
       </div>
