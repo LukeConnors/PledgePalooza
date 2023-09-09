@@ -9,6 +9,7 @@ import OpenModalButton from "../OpenModalButton";
 import ImageFormModal from "../DesImageFormModal";
 import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
+import { BiCategory, BiSolidMap } from "react-icons/bi";
 
 import RewardImageFormModal from "../RewardImageModal";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -217,8 +218,19 @@ const daysLeftNew = calculateDaysLeft(existingEndDate);
               <div>days left</div>
               {renderComponent}
             </div>
-          </div>
+          </div>  
         </div>
+        <div className="project-cat">
+          <p>
+            <BiCategory />
+            {project.category}
+          </p>
+          <p>
+            <BiSolidMap />
+            {project.location}
+          </p>
+        </div>
+
 
         <div className="grid-container flex">
           <div className="flex-column flex-row-md">
