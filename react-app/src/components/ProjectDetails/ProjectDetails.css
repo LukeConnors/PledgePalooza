@@ -389,3 +389,23 @@
   margin-bottom: -3px;
   font-size: 14px;
 }
+
+.project-summary {
+  text-align: justify;
+  width: 650px;
+}
+
+.project-cat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  margin-right: 700px;
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
+
+.project-cat p {
+  margin-bottom: -3px;
+  font-size: 14px;
+}
