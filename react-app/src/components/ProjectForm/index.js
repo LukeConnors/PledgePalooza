@@ -87,14 +87,11 @@ function ProjectFormPage() {
       } else {
         const e = await res.json();
         setErrors(e.form_errors);
-        console.log("!!!!!!!!!!!ERROR!!!!!!!!", e, "!!!!!!!!ERROR!!!!!!!!!!");
       }
     } catch (e) {
       console.log("fetch error:", e);
     }
   };
-
-  console.log("!!!!!!!!!!MY ERRORS!!!!!", errors);
 
   function getCurrentDate() {
     const currentDate = new Date();
@@ -110,7 +107,6 @@ function ProjectFormPage() {
     return oneYearLaterDate.toISOString().split("T")[0];
   }
 
-  console.log(formData);
 
   return (
     <>

@@ -26,7 +26,6 @@ function ImageFormModal(projectId) {
         e.preventDefault();
         const info = new FormData()
         info.append("url", formData.url);
-        console.log("THIS IS OUR URL", formData.url)
         try {
             const res = await fetch(`/api/projects/${projectId.projectId}/des-images`, {
               method: "POST",

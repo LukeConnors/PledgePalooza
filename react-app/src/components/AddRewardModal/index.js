@@ -89,7 +89,6 @@ function AddRewardModal({ projectId }) {
         const data = await res.json();
         closeModal();
         window.location.reload();
-        console.log(data);
       } else {
         const errorData = await res.json();
         console.log(errorData);

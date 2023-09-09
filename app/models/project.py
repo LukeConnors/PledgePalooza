@@ -50,5 +50,6 @@ class Project(db.Model):
             "endDate": self.endDate,
             "location": self.location,
             "summary": self.summary,
-            "backers": [back.id for back in self.backed_project]
+            "backers": [back.id for back in self.backed_project],
+            "cost": [back.cost for back in self.backed_project]
         }

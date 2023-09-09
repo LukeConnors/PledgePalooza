@@ -90,7 +90,6 @@ function ProjectDetails() {
       });
   }, [projectId]);
 
-  console.log("BACKED PROJECT", backedProjects);
 
   useEffect(() => {
     const fetchDescriptionImages = async () => {
@@ -143,7 +142,6 @@ function ProjectDetails() {
   let renderComponent = null;
 
   if (!user) {
-    console.log("REACHED HERE! 1");
     // User is not logged in
     renderComponent = (
       <button className="back-this-project">
@@ -152,7 +150,6 @@ function ProjectDetails() {
     );
   } else if (user.id === project.ownerId) {
     // User is the owner of the project
-    console.log("REACHED HERE! 2");
     renderComponent = (
       <OpenModalButton
         buttonText={"Add a Description Image"}
@@ -165,11 +162,9 @@ function ProjectDetails() {
       (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
     )
   ) {
-    console.log("REACHED HERE! 3", user.id);
     renderComponent = <></>;
   } else {
     // User can back the project
-    console.log("REACHED HERE! 4");
     renderComponent = (
       <OpenModalButton
         buttonText={"Back this project"}
@@ -177,10 +172,32 @@ function ProjectDetails() {
       />
     );
   }
+  let pledged = project?.cost?.reduce((x, y) => x + y)
+
+  const existingEndDate = project.endDate
+  ? new Date(project.endDate).toISOString().split("T")[0]
+  : "";
+
+function calculateDaysLeft(targetDate) {
+  // Create Date objects for the target date and current date
+  const currentDate = new Date();
+  const targetDateObj = new Date(targetDate);
+
+  // Calculate the time difference in milliseconds
+  const timeDifference = targetDateObj - currentDate;
+
+  // Convert milliseconds to days
+  const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+  return daysLeft;
+}
+
+const daysLeftNew = calculateDaysLeft(existingEndDate);
+
+
 
   rewards.sort((a, b) => a.price - b.price);
   // console.log(rewards);
-    console.log("!!!!!!!:",project)
   return (
     <div>
       <div className="project-detail">
@@ -192,11 +209,11 @@ function ProjectDetails() {
           <img className="project-banner" src={project.bannerImg} alt={project.name} />
           <div className="stats-and-rewards">
             <div className="project-stats">
-              <div>${pledgedAmount}</div>
+              <div>${pledged}</div>
               <div>pledged</div>
               <div>{project?.backers?.length}</div>
               <div>{project?.backers?.length <= 1 ? "backer" : "backers"}</div>
-              <div>{daysLeft}</div>
+              <div>{daysLeftNew}</div>
               <div>days left</div>
               {renderComponent}
             </div>

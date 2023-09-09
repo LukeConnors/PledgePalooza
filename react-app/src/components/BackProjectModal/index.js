@@ -7,7 +7,6 @@ function BackProjectModal(projectId) {
   const [formData, setFormData] = useState({
     cost: "",
   });
-  console.log("!!!!!!!!!!!!!!!!!", projectId.projectId, "!!!!!!!!!!!!!!!!!!!!");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

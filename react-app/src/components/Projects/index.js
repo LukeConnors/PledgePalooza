@@ -12,7 +12,7 @@ function Projects() {
       .then((data) => setProjects(data.project));
     setIsLoaded(true);
   }, []);
-  console.log(projects);
+  
   return (
     <>
       <div className="home-hero-main-text">
