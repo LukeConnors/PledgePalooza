@@ -48,10 +48,10 @@ function MyBackedProjects() {
                 </h2>
               </div>
               <div className="amount-div">
-                <h4>Amount Contributed: {back.cost}</h4>
+                <h4>Amount Contributed: ${back.cost}</h4>
               </div>
               <div className="reward-div">
-                <h4>Reward: {back.rewardName}</h4>
+                <h4>Reward: {back.rewardName ? back.rewardName : "None"}</h4>
               </div>
             </div>
           </Link>
