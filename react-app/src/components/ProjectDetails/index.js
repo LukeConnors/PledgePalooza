@@ -194,8 +194,8 @@ function ProjectDetails() {
             <div className="project-stats">
               <div>${pledgedAmount}</div>
               <div>pledged</div>
-              <div>{backerCount}</div>
-              <div>backers</div>
+              <div>{project?.backers?.length}</div>
+              <div>{project?.backers?.length <= 1 ? "backer" : "backers"}</div>
               <div>{daysLeft}</div>
               <div>days left</div>
               {renderComponent}

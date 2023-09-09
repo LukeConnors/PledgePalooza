@@ -164,7 +164,7 @@ def seed_backed_projects():
     db.session.add(backedProject20)
 
 
-
+    db.session.commit()
 
 
 
