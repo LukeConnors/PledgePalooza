@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useModal } from "../../context/Modal";
 import './DesImageModal.css'
+import { useHistory } from "react-router-dom";
 
 
 function ImageFormModal(projectId) {
     const {closeModal} = useModal()
+    const history = useHistory()
 
     const [formData, setFormData] = useState({
         url: "",
@@ -26,6 +28,7 @@ function ImageFormModal(projectId) {
               const data = await res.json();
               console.log(data);
               closeModal()
+              window.location.reload();
             } else {
               const errorData = await res.json();
               console.log(errorData);
