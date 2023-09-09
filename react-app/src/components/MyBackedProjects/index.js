@@ -30,6 +30,8 @@ function MyBackedProjects() {
     );
   }
 
+  console.log(backedProjects)
+
   return (
     <>
       <h1 className="back-project-title">Backed Projects:</h1>

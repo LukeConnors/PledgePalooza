@@ -285,8 +285,8 @@ def post_backed(id):
                 rewardId = None,
                 userId = current_user.id
             )
+            count = 0
             for reward in rewards:
-                count = 0
                 if(reward.price <= new_back.cost and reward.price > count):
                     count = reward.price
                     new_back.rewardId = reward.id
