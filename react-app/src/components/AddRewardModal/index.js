@@ -49,7 +49,7 @@ function AddRewardModal({ projectId }) {
     if (!formData.price) {
       formErrors.price = "Price is required";
     }
-    if(formData.price <= 0){
+    else if(formData.price <= 0){
       formErrors.price = "Price cannot be equal to or less than 0"
     }
     if (!formData.est_delivery) {
@@ -69,7 +69,7 @@ function AddRewardModal({ projectId }) {
     if (!formData.quantity) {
       formErrors.quantity = "Quantity is required";
     }
-    if(formData.quantity <= 0){
+    else if(formData.quantity <= 0){
       formErrors.quantity = "Quantity cannot be equal to or less than 0"
     }
 
