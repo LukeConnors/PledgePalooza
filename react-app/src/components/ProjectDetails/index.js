@@ -223,7 +223,7 @@ function ProjectDetails() {
               <div>${pledged}</div>
               <div>pledged</div>
               <div>{project?.backers?.length}</div>
-              <div>{project?.backers?.length <= 1 ? "backer" : "backers"}</div>
+              <div>{project?.backers?.length === 1 ? "backer" : "backers"}</div>
               <div>{daysLeftNew < 1 ? "This project is now closed" : daysLeftNew}</div>
               <div>{daysLeftNew < 1 ? "" : "days left"}</div>
               {renderComponent}
