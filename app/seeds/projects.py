@@ -39,7 +39,7 @@ def seed_projects():
         ownerId=3,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Cosmic1.png',
-        endDate=date(2023, 8, 15),
+        endDate=date(2024, 8, 15),
     )
 
     project4 = Project(

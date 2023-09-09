@@ -140,15 +140,38 @@ function ProjectDetails() {
     (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
   );
 
+  const existingEndDate = project.endDate
+    ? new Date(project.endDate).toISOString().split("T")[0]
+    : "";
+
+  function calculateDaysLeft(targetDate) {
+    // Create Date objects for the target date and current date
+    const currentDate = new Date();
+    const targetDateObj = new Date(targetDate);
+
+    // Calculate the time difference in milliseconds
+    const timeDifference = targetDateObj - currentDate;
+
+    // Convert milliseconds to days
+    const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+    return daysLeft;
+  }
+
+  const daysLeftNew = calculateDaysLeft(existingEndDate);
+
   let renderComponent = null;
 
   if (!user) {
-    // User is not logged in
-    renderComponent = (
-      <button className="back-this-project">
-        <Link to="/login">Back this project</Link>
-      </button>
-    );
+    if (daysLeftNew < 0) {
+      renderComponent = <></>;
+    } else {
+      renderComponent = (
+        <button className="back-this-project">
+          <Link to="/login">Back this project</Link>
+        </button>
+      );
+    }
   } else if (user.id === project.ownerId) {
     // User is the owner of the project
     renderComponent = (
@@ -172,34 +195,17 @@ function ProjectDetails() {
     );
   } else {
     // User can back the project
-    renderComponent = (
-      <OpenModalButton
-        buttonText={"Back this project"}
-        modalComponent={<BackProjectModal projectId={projectId} />}
-      />
-    );
+    if (daysLeftNew < 0) {
+      renderComponent = <></>;
+    } else {
+      renderComponent = (
+        <button className="back-this-project">
+          <Link to="/login">Back this project</Link>
+        </button>
+      );
+    }
   }
   let pledged = project?.cost?.reduce((x, y) => x + y, 0);
-
-  const existingEndDate = project.endDate
-    ? new Date(project.endDate).toISOString().split("T")[0]
-    : "";
-
-  function calculateDaysLeft(targetDate) {
-    // Create Date objects for the target date and current date
-    const currentDate = new Date();
-    const targetDateObj = new Date(targetDate);
-
-    // Calculate the time difference in milliseconds
-    const timeDifference = targetDateObj - currentDate;
-
-    // Convert milliseconds to days
-    const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-
-    return daysLeft;
-  }
-
-  const daysLeftNew = calculateDaysLeft(existingEndDate);
 
   rewards.sort((a, b) => a.price - b.price);
   // console.log(rewards);
@@ -217,8 +223,8 @@ function ProjectDetails() {
               <div>pledged</div>
               <div>{project?.backers?.length}</div>
               <div>{project?.backers?.length <= 1 ? "backer" : "backers"}</div>
-              <div>{daysLeftNew}</div>
-              <div>days left</div>
+              <div>{daysLeftNew < 1 ? "This project is now closed" : daysLeftNew}</div>
+              <div>{daysLeftNew < 1 ? "" : "days left"}</div>
               {renderComponent}
             </div>
           </div>
