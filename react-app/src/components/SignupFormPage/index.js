@@ -46,7 +46,7 @@ function SignupFormPage() {
                 id="email"
                 type="text"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value.toLowerCase())}
                 required
                 style={{ paddingLeft: "30px" + (email ? " 20px" : "") }}
                 className="signup-email-input"
