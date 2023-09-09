@@ -24,13 +24,14 @@ class BackedProject(db.Model):
 
 
     def to_dict(self):
+        reward_name = self.reward.name if self.reward else None
         return {
             "id": self.id,
             "projectId": self.projectId,
             "rewardId": self.rewardId,
             "userId": self.userId,
             "cost": self.cost,
-            "rewardName": self.reward.name,
+            "rewardName": reward_name,
             "projectImg": self.project.bannerImg,
             "projectName": self.project.name
         }
