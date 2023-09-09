@@ -177,6 +177,7 @@ function ProjectDetails() {
     );
   }
 
+  rewards.sort((a, b) => a.price - b.price);
   // console.log(rewards);
   return (
     <div>
