@@ -341,7 +341,7 @@ function ProjectDetails() {
               )}
             </>
             <div className="modal-button">
-              {rewards.length < 4 ? (
+              {rewards.length < 4 && user && user.id === project.ownerId ? (
                 <OpenModalButton
                   buttonText={"Add a Reward"}
                   modalComponent={<AddRewardModal projectId={project.id} />}
