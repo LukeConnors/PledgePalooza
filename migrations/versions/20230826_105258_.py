@@ -77,6 +77,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
+    op.create_table('likes',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False, primary_key=True),
+    sa.Column('userId', sa.Integer(), sa.ForeignKey('users.id'), nullable=False),
+    sa.Column('projectId', sa.Integer(), sa.ForeignKey('projects.id'), nullable=False),
+    sa.UniqueConstraint('userId', 'projectId', name='unique_liked_project')
+    )
+
 
 
     if environment == "production":
@@ -85,6 +92,7 @@ def upgrade():
         op.execute(f"ALTER TABLE rewards SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE images SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE backed_projects SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
 
 def downgrade():
     op.drop_table('categories')
@@ -92,3 +100,4 @@ def downgrade():
     op.drop_table('rewards')
     op.drop_table('images')
     op.drop_table('backed_projects')
+    op.drop_table('likes')

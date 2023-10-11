@@ -5,6 +5,7 @@ from .projects import seed_projects, undo_projects
 from .categories import seed_categories, undo_categories
 from .images import seed_images, undo_images
 from .rewards import seed_rewards, undo_rewards
+from .likes import seed_likes, undo_likes
 
 from app.models.db import db, environment, SCHEMA
 
@@ -27,12 +28,14 @@ def seed():
         undo_rewards()
         undo_images()
         undo_backed_projects()
+        undo_likes()
     seed_users()
     seed_categories()
     seed_projects()
     seed_rewards()
     seed_images()
     seed_backed_projects()
+    seed_likes()
     # Add other seed functions here
 
 
@@ -45,4 +48,5 @@ def undo():
     undo_rewards()
     undo_images()
     undo_backed_projects()
+    undo_likes()
     # Add other undo functions here

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, redirect
-from app.models import db, Image, User, Project, Reward, Category, BackedProject
+from app.models import db, Image, User, Project, Reward, Category, BackedProject, Like
 from app.forms.project_form import ProjectForm
 from app.forms.reward_form import RewardForm
 from app.forms.back_form import BackForm
@@ -322,3 +322,65 @@ def update_project(id):
             return back.to_dict()
         else:
             return jsonify({"error": "Project does not exist"})
+        
+
+
+@project_routes.route('/<int:id>/likes')
+def individual_project_likes(id):
+    """
+    Query for all likes belonging to a specific project
+    """
+    project = Project.query.get(id)
+    if project:
+        likes = Like.query.filter(Like.projectId == id).all()
+        return {'likes':[like.to_dict() for like in likes]}
+    else:
+        return jsonify({"error": "Project not found"}, 404)
+    
+# A user should be able to delete or unlike a like they given to a project
+
+@project_routes.route('/<int:id>/likes', methods=["DELETE"])
+@login_required
+def unlike_project(id):
+    project = Project.query.get(id)
+    if not project:
+        return jsonify({"error": "Project not found"}), 404
+    
+    like = Like.query.filter_by(userId=current_user.id, projectId=id).first()
+    if like:
+        db.session.delete(like)
+        db.session.commit()
+        return jsonify({"message": "Successfully unliked the project"}), 200
+    else:
+        return jsonify({"error": "Like not found"}), 404
+    
+# A user should be able to like projects belonging to other users, can only like the same project once and cant like their own project
+@project_routes.route('/<int:id>/likes', methods=["POST"])
+@login_required
+def like_project(id):
+    project =  Project.query.get(id)
+    if not project:
+        return jsonify({"error": "Project not found"}), 404
+    
+    if current_user.id == project.ownerId:
+        return jsonify({"error": "You cannot like your own project"}), 403
+    
+    already_liked = Like.query.filter_by(userId=current_user.id, projectId=id).first()
+    if already_liked:
+        return jsonify({"error": "You have already liked this project"}), 400
+    
+    new_like = Like(userId=current_user.id, projectId=id)
+    db.session.add(new_like)
+    db.session.commit()
+
+    return jsonify({"message": "Successfully liked the project", "like": new_like.to_dict()}), 201
+# Get all likes belonging to the current user '/projects/my-likes'
+
+@project_routes.route('/my-likes')
+@login_required
+def my_likes():
+    likes = Like.query.filter(current_user.id == Like.userId).all()
+    if likes:
+        return {"my_likes": [like.to_dict() for like in likes]}
+    else:
+        return jsonify({"error": "Likes could not be found for the current user"}), 404

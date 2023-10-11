@@ -34,7 +34,8 @@ class Project(db.Model):
     category = db.relationship('Category', back_populates='project')
 
     # INTERNAL-MODEL RELATIONS(PRIMARY-KEY):
-    reward = db.relationship('Reward', back_populates='project', cascade="all, delete-orphan" )
+    like =  db.relationship('Like', back_populates='project', cascade="all, delete-orphan")
+    reward = db.relationship('Reward', back_populates='project', cascade="all, delete-orphan")
     image = db.relationship('Image', primaryjoin="and_(Image.imageable_type=='project', foreign(Image.imageable_id)==Project.id)", cascade="all, delete-orphan")
     backed_project = db.relationship('BackedProject',back_populates='project', uselist=True, cascade="all, delete-orphan" )
 
