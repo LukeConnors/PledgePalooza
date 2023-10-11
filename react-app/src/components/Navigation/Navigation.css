@@ -14,7 +14,6 @@
 }
 .profile-dropdown {
   position: absolute;
-  margin-top: 290px;
   right: 10px;
   list-style-type: none;
   text-align: center;
@@ -92,4 +91,20 @@
 a {
   text-decoration: none;
   background-color: transparent;
+}
+
+.search-profile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.icon{
+  margin-left: 20px;
+}
+
+
+.search-results{
+  background-color: white;
 }

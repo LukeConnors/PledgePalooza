@@ -5,10 +5,15 @@ import { logout, login } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import SearchBar from "./SearchBar";
+import SearchResults from "./SearchResults";
+import "./Navigation.css"
 
 function ProfileButton({ user }) {
   const history = useHistory()
   const dispatch = useDispatch();
+  const [results, setResults] = useState([])
+  const [input, setInput] = useState("")
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -49,10 +54,18 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <>
-      <button className="icon" onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+    <div>
+      <div className="search-profile">
+        <div className="search-div">
+          <SearchBar setResults={setResults} input={input} setInput={setInput} />
+          <div className="search-results">
+            <SearchResults results={results} setResults={setResults} input={input} setInput={setInput} />
+          </div>
+        </div>
+        <button className="icon" onClick={openMenu}>
+          <i className="fas fa-user-circle" />
+        </button>
+      </div>
       <ul className={user ? ulClassName : `${ulClassName} no-user`} ref={ulRef}>
         {user ? (
           <>
@@ -65,7 +78,7 @@ function ProfileButton({ user }) {
             </li>
             <li className="user-details">
               <Link to='/users/current/backed-projects'>
-              View Backed Projects
+                View Backed Projects
               </Link>
             </li>
             <li className="list-btn">
@@ -92,7 +105,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 
