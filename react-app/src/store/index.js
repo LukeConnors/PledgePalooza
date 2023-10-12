@@ -2,10 +2,11 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session";
 import images from "./images";
-
+import projectsReducer from "./projects";
 const rootReducer = combineReducers({
   session,
   images,
+  projects: projectsReducer,
 });
 
 let enhancer;

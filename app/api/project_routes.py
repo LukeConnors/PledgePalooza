@@ -24,7 +24,7 @@ def all_projects():
     """
     projects = Project.query.all()
 
-    return {"project":[project.to_dict() for project in projects]}
+    return {"projects":[project.to_dict() for project in projects]}
 
 
 # POST a project for authenticated user '/projects'
