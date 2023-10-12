@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 import session from "./session";
 import images from "./images";
 import projectsReducer from "./projects";
+import rewards from "./rewards";
 const rootReducer = combineReducers({
   session,
   images,
   projects: projectsReducer,
+  rewards,
 });
 
 let enhancer;
