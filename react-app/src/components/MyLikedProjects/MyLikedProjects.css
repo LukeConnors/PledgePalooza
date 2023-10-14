@@ -23,6 +23,7 @@
     height: 500px;
     width: 500px;
     border-radius: 20px;
+    position: relative;
   }
   
   .my-liked-project-title {
@@ -59,4 +60,19 @@
     justify-content: space-between;
     margin: 0 auto;
   }
+
+  .my-like-logo {
+    display:none;
+    position: absolute;
+    filter: invert(20%) sepia(95%) saturate(700%) hue-rotate(340deg) brightness(90%) contrast(90%);
+    top: 10px;
+    right: 10px;
+    width: 24px; 
+    height: 24px;
+    cursor: pointer;
+    z-index: 1;
+  }
   
+  .my-liked-project-card:hover .my-like-logo{
+    display: block;
+  }
