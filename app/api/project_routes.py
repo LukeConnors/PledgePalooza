@@ -350,11 +350,11 @@ def unlike_project(id):
     if like:
         db.session.delete(like)
         db.session.commit()
-        return jsonify({"message": "Successfully unliked the project"}), 200
+        return jsonify({"message": "Successfully unliked the project", "likeId": like.id}), 200
     else:
         return jsonify({"error": "Like not found"}), 404
     
-# A user should be able to like projects belonging to other users, can only like the same project once and cant like their own project
+# A user should be able to like projects belonging to other users, can only like a project once and cant like their own project
 @project_routes.route('/<int:id>/likes', methods=["POST"])
 @login_required
 def like_project(id):

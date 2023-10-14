@@ -68,6 +68,11 @@ function ProfileButton({ user }) {
               View Backed Projects
               </Link>
             </li>
+            <li className="user-details">
+              <Link to='/users/current/likes'>
+              View Liked Projects
+              </Link>
+            </li>
             <li className="list-btn">
               <button onClick={handleLogout}>Log Out</button>
             </li>

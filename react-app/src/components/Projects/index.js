@@ -1,17 +1,53 @@
 import React, { useState, useEffect } from "react";
 import "./projects.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createLike } from "../../store/likes";
+import { deleteLike } from "../../store/likes";
+import { loadMyLikes } from "../../store/likes";
+import thumbsUp from "../../assets/thumbs-up-icon.png"
 
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState(null)
+  const user = useSelector((state) => state.session.user)
+  const { projectId } = useParams();
+  const dispatch = useDispatch();
+
+  const [likedProjects, setLikedProjects] = useState([]);
+
+  const handleLikeClick = async (projectId, e) => {
+    e.preventDefault();
+    console.log('projectId:', projectId)
+    if (likedProjects?.includes(projectId)) {
+      dispatch(deleteLike(null, projectId));  
+      setLikedProjects(likedProjects?.filter(id => id !== projectId));
+    } else {
+      const like = {
+        userId: user.id,
+        projectId: projectId
+      };
+      dispatch(createLike(like, projectId));
+      setLikedProjects([...likedProjects, projectId]);
+    }
+  };
 
   useEffect(() => {
     fetch("/api/projects/")
       .then((res) => res.json())
-      .then((data) => setProjects(data.project));
-    setIsLoaded(true);
-  }, []);
+      .then((data) => {
+        setProjects(data.project);
+        setIsLoaded(true);
+      });
+
+  
+    if (user) {
+      dispatch(loadMyLikes()).then(likes => {
+        setLikedProjects(likes || []);
+      });
+    }
+  }, [user, dispatch]);
 
   let pledged = 0;
   let backers = 0;
@@ -58,15 +94,28 @@ function Projects() {
           <div>
             {projects.map((project, index) =>
               index % 2 === 0 ? (
-                <Link to={`/projects/${project.id}`} key={project.id}>
+                <Link to={`/projects/${project.id}`}
+                 key={project.id}
+                 onMouseEnter={() => setHoveredProject(project.id)} 
+                 onMouseLeave={() => setHoveredProject(null)}
+                  >
                   <div className="project-card" key={project.id}>
-                    <div>
+                      <div className="main-project-image">
                       <img
-                        className="main-project-image"
+                        className="project-banner"
                         alt={`${project.name}`}
                         src={project.bannerImg}
                       ></img>
-                    </div>
+                      {hoveredProject === project.id && user && ( 
+                        console.log(thumbsUp),
+                     <img
+                     className={`like-icon ${likedProjects?.includes(project.id) ? 'liked' : ''}`}
+                     src={thumbsUp}
+                     alt="thumbs up icon"
+                     onClick={(e) => handleLikeClick(project.id, e)}
+                      />
+                    )}
+                  </div>
                     <div className="home-project-details">
                       <h1 key={project.id}>{project.name}</h1>
                       <p>{project.description}</p>
@@ -75,19 +124,32 @@ function Projects() {
                   </div>
                 </Link>
               ) : (
-                <Link to={`/projects/${project.id}`} key={project.id}>
+                <Link 
+                  to={`/projects/${project.id}`} 
+                  key={project.id} 
+                  onMouseEnter={() => setHoveredProject(project.id)} 
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
                   <div className="project-card" key={project.id}>
                     <div className="home-project-details">
                       <h1 key={project.id}>{project.name}</h1>
                       <p>{project.description}</p>
                       <p>By: {project.ownerName}</p>
                     </div>
-                    <div>
+                    <div className="main-project-image">
                       <img
-                        className="main-project-image"
+                        className="project-banner"
                         alt={`${project.name}`}
                         src={project.bannerImg}
                       ></img>
+                      {hoveredProject === project.id && user && ( 
+                        <img
+                        className={`like-icon ${likedProjects.includes(project.id) ? 'liked' : ''}`}
+                          src={thumbsUp}
+                          alt="thumbs up icon"
+                          onClick={(e) => handleLikeClick(project.id, e)}
+                        />
+                      )}
                     </div>
                   </div>
                 </Link>

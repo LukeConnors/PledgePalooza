@@ -11,6 +11,7 @@ import Projects from "./components/Projects";
 import MyProjects from "./components/MyProjectsPage";
 import MyBackedProjects from "./components/MyBackedProjects";
 import EditProject from "./components/EditProject";
+import MyLikedProjects from "./components/MyLikedProjects";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/users/current/backed-projects">
             <MyBackedProjects />
+          </Route>
+          <Route path="/users/current/likes">
+            <MyLikedProjects />
           </Route>
         </Switch>
       )}
