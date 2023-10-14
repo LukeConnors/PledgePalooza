@@ -26,6 +26,10 @@ def all_projects():
 
     return {"project":[project.to_dict() for project in projects]}
 
+@project_routes.route('/category/<int:id>')
+def project_by_category(id):
+    projects = Project.query.filter(Project.categoryId == id).all()
+    return {'projects': [project.to_dict() for project in projects]}
 
 # POST a project for authenticated user '/projects'
 @project_routes.route('/', methods=["POST"])
@@ -75,6 +79,15 @@ def my_projects():
     projects = Project.query.filter(current_user.id == Project.ownerId).all()
 
     return {"my_projects": [project.to_dict() for project in projects]}
+
+
+# GET a project by search query
+@project_routes.route('/project_search')
+def get_projects_name():
+    query = request.args.get("query", "").lower()
+    projects = Project.query.filter(Project.name.ilike(f"{query}%")).all()
+    return {"projects": [project.to_dict() for project in projects]}
+
 
 # GET a project's details '/projects/:id'
 

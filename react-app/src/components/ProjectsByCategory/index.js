@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from "react";
-import "./projects.css";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-function Projects() {
+function ProjectsByCategory() {
   const [projects, setProjects] = useState([]);
+  const [catProjects, setCatProjects] = useState([])
   const [isLoaded, setIsLoaded] = useState(false);
+  const {categoryId} = useParams();
+
+
 
   useEffect(() => {
-    fetch("/api/projects/")
+      fetch(`/api/projects/`)
       .then((res) => res.json())
       .then((data) => setProjects(data.project));
-    setIsLoaded(true);
-  }, []);
+    }, [categoryId]);
 
-  console.log(projects)
+    useEffect(() => {
+        fetch(`/api/projects/category/${categoryId}`)
+        .then((res) => res.json())
+        .then((data) => setCatProjects(data.projects));
+        setIsLoaded(true);
+    }, [categoryId]);
+
+console.log(catProjects)
   let pledged = 0;
   let backers = 0;
   for (let i = 0; i < projects.length; i++) {
@@ -57,7 +67,7 @@ function Projects() {
         <h2 className="feat-projects">Featured Projects:</h2>
         {isLoaded ? (
           <div>
-            {projects.map((project, index) =>
+            {catProjects.map((project, index) =>
               index % 2 === 0 ? (
                 <Link to={`/projects/${project.id}`} key={project.id}>
                   <div className="project-card" key={project.id}>
@@ -103,4 +113,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default ProjectsByCategory;

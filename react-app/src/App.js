@@ -11,6 +11,7 @@ import Projects from "./components/Projects";
 import MyProjects from "./components/MyProjectsPage";
 import MyBackedProjects from "./components/MyBackedProjects";
 import EditProject from "./components/EditProject";
+import ProjectsByCategory from "./components/ProjectsByCategory";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,25 +28,28 @@ function App() {
           <Route exact path="/">
             <Projects />
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/new-project">
+          <Route exact path="/new-project">
             <ProjectFormPage />
           </Route>
-          <Route path="/edit-project/:projectId">
-            <EditProject />
-          </Route>
-          <Route path="/projects/:projectId">
-            <ProjectDetails />
-          </Route>
-          <Route path="/my-projects">
+          <Route exact path="/my-projects">
             <MyProjects />
           </Route>
-          <Route path="/users/current/backed-projects">
+          <Route exact path="/edit-project/:projectId">
+            <EditProject />
+          </Route>
+          <Route exact path="/projects/:projectId">
+            <ProjectDetails />
+          </Route>
+          <Route exact path="/projects/category/:categoryId">
+          <ProjectsByCategory />
+          </Route>
+          <Route exact path="/users/current/backed-projects">
             <MyBackedProjects />
           </Route>
         </Switch>

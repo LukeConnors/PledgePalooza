@@ -26,6 +26,25 @@ function Navigation({ isLoaded }) {
         </div>
         {isLoaded && <ProfileButton user={sessionUser} />}
       </div>
+      <div className="cat-bar">
+        <div className="cat-contents">
+        <NavLink exact to="/projects/category/1">
+          Board Games
+        </NavLink>
+        <NavLink exact to="/projects/category/2">
+          Video Games
+        </NavLink>
+        <NavLink exact to="/projects/category/3">
+          Technology
+        </NavLink>
+        <NavLink exact to="/projects/category/4">
+          Retail
+        </NavLink>
+        <NavLink exact to="/projects/category/5">
+          Cooking
+        </NavLink>
+        </div>
+      </div>
     </>
   );
 }
