@@ -16,14 +16,16 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AddRewardModal from "../AddRewardModal";
 import DeleteRewardModal from "../DeleteRewardModal";
 import EditRewardModal from "../EditRewardModal";
-import { getProject, getProjectRewards } from "../../store/projects";
+import { getProject } from "../../store/projects";
+import { getProjectRewards } from "../../store/rewards";
 
 function ProjectDetails() {
   const dispatch = useDispatch();
   const { projectId } = useParams();
   const project = useSelector((state) => state.projects[projectId]);
   const [backedProjects, setBackedProjects] = useState([]);
-  const rewards = useSelector((state) => state.projects[projectId]?.rewards || []);
+  const rewards = useSelector((state) => state.rewards);
+  const rewardIds = Object.keys(rewards || {});
   const [rewardImages, setRewardImages] = useState({});
 
   const user = useSelector(userSelector);
@@ -38,30 +40,9 @@ function ProjectDetails() {
   }, [descriptionImages, slideIndex]);
 
   useEffect(() => {
-    // Fetch project and rewards
-    const fetchData = async () => {
-      await dispatch(getProject(projectId));
-      await dispatch(getProjectRewards(projectId));
-    };
-
-    fetchData();
+    dispatch(getProject(projectId))
+    .then(dispatch(getProjectRewards(projectId)));
   }, [projectId, dispatch]);
-  useEffect(() => {
-    // Fetch reward images for each reward
-    rewards.forEach((reward) => {
-      fetch(`/api/rewards/${reward.id}/image`)
-        .then((response) => response.json())
-        .then((data) => {
-          setRewardImages((prevRewardImages) => ({
-            ...prevRewardImages,
-            [reward.id]: data.image[0],
-          }));
-        })
-        .catch((error) => {
-          console.error(`Error fetching reward images for reward ${reward.id}`, error);
-        });
-    });
-  }, [rewards]);
 
   useEffect(() => {
     fetch("/api/users/current/backed-projects")
@@ -196,7 +177,7 @@ function ProjectDetails() {
   }
   let pledged = project?.cost?.reduce((x, y) => x + y, 0);
 
-  rewards.sort((a, b) => a.price - b.price);
+  // rewards.sort((a, b) => a.price - b.price);
   // console.log(rewards);
   return (
     <div>
@@ -275,52 +256,60 @@ function ProjectDetails() {
             </div>
             <p>{project?.summary}</p>
           </div>
-          <div className="reward-list">
-            {rewards.map((reward) => (
-              <div key={reward.id} className="reward-tile">
-                {user && user.id === project?.ownerId ? (
-                  <>
-                    {rewardImages[reward.id] && (
-                      <img
-                        className="reward-img"
-                        src={rewardImages[reward.id].url}
-                        alt={`Reward for ${reward.name}`}
-                      />
-                    )}
-                    <OpenModalButton
-                      buttonText={"Edit Reward"}
-                      modalComponent={<EditRewardModal projectId={project?.id} reward={reward} />}
-                    />
-                    {rewardImages[reward.id] ? (
-                      ""
-                    ) : (
-                      <OpenModalButton
-                        buttonText={"Add an Image"}
-                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                      />
-                    )}
-                    <OpenModalButton
-                      buttonText={"Delete Reward"}
-                      modalComponent={
-                        <DeleteRewardModal projectId={project?.id} rewardId={reward.id} />
-                      }
-                    />
-                  </>
-                ) : (
-                  rewardImages[reward.id] && (
-                    <img
-                      className="reward-img"
-                      src={rewardImages[reward.id].url}
-                      alt={`Reward for ${reward.name}`}
-                    />
-                  )
-                )}
 
-                <h3>{reward.name}</h3>
-                <p>{reward.description}</p>
-                <p>Price: ${reward.price}</p>
-              </div>
-            ))}
+          <div className="reward-list">
+            {rewardIds &&
+              rewardIds.map((rewardId) => {
+                const reward = rewards[rewardId];
+                return (
+                  <div key={reward.id} className="reward-tile">
+                    {user && user.id === project?.ownerId ? (
+                      <>
+                        {reward.image[0] && (
+                          <img
+                            className="reward-img"
+                            src={reward?.image[0]?.url}
+                            alt={`Reward for ${reward.name}`}
+                          />
+                        )}
+                        <OpenModalButton
+                          buttonText={"Edit Reward"}
+                          modalComponent={
+                            <EditRewardModal projectId={project?.id} reward={reward} />
+                          }
+                        />
+                        {reward.image[0] ? (
+                          ""
+                        ) : (
+                          <OpenModalButton
+                            buttonText={"Add an Image"}
+                            modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                          />
+                        )}
+                        <OpenModalButton
+                          buttonText={"Delete Reward"}
+                          modalComponent={
+                            <DeleteRewardModal projectId={project?.id} rewardId={reward.id} />
+                          }
+                        />
+                      </>
+                    ) : (
+                      reward.image[0] && (
+                        <img
+                          className="reward-img"
+                          src={reward?.image[0]?.url}
+                          alt={`Reward for ${reward.name}`}
+                        />
+                      )
+                    )}
+
+                    <h3>{reward.name}</h3>
+                    <p>{reward.description}</p>
+                    <p>Price: ${reward.price}</p>
+                  </div>
+                );
+              })}
+
             <>
               {user && user.id === project?.ownerId && rewards.length === 0 && (
                 <>
@@ -329,7 +318,7 @@ function ProjectDetails() {
               )}
             </>
             <div className="modal-button">
-              {rewards.length < 4 && user && user.id === project?.ownerId ? (
+              {rewardIds.length < 4 && user && user.id === project?.ownerId ? (
                 <OpenModalButton
                   buttonText={"Add a Reward"}
                   modalComponent={<AddRewardModal projectId={project?.id} />}

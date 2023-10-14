@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./EditReward.css";
-import { editReward, getProject } from "../../store/projects";
+import { getProject } from "../../store/projects";
+import { editReward } from "../../store/rewards";
 
 function EditRewardModal({ projectId, reward }) {
   const dispatch = useDispatch();

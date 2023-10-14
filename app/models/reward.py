@@ -31,5 +31,6 @@ class Reward(db.Model):
             'description': self.description,
             'price': self.price,
             'estDelivery': self.est_delivery,
-            'quantity': self.quantity
+            'quantity': self.quantity,
+            'image': [image.to_dict() for image in self.image]
         }
