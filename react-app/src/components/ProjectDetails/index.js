@@ -16,18 +16,19 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AddRewardModal from "../AddRewardModal";
 import DeleteRewardModal from "../DeleteRewardModal";
 import EditRewardModal from "../EditRewardModal";
+import { getProject } from "../../store/projects";
+import { getProjectRewards } from "../../store/rewards";
 
 function ProjectDetails() {
-  const [project, setProject] = useState({});
-  const [backedProjects, setBackedProjects] = useState([]);
-  const [rewards, setRewards] = useState([]);
-  const [rewardImages, setRewardImages] = useState({});
+  const dispatch = useDispatch();
   const { projectId } = useParams();
-  const user = useSelector(userSelector);
+  const project = useSelector((state) => state.projects[projectId]);
+  const [backedProjects, setBackedProjects] = useState([]);
+  const rewards = useSelector((state) => state.rewards);
+  const rewardIds = Object.keys(rewards || {});
+  const [rewardImages, setRewardImages] = useState({});
 
-  const [pledgedAmount, setPledgedAmount] = useState(Math.floor(Math.random() * 10000));
-  const [backerCount, setBackerCount] = useState(Math.floor(Math.random() * 5000));
-  const [daysLeft, setDaysLeft] = useState(Math.floor(Math.random() * 65));
+  const user = useSelector(userSelector);
   const [descriptionImages, setDescriptionImages] = useState([]);
   const slidesReference = useRef(null);
   const dotsReference = useRef(null);
@@ -39,42 +40,9 @@ function ProjectDetails() {
   }, [descriptionImages, slideIndex]);
 
   useEffect(() => {
-    fetch(`/api/projects/${projectId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setProject(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching project:", error);
-      });
-
-    fetch(`/api/projects/${projectId}/rewards`)
-      .then((response) => response.json())
-      .then((data) => {
-        setRewards(data.rewards);
-      })
-      .catch((error) => {
-        console.error("Error fetching rewards", error);
-      });
-  }, [projectId]);
-
-  useEffect(() => {
-    // Fetch reward images for each reward
-    rewards.forEach((reward) => {
-      fetch(`/api/rewards/${reward.id}/image`)
-        .then((response) => response.json())
-        .then((data) => {
-          setRewardImages((prevRewardImages) => ({
-            ...prevRewardImages,
-            [reward.id]: data.image[0],
-          }));
-        })
-        .catch((error) => {
-          console.error(`Error fetching reward images for reward ${reward.id}`, error);
-        });
-    });
-  }, [rewards]);
+    dispatch(getProject(projectId))
+    .then(dispatch(getProjectRewards(projectId)));
+  }, [projectId, dispatch]);
 
   useEffect(() => {
     fetch("/api/users/current/backed-projects")
@@ -137,11 +105,11 @@ function ProjectDetails() {
     }
   }
   const backed = backedProjects.filter(
-    (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
+    (backedProject) => backedProject?.userId === user.id && backedProject?.projectId === project?.id
   );
 
-  const existingEndDate = project.endDate
-    ? new Date(project.endDate).toISOString().split("T")[0]
+  const existingEndDate = project?.endDate
+    ? new Date(project?.endDate).toISOString().split("T")[0]
     : "";
 
   function calculateDaysLeft(targetDate) {
@@ -172,7 +140,7 @@ function ProjectDetails() {
         </button>
       );
     }
-  } else if (user.id === project.ownerId) {
+  } else if (user.id === project?.ownerId) {
     // User is the owner of the project
     renderComponent = (
       <OpenModalButton
@@ -183,7 +151,8 @@ function ProjectDetails() {
     // Hide the "Back this project" button for project owner
   } else if (
     backedProjects.some(
-      (backedProject) => backedProject.userId === user.id && backedProject.projectId === project.id
+      (backedProject) =>
+        backedProject?.userId === user.id && backedProject?.projectId === project?.id
     )
   ) {
     renderComponent = (
@@ -201,23 +170,23 @@ function ProjectDetails() {
       renderComponent = (
         <OpenModalButton
           buttonText={"Back this project"}
-          modalComponent={<BackProjectModal projectId={project.id} />}
+          modalComponent={<BackProjectModal projectId={project?.id} />}
         />
       );
     }
   }
   let pledged = project?.cost?.reduce((x, y) => x + y, 0);
 
-  rewards.sort((a, b) => a.price - b.price);
+  // rewards.sort((a, b) => a.price - b.price);
   // console.log(rewards);
   return (
     <div>
       <div className="project-detail">
-        <h1>{project.name}</h1>
-        <p>{project.description}</p>
+        <h1>{project?.name}</h1>
+        <p>{project?.description}</p>
 
         <div className="project-main-content">
-          <img className="project-banner" src={project.bannerImg} alt={project.name} />
+          <img className="project-banner" src={project?.bannerImg} alt={project?.name} />
           <div className="stats-and-rewards">
             <div className="project-stats">
               <div>${pledged}</div>
@@ -233,11 +202,11 @@ function ProjectDetails() {
         <div className="project-cat">
           <p>
             <BiCategory />
-            {project.category}
+            {project?.category}
           </p>
           <p>
             <BiSolidMap />
-            {project.location}
+            {project?.location}
           </p>
         </div>
 
@@ -285,66 +254,74 @@ function ProjectDetails() {
                 <span key={index} className="dot" onClick={() => currentSlide(index + 1)}></span>
               ))}
             </div>
-            <p>{project.summary}</p>
+            <p>{project?.summary}</p>
           </div>
-          <div className="reward-list">
-            {rewards.map((reward) => (
-              <div key={reward.id} className="reward-tile">
-                {user && user.id === project.ownerId ? (
-                  <>
-                    {rewardImages[reward.id] && (
-                      <img
-                        className="reward-img"
-                        src={rewardImages[reward.id].url}
-                        alt={`Reward for ${reward.name}`}
-                      />
-                    )}
-                    <OpenModalButton
-                      buttonText={"Edit Reward"}
-                      modalComponent={<EditRewardModal projectId={project.id} reward={reward} />}
-                    />
-                    {rewardImages[reward.id] ? (
-                      ""
-                    ) : (
-                      <OpenModalButton
-                        buttonText={"Add an Image"}
-                        modalComponent={<RewardImageFormModal rewardId={reward.id} />}
-                      />
-                    )}
-                    <OpenModalButton
-                      buttonText={"Delete Reward"}
-                      modalComponent={
-                        <DeleteRewardModal projectId={project.id} rewardId={reward.id} />
-                      }
-                    />
-                  </>
-                ) : (
-                  rewardImages[reward.id] && (
-                    <img
-                      className="reward-img"
-                      src={rewardImages[reward.id].url}
-                      alt={`Reward for ${reward.name}`}
-                    />
-                  )
-                )}
 
-                <h3>{reward.name}</h3>
-                <p>{reward.description}</p>
-                <p>Price: ${reward.price}</p>
-              </div>
-            ))}
+          <div className="reward-list">
+            {rewardIds &&
+              rewardIds.map((rewardId) => {
+                const reward = rewards[rewardId];
+                return (
+                  <div key={reward.id} className="reward-tile">
+                    {user && user.id === project?.ownerId ? (
+                      <>
+                        {reward.image[0] && (
+                          <img
+                            className="reward-img"
+                            src={reward?.image[0]?.url}
+                            alt={`Reward for ${reward.name}`}
+                          />
+                        )}
+                        <OpenModalButton
+                          buttonText={"Edit Reward"}
+                          modalComponent={
+                            <EditRewardModal projectId={project?.id} reward={reward} />
+                          }
+                        />
+                        {reward.image[0] ? (
+                          ""
+                        ) : (
+                          <OpenModalButton
+                            buttonText={"Add an Image"}
+                            modalComponent={<RewardImageFormModal rewardId={reward.id} />}
+                          />
+                        )}
+                        <OpenModalButton
+                          buttonText={"Delete Reward"}
+                          modalComponent={
+                            <DeleteRewardModal projectId={project?.id} rewardId={reward.id} />
+                          }
+                        />
+                      </>
+                    ) : (
+                      reward.image[0] && (
+                        <img
+                          className="reward-img"
+                          src={reward?.image[0]?.url}
+                          alt={`Reward for ${reward.name}`}
+                        />
+                      )
+                    )}
+
+                    <h3>{reward.name}</h3>
+                    <p>{reward.description}</p>
+                    <p>Price: ${reward.price}</p>
+                  </div>
+                );
+              })}
+
             <>
-              {user && user.id === project.ownerId && rewards.length === 0 && (
+              {user && user.id === project?.ownerId && rewards.length === 0 && (
                 <>
                   <p>No rewards created for this project yet! Click the button below to add one.</p>
                 </>
               )}
             </>
             <div className="modal-button">
-              {rewards.length < 4 && user && user.id === project.ownerId ? (
+              {rewardIds.length < 4 && user && user.id === project?.ownerId ? (
                 <OpenModalButton
                   buttonText={"Add a Reward"}
-                  modalComponent={<AddRewardModal projectId={project.id} />}
+                  modalComponent={<AddRewardModal projectId={project?.id} />}
                 />
               ) : (
                 ""

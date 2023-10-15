@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./EditReward.css";
+import { getProject } from "../../store/projects";
+import { editReward } from "../../store/rewards";
 
 function EditRewardModal({ projectId, reward }) {
+  const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   let existingEndDate = new Date(reward.estDelivery).toISOString().split("T")[0] || "";
   const [formData, setFormData] = useState({
     name: reward.name,
@@ -38,8 +41,6 @@ function EditRewardModal({ projectId, reward }) {
     formDataToSend.append("est_delivery", formData.est_delivery);
     formDataToSend.append("quantity", formData.quantity);
 
-
-
     let formErrors = {};
     if (!formData.name) {
       formErrors.name = "Name is required.";
@@ -49,9 +50,8 @@ function EditRewardModal({ projectId, reward }) {
     }
     if (!formData.price) {
       formErrors.price = "Price is required";
-    }
-    else if(formData.price <= 0){
-      formErrors.price = "Price cannot be equal to or less than 0"
+    } else if (formData.price <= 0) {
+      formErrors.price = "Price cannot be equal to or less than 0";
     }
     if (!formData.est_delivery) {
       formErrors.est_delivery = "End Date is required";
@@ -69,9 +69,8 @@ function EditRewardModal({ projectId, reward }) {
 
     if (!formData.quantity) {
       formErrors.quantity = "Quantity is required";
-    }
-    else if(formData.quantity <= 0){
-      formErrors.quantity = "Quantity cannot be equal to or less than 0"
+    } else if (formData.quantity <= 0) {
+      formErrors.quantity = "Quantity cannot be equal to or less than 0";
     }
 
     if (Object.keys(formErrors).length > 0) {
@@ -80,21 +79,9 @@ function EditRewardModal({ projectId, reward }) {
     }
 
     try {
-      const res = await fetch(`/api/projects/${projectId}/rewards/${reward.id}`, {
-        method: "PUT",
-        body: formDataToSend,
-        credentials: "include",
-      });
-      console.log(res);
-      if (res.ok) {
-        const data = await res.json();
-        closeModal();
-        window.location.reload();
-        console.log(data);
-      } else {
-        const errorData = await res.json();
-        console.log(errorData);
-      }
+      dispatch(editReward(projectId, reward.id, formDataToSend));
+      dispatch(getProject(projectId));
+      closeModal();
     } catch (e) {
       console.log("fetch error:", e);
     }
@@ -116,7 +103,7 @@ function EditRewardModal({ projectId, reward }) {
           <div className="rew-form-amount">
             <label>
               Name
-            {errors.name && <div className="error-message">{errors.name}</div>}
+              {errors.name && <div className="error-message">{errors.name}</div>}
               <input
                 type="text"
                 name="name"
@@ -127,7 +114,7 @@ function EditRewardModal({ projectId, reward }) {
             </label>
             <label>
               Description
-            {errors.description && <div className="error-message">{errors.description}</div>}
+              {errors.description && <div className="error-message">{errors.description}</div>}
               <textarea
                 cols="30"
                 rows="5"
@@ -139,7 +126,7 @@ function EditRewardModal({ projectId, reward }) {
             </label>
             <label>
               Price
-            {errors.price && <div className="error-message">{errors.price}</div>}
+              {errors.price && <div className="error-message">{errors.price}</div>}
               <input
                 type="number"
                 name="price"
@@ -150,7 +137,7 @@ function EditRewardModal({ projectId, reward }) {
             </label>
             <label>
               Estimated Delivery Date
-            {errors.est_delivery && <div className="error-message">{errors.est_delivery}</div>}
+              {errors.est_delivery && <div className="error-message">{errors.est_delivery}</div>}
               <input
                 type="date"
                 name="est_delivery"
@@ -161,7 +148,7 @@ function EditRewardModal({ projectId, reward }) {
             </label>
             <label>
               Quantity
-            {errors.quantity && <div className="error-message">{errors.quantity}</div>}
+              {errors.quantity && <div className="error-message">{errors.quantity}</div>}
               <input
                 type="number"
                 name="quantity"

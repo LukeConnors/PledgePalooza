@@ -24,7 +24,7 @@ def all_projects():
     """
     projects = Project.query.all()
 
-    return {"project":[project.to_dict() for project in projects]}
+    return {"projects":[project.to_dict() for project in projects]}
 
 @project_routes.route('/category/<int:id>')
 def project_by_category(id):
@@ -196,7 +196,7 @@ def get_all_description_images(id):
 # GET rewards by projectId at '/projects/:project-id/rewards'
 @project_routes.route('/<int:id>/rewards')
 def project_rewards(id):
-    rewards = Reward.query.filter(Reward.projectId == id).all()
+    rewards = Reward.query.join(Reward.image).filter(Reward.projectId == id).all()
     return {'rewards': [reward.to_dict() for reward in rewards]}
 
 # POST a reward by projectId at '/projects/:project-id/rewards' (auth user)
