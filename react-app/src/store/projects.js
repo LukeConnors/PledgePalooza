@@ -1,6 +1,7 @@
 const GET_PROJECTS = "projects/setProjects";
 const SET_DETAILED_PROJECT = "projects/SET_DETAILED_PROJECT";
 const ADD_PROJECT = "projects/ADD_PROJECT"
+const UPDATE_PROJECT = "projects/UPDATE_PROJECT"
 
 
 const setProjects = (projects) => ({
@@ -15,6 +16,11 @@ export const setDetailedProject = (project) => ({
 
 const addProject = (project) => ({
   type: ADD_PROJECT,
+  payload: project
+})
+
+const updateProject = (project) => ({
+  type: UPDATE_PROJECT,
   payload: project
 })
 
@@ -56,6 +62,22 @@ export const createProject = (payload) => async (dispatch) => {
   }
 }
 
+export const editProject = (projectId, payload) => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/projects/${projectId}`, {
+      method: "PUT",
+      body: payload
+    })
+    if(res.ok){
+      const editedProject = await res.json();
+      dispatch(updateProject(editedProject))
+      return editedProject
+    }
+  } catch(e){
+    return e
+  }
+}
+
 export default function reducer(state = {}, action) {
   let newState = {};
   switch (action.type) {
@@ -66,6 +88,12 @@ export default function reducer(state = {}, action) {
       const newProject = action.payload
       newState = { ...state }
       newState[newProject.id] = newProject
+      return newState
+
+    case UPDATE_PROJECT:
+      const projectId = action.payload.id
+      newState = {...state}
+      newState[projectId] = {...state[projectId], ...action.payload}
       return newState
     case SET_DETAILED_PROJECT:
       return {
