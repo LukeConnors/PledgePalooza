@@ -1,14 +1,14 @@
 const GET_PROJECTS = "projects/setProjects";
-const GET_PROJECT = "projects/setProject";
+const SET_DETAILED_PROJECT = "projects/SET_DETAILED_PROJECT";
 
 const setProjects = (projects) => ({
   type: GET_PROJECTS,
   projects,
 });
 
-export const setProject = (projectId) => ({
-  type: GET_PROJECT,
-  projectId,
+export const setDetailedProject = (project) => ({
+  type: SET_DETAILED_PROJECT,
+  project,
 });
 
 export const getProjects = () => async (dispatch) => {
@@ -27,7 +27,8 @@ export const getProject = (projectId) => async (dispatch) => {
   const response = await fetch(`/api/projects/${projectId}`);
 
   const data = await response.json();
-  dispatch(setProject(data));
+  console.log("THIS IS THE FETCH DATA", data)
+  dispatch(setDetailedProject(data));
 };
 
 export default function reducer(state = {}, action) {
@@ -37,10 +38,10 @@ export default function reducer(state = {}, action) {
       action.projects.forEach((project) => (newState[project.id] = project));
 
       return newState;
-    case GET_PROJECT:
+    case SET_DETAILED_PROJECT:
       return {
         ...state,
-        [action.projectId]: action.project,
+        detailedProject: action.project,
       };
 
     default:

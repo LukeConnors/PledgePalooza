@@ -2,7 +2,6 @@ import { useHistory } from "react-router-dom";
 import "./SearchResults.css"
 
 function SearchResults({ input, setInput, results, setResults }) {
-    console.log("these are the results", results)
     const history = useHistory()
     const handleClick = (projectId) => {
         history.push(`/projects/${projectId}`)

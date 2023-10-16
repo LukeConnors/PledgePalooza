@@ -7,9 +7,8 @@ const addImage = (info) => ({
   info,
 });
 
-const setProjectRewards = (projectId, rewards) => ({
+const setProjectRewards = (rewards) => ({
   type: GET_REWARDS,
-  projectId,
   rewards,
 });
 
@@ -35,7 +34,7 @@ export const getProjectRewards = (projectId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     console.log("DATAAA", data);
-    dispatch(setProjectRewards(projectId, data.rewards));
+    dispatch(setProjectRewards(data.rewards));
   }
 };
 
@@ -58,6 +57,7 @@ export default function reducer(state = {}, action) {
       newState[newImage.id] = newImage;
       return newState;
     case GET_REWARDS:
+      console.log("THESE ARE THE REWARDS", action.rewards)
       action.rewards.forEach((reward) => {
         console.log("REWARD", reward);
         newState[reward.id] = reward;

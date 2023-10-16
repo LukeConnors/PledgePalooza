@@ -10,6 +10,7 @@ import ImageFormModal from "../DesImageFormModal";
 import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
 import { BiCategory, BiSolidMap } from "react-icons/bi";
+import * as projectActions from "../../store/projects"
 
 import RewardImageFormModal from "../RewardImageModal";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -22,7 +23,7 @@ import { getProjectRewards } from "../../store/rewards";
 function ProjectDetails() {
   const dispatch = useDispatch();
   const { projectId } = useParams();
-  const project = useSelector((state) => state.projects[projectId]);
+  const project = useSelector(state => state.projects.detailedProject);
   const [backedProjects, setBackedProjects] = useState([]);
   const rewards = useSelector((state) => state.rewards);
   const rewardIds = Object.keys(rewards || {});
@@ -40,22 +41,22 @@ function ProjectDetails() {
   }, [descriptionImages, slideIndex]);
 
   useEffect(() => {
-    dispatch(getProject(projectId))
+    dispatch(projectActions.getProject(projectId))
     .then(dispatch(getProjectRewards(projectId)));
   }, [projectId, dispatch]);
 
-  useEffect(() => {
-    fetch("/api/users/current/backed-projects")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.backed_projects) {
-          setBackedProjects(data.backed_projects);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, [projectId]);
+  // useEffect(() => {
+  //   fetch("/api/users/current/backed-projects")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data && data.backed_projects) {
+  //         setBackedProjects(data.backed_projects);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, [projectId]);
 
   useEffect(() => {
     const fetchDescriptionImages = async () => {

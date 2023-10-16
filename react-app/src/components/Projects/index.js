@@ -13,9 +13,6 @@ function Projects() {
     dispatch(projectActions.getProjects());
   }, [dispatch]);
 
-  console.log("PROJECTSSSS ID", projects);
-
-  console.log(projects)
   let pledged = 0;
   let backers = 0;
 
