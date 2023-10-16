@@ -9,6 +9,8 @@ from app.api.helper_aws import (
 from app.forms.image_form import ImageForm
 from .helper_aws import upload_file_to_s3
 from datetime import date
+from sqlalchemy import and_
+from sqlalchemy.orm import aliased
 
 
 project_routes = Blueprint('projects', __name__)
@@ -196,8 +198,17 @@ def get_all_description_images(id):
 # GET rewards by projectId at '/projects/:project-id/rewards'
 @project_routes.route('/<int:id>/rewards')
 def project_rewards(id):
-    rewards = Reward.query.join(Reward.image).filter(Reward.projectId == id).all()
-    return {'rewards': [reward.to_dict() for reward in rewards]}
+    image_alias = aliased(Image)
+    rewards = (
+        db.session.query(Reward, image_alias)
+        .outerjoin(image_alias, and_(
+            Reward.id == image_alias.imageable_id,
+            image_alias.imageable_type == "reward"
+        ))
+        .filter(Reward.projectId == id)
+        .all()
+    )
+    return {'rewards': [reward[0].to_dict() for reward in rewards]}
 
 # POST a reward by projectId at '/projects/:project-id/rewards' (auth user)
 @project_routes.route('/<int:id>', methods=["POST"])

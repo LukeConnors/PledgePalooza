@@ -75,7 +75,11 @@ def seed_images():
         imageable_type="project"
     )
 
-
+    reward_image1 = Image(
+        url="https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Arcane1.png",
+        imageable_id=1,
+        imageable_type="reward"
+    )
 
 
 
@@ -97,6 +101,7 @@ def seed_images():
     db.session.add(project_image12)
     db.session.add(project_image13)
     db.session.add(project_image14)
+    db.session.add(reward_image1)
 
 
     db.session.commit()

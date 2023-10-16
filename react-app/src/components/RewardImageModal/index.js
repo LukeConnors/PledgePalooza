@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./RewardImage.css";
-import { addAImage } from "../../store/rewards";
+import { addAImage, getProjectRewards } from "../../store/rewards";
 
-function RewardImageFormModal({ rewardId }) {
+function RewardImageFormModal({ rewardId, projectId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
@@ -18,8 +18,9 @@ function RewardImageFormModal({ rewardId }) {
   useEffect(() => {
     if (formData.url) {
       setLoading(false);
+      dispatch(getProjectRewards(projectId))
     }
-  }, [formData.url]);
+  }, [formData.url, submitted]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
