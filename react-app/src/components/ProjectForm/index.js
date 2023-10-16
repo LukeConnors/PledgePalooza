@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import "./ProjectForm.css";
+import * as projectActions from "../../store/projects"
 
 function ProjectFormPage() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
+  const user = useSelector(state => state.session.user)
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -38,7 +41,7 @@ function ProjectFormPage() {
     formDataToSend.append("name", formData.name);
     formDataToSend.append("description", formData.description);
     formDataToSend.append("location", formData.location);
-    formDataToSend.append("summary", formData.description);
+    formDataToSend.append("summary", formData.summary);
     formDataToSend.append("categoryId", formData.categoryId);
     formDataToSend.append("endDate", formData.endDate);
     formDataToSend.append("bannerImg", formData.bannerImg);
@@ -75,21 +78,11 @@ function ProjectFormPage() {
       return;
     }
 
-    try {
-      const res = await fetch("/api/projects/", {
-        method: "POST",
-        body: formDataToSend,
-        credentials: "include",
-      });
-      if (res.ok) {
-        const data = await res.json();
-        history.push(`/projects/${data.id}`);
-      } else {
-        const e = await res.json();
-        setErrors(e.form_errors);
-      }
-    } catch (e) {
-      console.log("fetch error:", e);
+    let newProject = await dispatch(projectActions.createProject(formDataToSend))
+    if(newProject && newProject.id){
+      history.push(`/projects/${newProject?.id}`)
+    } else {
+      return newProject
     }
   };
 
@@ -112,7 +105,7 @@ function ProjectFormPage() {
     <>
       <div className="form-container">
         <div className="form-content">
-          <form onSubmit={handleSubmit} className="project-form">
+          <form onSubmit={handleSubmit} encType="multipart/form-data" className="project-form">
             <h1 style={{ textAlign: "center" }}>Create a Project</h1>
             <div className="project-form-name">
               <label htmlFor="name">Name:</label>
