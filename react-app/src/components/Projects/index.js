@@ -9,6 +9,7 @@ function Projects() {
   const projects = useSelector((state) => state.projects);
   const projectIds = Object.keys(projects || {});
 
+
   useEffect(() => {
     dispatch(projectActions.getProjects());
   }, [dispatch]);
