@@ -13,11 +13,6 @@ function DeleteProjectModal({ projectId }) {
   };
 
   const handleDelete = () => {
-    // fetch(`/api/projects/${projectId}`, {
-    //   method: "DELETE",
-    // }).then(() => {
-    //   setDeleted(true);
-    // });
     dispatch(projectActions.removeProject(projectId))
     .then(() => {
       setDeleted(true)

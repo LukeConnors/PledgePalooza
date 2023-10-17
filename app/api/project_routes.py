@@ -64,13 +64,16 @@ def post_form():
                 endDate=form.data["endDate"],
                 ownerId=current_user.id
             )
+            print("THIS IS THE NEW PROJECT", new_project)
         db.session.add(new_project)
         db.session.commit()
 
         return new_project.to_dict()
 
     else:
+        print("FORM ERRORS!", form.errors)
         return jsonify({"error": "Invalid form data", "form_errors": form.errors}), 400
+
 
 
 # GET all projects owned by current user '/projects/my-projects'

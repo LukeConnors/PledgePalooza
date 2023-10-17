@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./DeleteRewardModal.css";
 import { useModal } from "../../context/Modal";
+import * as rewardActions from "../../store/rewards"
+import { useDispatch } from "react-redux";
 
 function DeleteRewardModal({ projectId, rewardId }) {
   const [deleted, setDeleted] = useState(false);
+  const dispatch = useDispatch()
   const { closeModal } = useModal();
   const handleCancel = () => {
     closeModal();
   };
 
   const handleDelete = () => {
-    fetch(`/api/projects/${projectId}/rewards/${rewardId}`, {
-      method: "DELETE",
-    }).then(() => {
-      setDeleted(true);
-    });
+    dispatch(rewardActions.removeReward(projectId, rewardId))
+    .then(setDeleted(true))
   };
 
   useEffect(() => {
     if (deleted) {
       const timeout = setTimeout(() => {
         closeModal();
-        window.location.reload();
       }, 1500);
 
       return () => clearTimeout(timeout);

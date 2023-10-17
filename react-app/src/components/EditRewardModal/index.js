@@ -80,7 +80,7 @@ function EditRewardModal({ projectId, reward }) {
 
     try {
       dispatch(editReward(projectId, reward.id, formDataToSend));
-      dispatch(getProject(projectId));
+      // dispatch(getProject(projectId));
       closeModal();
     } catch (e) {
       console.log("fetch error:", e);

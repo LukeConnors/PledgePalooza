@@ -123,7 +123,7 @@ export default function reducer(state = {}, action) {
       }
       action.my_projects.forEach((project) => (newState.userProjects[project.id] = project))
       return newState
-      case ADD_PROJECT:
+    case ADD_PROJECT:
       const newProject = action.payload
       newState = { ...state }
       newState[newProject.id] = newProject
@@ -137,7 +137,7 @@ export default function reducer(state = {}, action) {
       const p_id = action.payload
       newState = {
         ...state,
-        userProjects: {...state.userProjects}
+        userProjects: { ...state.userProjects }
       }
       delete newState.userProjects[p_id]
       delete newState[p_id]

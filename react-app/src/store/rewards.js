@@ -1,6 +1,9 @@
-const ADD_IMAGE = "rewards/addImage";
-const GET_REWARDS = "rewards/setProjectRewards";
-const EDIT_REWARD = "rewards/editAReward";
+const ADD_IMAGE = "rewards/ADD_IMAGE";
+const GET_REWARDS = "rewards/GET_REWARDS";
+const ADD_REWARD = "rewards/ADD_REWARD"
+const UPDATE_REWARD = "rewards/UPDATE_REWARD";
+const DELETE_REWARD = "rewards/DELETE_REWARD";
+
 
 const addImage = (info) => ({
   type: ADD_IMAGE,
@@ -12,10 +15,21 @@ const setProjectRewards = (rewards) => ({
   rewards,
 });
 
-const editAReward = (rewardId, formData) => ({
-  type: EDIT_REWARD,
-  formData,
+const addReward = (reward) => ({
+  type: ADD_REWARD,
+  payload: reward
+})
+
+
+const updateReward = (reward) => ({
+  type: UPDATE_REWARD,
+  payload: reward,
 });
+
+const deleteReward = (rewardId) => ({
+  type: DELETE_REWARD,
+  payload: rewardId
+})
 
 export const addAImage = (rewardId, info) => async (dispatch) => {
   const response = await fetch(`/api/rewards/${rewardId}/image`, {
@@ -29,6 +43,7 @@ export const addAImage = (rewardId, info) => async (dispatch) => {
   }
 };
 
+
 export const getProjectRewards = (projectId) => async (dispatch) => {
   const response = await fetch(`/api/projects/${projectId}/rewards`);
   if (response.ok) {
@@ -38,15 +53,39 @@ export const getProjectRewards = (projectId) => async (dispatch) => {
   }
 };
 
-export const editReward = (projectId, rewardId, formData) => async (dispatch) => {
-  const response = await fetch(`/api/projects/${projectId}/rewards/${rewardId}`, {
-    method: "PUT",
-    body: formData,
-    credentials: "include",
-  });
+export const createReward = (projectId, payload) => async (dispatch) => {
+  const res = await fetch(`/api/projects/${projectId}`, {
+    method: "POST",
+    body: payload
+  })
+  if (res.ok) {
+    const newReward = await res.json()
+    dispatch(addReward(newReward))
+    return newReward
+  }
+}
 
-  dispatch(editAReward(projectId, rewardId, formData));
+export const editReward = (projectId, rewardId, payload) => async (dispatch) => {
+  const res = await fetch(`/api/projects/${projectId}/rewards/${rewardId}`, {
+    method: "PUT",
+    body: payload,
+    // credentials: "include",
+  });
+  if (res.ok) {
+    const editedReward = await res.json();
+    dispatch(updateReward(editedReward));
+    return editedReward
+  }
 };
+
+export const removeReward = (projectId, rewardId) => async (dispatch) => {
+  const res = await fetch(`/api/projects/${projectId}/rewards/${rewardId}`, {
+    method: "DELETE"
+  })
+  if (res.ok) {
+    dispatch(deleteReward(rewardId))
+  }
+}
 
 export default function reducer(state = {}, action) {
   let newState = {};
@@ -57,18 +96,25 @@ export default function reducer(state = {}, action) {
       newState[newImage.id] = newImage;
       return newState;
     case GET_REWARDS:
-      console.log("THESE ARE THE REWARDS", action.rewards)
       action.rewards.forEach((reward) => {
-        console.log("REWARD", reward);
         newState[reward.id] = reward;
       });
       return newState;
-    case EDIT_REWARD:
+    case ADD_REWARD:
+      const newReward = action.payload
+      newState = {...state}
+      newState[newReward.id] = newReward
+      return newState
+    case UPDATE_REWARD:
       newState = { ...state };
-      const rewardId = action.rewardId;
-
-      newState[rewardId] = { ...state[rewardId], ...action.formData };
+      const rewardId = action.payload.id;
+      newState[rewardId] = { ...state[rewardId], ...action.payload };
       return newState;
+    case DELETE_REWARD:
+      const r_id = action.payload
+      newState = { ...state }
+      delete newState[r_id]
+      return newState
     default:
       return state;
   }
