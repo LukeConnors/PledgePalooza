@@ -64,7 +64,7 @@ function ProfileButton({ user }) {
               </Link>
             </li>
             <li className="user-details">
-              <Link to='/users/current/backed-projects'>
+              <Link to='/backed-projects'>
               View Backed Projects
               </Link>
             </li>

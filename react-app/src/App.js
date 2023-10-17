@@ -46,7 +46,7 @@ function App() {
           <Route path="/my-projects">
             <MyProjects />
           </Route>
-          <Route path="/users/current/backed-projects">
+          <Route path="/backed-projects">
             <MyBackedProjects />
           </Route>
           <Route path="/users/current/likes">

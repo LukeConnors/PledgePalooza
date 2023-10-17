@@ -10,6 +10,7 @@ import ImageFormModal from "../DesImageFormModal";
 import BackProjectModal from "../BackProjectModal";
 import { userSelector } from "../../store/session";
 import { BiCategory, BiSolidMap } from "react-icons/bi";
+import {fetchBackedProjects } from "../../store/backed-projects";
 
 import RewardImageFormModal from "../RewardImageModal";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -19,11 +20,12 @@ import EditRewardModal from "../EditRewardModal";
 
 function ProjectDetails() {
   const [project, setProject] = useState({});
-  const [backedProjects, setBackedProjects] = useState([]);
   const [rewards, setRewards] = useState([]);
   const [rewardImages, setRewardImages] = useState({});
   const { projectId } = useParams();
   const user = useSelector(userSelector);
+  const dispatch = useDispatch();
+  const backedProjects = useSelector(state => state.backedProject.backedProjects)
 
   const [pledgedAmount, setPledgedAmount] = useState(Math.floor(Math.random() * 10000));
   const [backerCount, setBackerCount] = useState(Math.floor(Math.random() * 5000));
@@ -77,17 +79,11 @@ function ProjectDetails() {
   }, [rewards]);
 
   useEffect(() => {
-    fetch("/api/users/current/backed-projects")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.backed_projects) {
-          setBackedProjects(data.backed_projects);
-        }
-      })
+    dispatch(fetchBackedProjects())
       .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, [projectId]);
+        console.error("Error fetching backed projects:", error)
+      })
+  }, [dispatch, projectId]);
 
   useEffect(() => {
     const fetchDescriptionImages = async () => {

@@ -1,35 +1,23 @@
 import React, { useState } from "react";
 import { useModal } from "../../context/Modal";
 import "./BackProjectForm.css";
+import { createBackedProject } from "../../store/backed-projects";
+import { useDispatch } from "react-redux";
 
-function BackProjectModal(projectId) {
+function BackProjectModal({ projectId }) {
   const { closeModal } = useModal();
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     cost: "",
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const info = new FormData();
-    info.append("cost", formData.cost);
-
-    try {
-      const res = await fetch(`/api/projects/${projectId.projectId}/back`, {
-        method: "POST",
-        body: info,
-        credentials: "include",
-      });
-      if (res.ok) {
-        const data = await res.json();
-        console.log(data);
-        closeModal();
-        window.location.reload();
-      } else {
-        const errorData = await res.json();
-        console.log(errorData);
-      }
-    } catch (e) {
-      console.log("fetch error:", e);
+   try {
+      await dispatch(createBackedProject(projectId, formData.cost));
+      closeModal();
+    }catch (error) {
+      console.error("Error trying to back project:", error);
     }
   };
 

@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import session from "./session";
 import images from "./images";
 import { likesReducer } from "./likes";
+import backedProjectReducer from "./backed-projects";
 
 const rootReducer = combineReducers({
   session,
   images,
-  like: likesReducer
+  like: likesReducer,
+  backedProject: backedProjectReducer
 });
 
 let enhancer;

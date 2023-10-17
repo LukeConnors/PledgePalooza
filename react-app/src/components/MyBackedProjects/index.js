@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchBackedProjects } from "../../store/backed-projects";
 import "./MyBackedProjects.css";
 
 function MyBackedProjects() {
-  const [backedProjects, setBackedProjects] = useState([]);
+  // const [backedProjects, setBackedProjects] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
+  console.log(state);
+  const backedProjects = useSelector(state => state?.backedProject?.backedProjects)
+  console.log(backedProjects);
 
   useEffect(() => {
-    fetch("/api/users/current/backed-projects")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.backed_projects) {
-          setBackedProjects(data.backed_projects);
-        }
-        setIsLoaded(true);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setIsLoaded(true);
-      });
-  }, []);
+    console.log('Before dispatch')
+    dispatch(fetchBackedProjects())
+        .then(() => setIsLoaded(true)) // If using redux-thunk with promise, set isLoaded to true when promise resolves
+        .catch((error) => {
+            console.error("Error fetching data:", error);
+            setIsLoaded(true);
+        });
+}, [dispatch]);
 
   // Check if backedProjects is empty or undefined
   if (!isLoaded || backedProjects.length === 0) {
