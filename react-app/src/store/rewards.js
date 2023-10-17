@@ -7,7 +7,7 @@ const DELETE_REWARD = "rewards/DELETE_REWARD";
 
 const addImage = (info) => ({
   type: ADD_IMAGE,
-  info,
+  payload: info,
 });
 
 const setProjectRewards = (rewards) => ({
@@ -31,15 +31,17 @@ const deleteReward = (rewardId) => ({
   payload: rewardId
 })
 
-export const addAImage = (rewardId, info) => async (dispatch) => {
-  const response = await fetch(`/api/rewards/${rewardId}/image`, {
+export const addAImage = (rewardId, payload) => async (dispatch) => {
+  const res = await fetch(`/api/rewards/${rewardId}/image`, {
     method: "POST",
-    body: info,
+    body: payload,
     credentials: "include",
   });
 
-  if (response.ok) {
-    dispatch(addImage(rewardId, info));
+  if (res.ok) {
+    const newImage = await res.json()
+    dispatch(addImage(newImage));
+    return newImage
   }
 };
 
@@ -90,19 +92,23 @@ export const removeReward = (projectId, rewardId) => async (dispatch) => {
 export default function reducer(state = {}, action) {
   let newState = {};
   switch (action.type) {
-    case ADD_IMAGE:
-      const newImage = action.info;
-      newState = { ...state };
-      newState[newImage.id] = newImage;
-      return newState;
     case GET_REWARDS:
       action.rewards.forEach((reward) => {
         newState[reward.id] = reward;
       });
       return newState;
+    case ADD_IMAGE:
+      const newImage = action.payload;
+      return {
+        ...state,
+        [newImage.imageable_id]: {
+          ...state[newImage.imageable_id],
+          image: [newImage],
+        },
+      }
     case ADD_REWARD:
       const newReward = action.payload
-      newState = {...state}
+      newState = { ...state }
       newState[newReward.id] = newReward
       return newState
     case UPDATE_REWARD:

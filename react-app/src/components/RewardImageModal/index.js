@@ -27,7 +27,7 @@ function RewardImageFormModal({ rewardId, projectId }) {
 
     const info = new FormData();
     info.append("url", formData.url);
-    dispatch(addAImage(rewardId, info));
+    await dispatch(addAImage(rewardId, info));
     closeModal();
     setSubmitted(true);
   };
