@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./DeleteProjectModal.css";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
+import * as projectActions from "../../store/projects"
 
 function DeleteProjectModal({ projectId }) {
+  const dispatch = useDispatch();
   const [deleted, setDeleted] = useState(false);
   const { closeModal } = useModal();
   const handleCancel = () => {
@@ -10,18 +13,17 @@ function DeleteProjectModal({ projectId }) {
   };
 
   const handleDelete = () => {
-    fetch(`/api/projects/${projectId}`, {
-      method: "DELETE",
-    }).then(() => {
-      setDeleted(true);
-    });
+    dispatch(projectActions.removeProject(projectId))
+    .then(() => {
+      setDeleted(true)
+    })
+
   };
 
   useEffect(() => {
     if (deleted) {
       const timeout = setTimeout(() => {
         closeModal();
-        window.location.reload();
       }, 1500);
 
       return () => clearTimeout(timeout);

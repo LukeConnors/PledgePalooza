@@ -9,6 +9,8 @@ from app.api.helper_aws import (
 from app.forms.image_form import ImageForm
 from .helper_aws import upload_file_to_s3
 from datetime import date
+from sqlalchemy import and_
+from sqlalchemy.orm import aliased
 
 
 project_routes = Blueprint('projects', __name__)
@@ -24,8 +26,12 @@ def all_projects():
     """
     projects = Project.query.all()
 
-    return {"project":[project.to_dict() for project in projects]}
+    return {"projects":[project.to_dict() for project in projects]}
 
+@project_routes.route('/category/<int:id>')
+def project_by_category(id):
+    projects = Project.query.filter(Project.categoryId == id).all()
+    return {'projects': [project.to_dict() for project in projects]}
 
 # POST a project for authenticated user '/projects'
 @project_routes.route('/', methods=["POST"])
@@ -58,13 +64,16 @@ def post_form():
                 endDate=form.data["endDate"],
                 ownerId=current_user.id
             )
+            print("THIS IS THE NEW PROJECT", new_project)
         db.session.add(new_project)
         db.session.commit()
 
         return new_project.to_dict()
 
     else:
+        print("FORM ERRORS!", form.errors)
         return jsonify({"error": "Invalid form data", "form_errors": form.errors}), 400
+
 
 
 # GET all projects owned by current user '/projects/my-projects'
@@ -75,6 +84,15 @@ def my_projects():
     projects = Project.query.filter(current_user.id == Project.ownerId).all()
 
     return {"my_projects": [project.to_dict() for project in projects]}
+
+
+# GET a project by search query
+@project_routes.route('/project_search')
+def get_projects_name():
+    query = request.args.get("query", "").lower()
+    projects = Project.query.filter(Project.name.ilike(f"{query}%")).all()
+    return {"projects": [project.to_dict() for project in projects]}
+
 
 # GET a project's details '/projects/:id'
 
@@ -183,8 +201,17 @@ def get_all_description_images(id):
 # GET rewards by projectId at '/projects/:project-id/rewards'
 @project_routes.route('/<int:id>/rewards')
 def project_rewards(id):
-    rewards = Reward.query.filter(Reward.projectId == id).all()
-    return {'rewards': [reward.to_dict() for reward in rewards]}
+    image_alias = aliased(Image)
+    rewards = (
+        db.session.query(Reward, image_alias)
+        .outerjoin(image_alias, and_(
+            Reward.id == image_alias.imageable_id,
+            image_alias.imageable_type == "reward"
+        ))
+        .filter(Reward.projectId == id)
+        .all()
+    )
+    return {'rewards': [reward[0].to_dict() for reward in rewards]}
 
 # POST a reward by projectId at '/projects/:project-id/rewards' (auth user)
 @project_routes.route('/<int:id>', methods=["POST"])

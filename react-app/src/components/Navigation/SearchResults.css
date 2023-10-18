@@ -1,0 +1,20 @@
+.result-container{
+    background-color:#36d892;
+    /* border: green 1px solid; */
+    border-radius: 5px;
+    position: absolute;
+}
+
+.search-result{
+    background-color: #7ce6b8;
+    margin: 5px 5px;
+    border-radius: 5px;
+    padding: 10px;
+    transition: transform 0.2s ease-in;
+}
+
+
+.search-result:hover{
+    cursor: pointer;
+    transform: scale(0.97);
+}

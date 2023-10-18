@@ -14,7 +14,6 @@
 }
 .profile-dropdown {
   position: absolute;
-  margin-top: 290px;
   right: 10px;
   list-style-type: none;
   text-align: center;
@@ -56,6 +55,22 @@
   border-bottom: #cecece 1px solid;
   margin-bottom: 20px;
 }
+.cat-bar{
+  padding: 0px 30px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: #cecece 1px solid;
+  margin-bottom: 20px;
+}
+
+.cat-contents{
+  display: flex;
+  justify-content: space-between;
+  width: 35%;
+  margin-bottom: 20px;
+}
 
 .start-project {
   color: #656969;
@@ -64,6 +79,10 @@
 .start-project:hover {
   color: #0b7564;
   text-decoration: none;
+}
+
+.logo{
+  margin-left: 70px;
 }
 
 .logo img {
@@ -92,4 +111,20 @@
 a {
   text-decoration: none;
   background-color: transparent;
+}
+
+.search-profile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.icon{
+  margin-left: 20px;
+}
+
+
+.search-results{
+  background-color: white;
 }

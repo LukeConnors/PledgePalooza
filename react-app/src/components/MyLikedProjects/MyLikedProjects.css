@@ -4,7 +4,6 @@
     gap: 20px;
     padding: 0px 100px;
   }
-  
   .my-liked-project-card {
     border-radius: 20px;
     padding: 20px;
@@ -14,27 +13,26 @@
     height: 650px;
     width: 540px;
   }
-  
+
   .my-liked-project-card:hover {
     transform: scale(1.02);
   }
-  
+
   .my-liked-project-image {
     height: 500px;
     width: 500px;
     border-radius: 20px;
     position: relative;
   }
-  
+
   .my-liked-project-title {
     padding-bottom: 50px;
   }
-  
+
   .my-liked-name-holder {
     display: flex;
     justify-content: center;
   }
-  
   .my-liked-project-box * button {
     background: none;
     margin-top: 20px;
@@ -47,12 +45,10 @@
     border: none;
     border-radius: 10px;
   }
-  
   .my-liked-project-box * button:hover {
     transform: translateY(-5px);
     background-color: #1a5553;
   }
-  
   .my-view-project-btn {
     display: flex;
     justify-content: center;
@@ -67,12 +63,12 @@
     filter: invert(20%) sepia(95%) saturate(700%) hue-rotate(340deg) brightness(90%) contrast(90%);
     top: 10px;
     right: 10px;
-    width: 24px; 
+    width: 24px;
     height: 24px;
     cursor: pointer;
     z-index: 1;
   }
-  
+
   .my-liked-project-card:hover .my-like-logo{
     display: block;
   }

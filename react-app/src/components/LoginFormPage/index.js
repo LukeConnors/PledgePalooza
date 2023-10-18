@@ -46,7 +46,7 @@ function LoginFormPage() {
                 type="text"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value.toLowerCase())}
                 placeholder="Email"
                 required
                 style={{ paddingLeft: "30px" + (email ? " 20px" : "") }}

@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./AddReward.css";
+import * as rewardActions from "../../store/rewards"
 
 function AddRewardModal({ projectId }) {
   const { closeModal } = useModal();
+  const dispatch = useDispatch()
   const [errors, setErrors] = useState({})
   const [formData, setFormData] = useState({
     name: "",
@@ -78,24 +80,9 @@ function AddRewardModal({ projectId }) {
       return;
     }
 
+    dispatch(rewardActions.createReward(projectId, formDataToSend))
+    closeModal()
 
-    try {
-      const res = await fetch(`/api/projects/${projectId}`, {
-        method: "POST",
-        body: formDataToSend,
-        credentials: "include",
-      });
-      if (res.ok) {
-        const data = await res.json();
-        closeModal();
-        window.location.reload();
-      } else {
-        const errorData = await res.json();
-        console.log(errorData);
-      }
-    } catch (e) {
-      console.log("fetch error:", e);
-    }
   };
 
   return (

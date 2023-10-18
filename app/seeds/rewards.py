@@ -43,7 +43,6 @@ def seed_rewards():
         projectId=2,
         name='VR Explorer Pack',
         description='Embark on your VR adventure with this essential starter pack!',
-
         price=40,
         est_delivery=date(2024, 9, 1),
         quantity=100,

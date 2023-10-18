@@ -19,19 +19,19 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal();
     }
   };
 
   const handleClose = () => {
-    closeModal()
-  }
+    closeModal();
+  };
 
   const handleDemo = () => {
     const email = "demo@aa.io";
     const password = "password";
     dispatch(login(email, password));
-    closeModal()
+    closeModal();
   };
 
   return (
@@ -52,7 +52,7 @@ function LoginFormModal() {
                 type="text"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value.toLowerCase())}
                 placeholder="Email"
                 style={{ paddingLeft: "30px" + (email ? " 20px" : "") }}
                 className="modal-email-input"
@@ -75,7 +75,11 @@ function LoginFormModal() {
             </div>
           </div>
           <p className="modal-signup-here-btn">
-            Don't have an account? Sign up <Link to="/signup" onClick={handleClose}>here</Link>!
+            Don't have an account? Sign up{" "}
+            <Link to="/signup" onClick={handleClose}>
+              here
+            </Link>
+            !
           </p>
           <button className="modal-login-form-page-btn" type="submit">
             Log In

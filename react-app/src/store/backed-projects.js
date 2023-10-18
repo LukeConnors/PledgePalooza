@@ -44,7 +44,6 @@ export const createBackedProject = (projectId, cost) => async (dispatch) => {
         } else {
             console.error("Failed to back this project");
         }
-       
         } catch(error){
             console.error("An error occured while creating a backed project:", error)
         }
@@ -68,5 +67,3 @@ const backedProjectReducer = (state = initialState, action) => {
 };
 
 export default backedProjectReducer;
-
-

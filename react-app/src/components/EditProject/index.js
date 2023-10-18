@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./EditProject.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { userSelector } from "../../store/session";
+import * as projectActions from "../../store/projects"
 
 function EditProject() {
   const history = useHistory();
   const { projectId } = useParams();
+  const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState("");
   const user = useSelector(userSelector);
   const [project, setProject] = useState({});
@@ -60,7 +62,6 @@ function EditProject() {
     formDataToSend.append("summary", formData.summary);
     formDataToSend.append("categoryId", formData.categoryId);
     formDataToSend.append("endDate", formData.endDate);
-
     formDataToSend.append("bannerImg", formData.bannerImg);
 
     let formErrors = {};
@@ -102,32 +103,38 @@ function EditProject() {
       const day = String(currentDate.getDate()).padStart(2, "0");
       return `${year}-${month}-${day}`;
     }
-  
+
     function getOneYearLaterDate() {
       const oneYearLaterDate = new Date();
       oneYearLaterDate.setFullYear(oneYearLaterDate.getFullYear() + 1);
       return oneYearLaterDate.toISOString().split("T")[0];
     }
-  
 
 
-    try {
-      const res = await fetch(`/api/projects/${projectId}`, {
-        method: "PUT",
-        body: formDataToSend,
-        credentials: "include",
-      });
 
-      if (res.ok) {
-        const data = await res.json();
-        history.push(`/projects/${data.id}`);
-      } else {
-        const errors = await res.json();
-        setErrors(errors.form_errors);
-        console.log("Error:", errors);
-      }
-    } catch (error) {
-      console.log("Fetch error:", error);
+    // try {
+    //   const res = await fetch(`/api/projects/${projectId}`, {
+    //     method: "PUT",
+    //     body: formDataToSend,
+    //     credentials: "include",
+    //   });
+
+    //   if (res.ok) {
+    //     const data = await res.json();
+    //     history.push(`/projects/${data.id}`);
+    //   } else {
+    //     const errors = await res.json();
+    //     setErrors(errors.form_errors);
+    //     console.log("Error:", errors);
+    //   }
+    // } catch (error) {
+    //   console.log("Fetch error:", error);
+    // }
+    let editedProject = await dispatch(projectActions.editProject(projectId, formDataToSend))
+    if(editedProject && editedProject.id){
+      history.push(`/projects/${projectId}`)
+    } else {
+      return editedProject
     }
   };
 

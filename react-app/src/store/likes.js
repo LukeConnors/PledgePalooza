@@ -19,19 +19,18 @@ const removeLike = (like) => ({
 
 export const loadMyLikes = () => async (dispatch) => {
     const response = await fetch('/api/projects/my-likes');
-    
     if(response.ok){
         const data = await response.json();
         const likedProjectIds = data.my_likes.map(like => like.projectId);
 
         // Fetch the details of the liked projects
         const likedProjectsDetails = await Promise.all(
-            likedProjectIds.map(projectId => 
+            likedProjectIds.map(projectId =>
                 fetch(`/api/projects/${projectId}`).then(res => res.json())
             )
         );
 
-        dispatch(getLikes(likedProjectIds)); 
+        dispatch(getLikes(likedProjectIds));
         return likedProjectsDetails;
     } else {
         console.error("Failed to fetch user's likes");
@@ -71,19 +70,17 @@ export const deleteLike = (likeId, projectId) => async (dispatch) => {
 }
 
 export const likesReducer = (state = {}, action) => {
-    let newState;
+    let newState = {};
     switch(action.type){
         case GET_LIKES:
-            newState =  {...state };
-            action.likes.forEach(like => {
+            action.likes.forEach((like) => {
                 newState[like.id] = like
             })
             return newState;
         case ADD_LIKE:
-            newState = {
-                ...state,
-                [action.like.id]: action.like
-            };
+            const newLike = action.like
+            newState = {...state}
+            newState[newLike.id] = newLike
             return newState;
         case REMOVE_LIKE:
             newState = { ...state };
@@ -93,3 +90,5 @@ export const likesReducer = (state = {}, action) => {
             return state
     }
 }
+
+export default likesReducer

@@ -19,7 +19,7 @@ function MyLikedProjects() {
     const handleLikeClick = async (projectId, e) => {
         e.preventDefault();
         console.log('projectId:', projectId)
-          dispatch(deleteLike(null, projectId));  
+          dispatch(deleteLike(null, projectId));
           setLikedProjects(likedProjects?.filter(id => id !== projectId));
         }
 
@@ -46,7 +46,7 @@ function MyLikedProjects() {
                         src={project.bannerImg}
                       ></img>
                       <img
-                        className="my-like-logo" 
+                        className="my-like-logo"
                           src={thumbsUp}
                           alt="thumbs up icon"
                           onClick={(e) => handleLikeClick(project.id, e)}

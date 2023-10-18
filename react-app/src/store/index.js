@@ -2,14 +2,18 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session";
 import images from "./images";
-import { likesReducer } from "./likes";
+import projectsReducer from "./projects";
+import rewards from "./rewards";
+import likesReducer from "./likes";
 import backedProjectReducer from "./backed-projects";
 
 const rootReducer = combineReducers({
   session,
   images,
-  like: likesReducer,
-  backedProject: backedProjectReducer
+  projects: projectsReducer,
+  rewards,
+  likes: likesReducer,
+  backedProjects: backedProjectReducer
 });
 
 let enhancer;
