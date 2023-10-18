@@ -51,6 +51,7 @@
 .main-project-image {
   height: 500px;
   border-radius: 10px;
+  position: relative;
 }
 
 .project-card {
@@ -77,4 +78,27 @@
 .feat-projects {
   font-weight: 300;
   margin: 20px 150px;
+}
+
+.like-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  z-index: 1;
+  display: none;
+}
+
+.like-icon.liked {
+filter: invert(20%) sepia(95%) saturate(700%) hue-rotate(340deg) brightness(90%) contrast(90%);
+}
+
+.main-project-image:hover .like-icon {
+  display: block;
+}
+.project-banner {
+  height: 500px;
+  border-radius: 10px;
 }

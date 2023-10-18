@@ -4,11 +4,16 @@ import session from "./session";
 import images from "./images";
 import projectsReducer from "./projects";
 import rewards from "./rewards";
+import likesReducer from "./likes";
+import backedProjectReducer from "./backed-projects";
+
 const rootReducer = combineReducers({
   session,
   images,
   projects: projectsReducer,
   rewards,
+  likes: likesReducer,
+  backedProjects: backedProjectReducer
 });
 
 let enhancer;
