@@ -45,18 +45,6 @@ function ProjectDetails() {
     .then(dispatch(getProjectRewards(projectId)));
   }, [projectId, dispatch]);
 
-  // useEffect(() => {
-  //   fetch("/api/users/current/backed-projects")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data && data.backed_projects) {
-  //         setBackedProjects(data.backed_projects);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }, [projectId]);
 
   useEffect(() => {
     const fetchDescriptionImages = async () => {
@@ -178,8 +166,6 @@ function ProjectDetails() {
   }
   let pledged = project?.cost?.reduce((x, y) => x + y, 0);
 
-  // rewards.sort((a, b) => a.price - b.price);
-  // console.log(rewards);
   return (
     <div>
       <div className="project-detail">

@@ -89,25 +89,26 @@ function Projects() {
             const project = projects[projectId];
 
             return index % 2 === 0 ? (
-              <Link to={`/projects/${project?.id}`} key={project?.id}>
-                <div className="project-card" key={project?.id}
-                  onMouseEnter={() => setHoveredProject(project.id)}
-                  onMouseLeave={() => setHoveredProject(null)}>
-                  <div>
-                    <img
-                      className="main-project-image"
-                      alt={`${project?.name}`}
-                      src={project?.bannerImg}
-                    ></img>
-                    {hoveredProject === project.id && user && (
+              <Link to={`/projects/${project?.id}`} key={project?.id}
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
+                <div className="project-card" key={project?.id}>
+                  <div className="main-project-image">
                       <img
-                        className={`like-icon ${likedProjects?.includes(project.id) ? 'liked' : ''}`}
-                        src={thumbsUp}
-                        alt="thumbs up icon"
-                        onClick={(e) => handleLikeClick(project.id, e)}
-                      />
-                    )}
-                  </div>
+                        className="project-banner"
+                        alt={`${project.name}`}
+                        src={project.bannerImg}
+                      ></img>
+                      {hoveredProject === project.id && user && (
+                        <img
+                        className={`like-icon ${likedProjects.includes(project.id) ? 'liked' : ''}`}
+                          src={thumbsUp}
+                          alt="thumbs up icon"
+                          onClick={(e) => handleLikeClick(project.id, e)}
+                        />
+                      )}
+                    </div>
                   <div className="home-project-details">
                     <h1 key={project?.id}>{project?.name}</h1>
                     <p>{project?.description}</p>
@@ -126,21 +127,21 @@ function Projects() {
                     <p>{project?.description}</p>
                     <p>By: {project?.ownerName}</p>
                   </div>
-                  <div>
-                    <img
-                      className="main-project-image"
-                      alt={`${project?.name}`}
-                      src={project?.bannerImg}
-                    ></img>
-                    {hoveredProject === project.id && user && (
+                  <div className="main-project-image">
                       <img
+                        className="project-banner"
+                        alt={`${project.name}`}
+                        src={project.bannerImg}
+                      ></img>
+                      {hoveredProject === project.id && user && (
+                        <img
                         className={`like-icon ${likedProjects.includes(project.id) ? 'liked' : ''}`}
-                        src={thumbsUp}
-                        alt="thumbs up icon"
-                        onClick={(e) => handleLikeClick(project.id, e)}
-                      />
-                    )}
-                  </div>
+                          src={thumbsUp}
+                          alt="thumbs up icon"
+                          onClick={(e) => handleLikeClick(project.id, e)}
+                        />
+                      )}
+                    </div>
                 </div>
               </Link>
             );

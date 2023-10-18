@@ -71,19 +71,17 @@ export const deleteLike = (likeId, projectId) => async (dispatch) => {
 }
 
 export const likesReducer = (state = {}, action) => {
-    let newState;
+    let newState = {};
     switch(action.type){
         case GET_LIKES:
-            newState =  {...state };
-            action.likes.forEach(like => {
+            action.likes.forEach((like) => {
                 newState[like.id] = like
             })
             return newState;
         case ADD_LIKE:
-            newState = {
-                ...state,
-                [action.like.id]: action.like
-            };
+            const newLike = action.like
+            newState = {...state}
+            newState[newLike.id] = newLike
             return newState;
         case REMOVE_LIKE:
             newState = { ...state };
