@@ -10,7 +10,7 @@ function MyBackedProjects() {
   const dispatch = useDispatch();
   const state = useSelector(state => state);
   console.log(state);
-  const backedProjects = useSelector(state => state?.backedProject?.backedProjects)
+  const backedProjects = useSelector(state => state.backedProjects.backedProjects)
   console.log(backedProjects);
 
   useEffect(() => {

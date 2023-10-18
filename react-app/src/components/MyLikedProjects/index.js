@@ -10,7 +10,8 @@ function MyLikedProjects() {
     const [likedProjects, setLikedProjects] = useState([]);
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
-    const likes =  useSelector(state => Object.values(state.like))
+    const likes =  useSelector((state => state.likes))
+    console.log(likes)
     const dispatch = useDispatch()
     if(!user){
         history.push("/");

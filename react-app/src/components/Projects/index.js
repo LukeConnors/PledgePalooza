@@ -12,8 +12,10 @@ function Projects() {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.projects);
   const projectIds = Object.keys(projects || {});
+  console.log(projectIds);
   const [likedProjects, setLikedProjects] = useState([])
-  const [hoveredProject, setHoveredProject] = useState(null)
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const [errorMessages, setErrorMessages] = useState({})
   const user = useSelector((state) => state.session.user)
 
 
@@ -23,6 +25,16 @@ function Projects() {
 
   const handleLikeClick = async (projectId, e) => {
     e.preventDefault();
+
+    const project = projects[projectId]
+    
+    if(user.id === project.ownerId){
+      setErrorMessages(prev =>({...prev, [projectId]: "You cannot like your own project!"}));
+      return
+    }
+
+    setErrorMessages(prev => ({...prev, [projectId]: ""}));
+
     if (likedProjects?.includes(projectId)) {
       dispatch(deleteLike(null, projectId));
       setLikedProjects(likedProjects?.filter(id => id !== projectId));
@@ -110,6 +122,7 @@ function Projects() {
                       )}
                     </div>
                   <div className="home-project-details">
+                  {errorMessages[projectId] && <div className="liked-project-error-message">{errorMessages[projectId]}</div>}
                     <h1 key={project?.id}>{project?.name}</h1>
                     <p>{project?.description}</p>
                     <p>By: {project?.ownerName}</p>
@@ -123,6 +136,7 @@ function Projects() {
               >
                 <div className="project-card" key={project?.id}>
                   <div className="home-project-details">
+                  {errorMessages[projectId] && <div className="liked-project-error-message">{errorMessages[projectId]}</div>}
                     <h1 key={project?.id}>{project?.name}</h1>
                     <p>{project?.description}</p>
                     <p>By: {project?.ownerName}</p>

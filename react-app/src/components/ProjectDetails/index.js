@@ -19,12 +19,13 @@ import DeleteRewardModal from "../DeleteRewardModal";
 import EditRewardModal from "../EditRewardModal";
 import { getProject } from "../../store/projects";
 import { getProjectRewards } from "../../store/rewards";
+import { fetchBackedProjects } from "../../store/backed-projects";
 
 function ProjectDetails() {
   const dispatch = useDispatch();
   const { projectId } = useParams();
   const project = useSelector(state => state.projects.detailedProject);
-  const [backedProjects, setBackedProjects] = useState([]);
+  const backedProjects =  useSelector(state => state.backedProjects.backedProjects)
   const rewards = useSelector((state) => state.rewards);
   const rewardIds = Object.keys(rewards || {});
   const [rewardImages, setRewardImages] = useState({});
@@ -37,6 +38,7 @@ function ProjectDetails() {
   let slideIndex = 1;
 
   useEffect(() => {
+    dispatch(fetchBackedProjects());
     showSlides(slideIndex);
   }, [descriptionImages, slideIndex]);
 

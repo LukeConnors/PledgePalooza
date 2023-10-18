@@ -12,6 +12,7 @@ import MyProjects from "./components/MyProjectsPage";
 import MyBackedProjects from "./components/MyBackedProjects";
 import EditProject from "./components/EditProject";
 import ProjectsByCategory from "./components/ProjectsByCategory";
+import MyLikedProjects from "./components/MyLikedProjects";
 
 function App() {
   const dispatch = useDispatch();
