@@ -89,10 +89,11 @@
   cursor: pointer;
   z-index: 1;
   display: none;
+  border-radius: 10px;
 }
 
 .like-icon.liked {
-filter: invert(20%) sepia(95%) saturate(700%) hue-rotate(340deg) brightness(90%) contrast(90%);
+  filter: invert(15%) sepia(100%) saturate(700%) hue-rotate(80deg) brightness(120%) contrast(90%);
 }
 
 .main-project-image:hover .like-icon {
@@ -108,9 +109,9 @@ filter: invert(20%) sepia(95%) saturate(700%) hue-rotate(340deg) brightness(90%)
   font-weight: bold;
   padding: 5px 10px;
   border-radius: 5px;
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
   text-align: center;
-  max-width: 80%; 
+  max-width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
