@@ -81,7 +81,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False, primary_key=True),
     sa.Column('userId', sa.Integer(), sa.ForeignKey('users.id'), nullable=False),
     sa.Column('projectId', sa.Integer(), sa.ForeignKey('projects.id'), nullable=False),
-    sa.UniqueConstraint('userId', 'projectId', name='unique_liked_project')
+    sa.PrimaryKeyConstraint('id')
     )
 
 

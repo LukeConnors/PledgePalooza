@@ -17,11 +17,6 @@ class Like(db.Model):
     project = db.relationship('Project', back_populates='like')
     user = db.relationship('User', back_populates='like')
 
-    # if environment == "production":
-    #     __table_args__ = (UniqueConstraint(userId, projectId, name='unique_liked_project'), {'schema': SCHEMA})
-    # else:
-    #     __table_args__ = (UniqueConstraint(userId, projectId, name='unique_liked_project'),)
-
 
     def to_dict(self):
         return {
