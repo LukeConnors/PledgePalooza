@@ -24,7 +24,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/LukeConnors/PledgePalooza">
-    <img src="./react-app/public/favicon-32x32.png alt="Logo" width="80" height="80">
+    <img src="./react-app/src/assets/favicon-PP.png alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Pledge Palooza</h3>
