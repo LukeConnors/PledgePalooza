@@ -67,10 +67,10 @@ Even guests can explore the platform, browsing all available projects and perfor
 
 
 * [![React][React.js]][React-url]
-* [![CSS][CSSlogo][css-url]
-* [![Python][python-logo][python-url]
-* [![Flask][flask-logo][flask-url]
-* [![SQLAlchemy][sqlalchemy-logo][sqlalchemy-url]
+* [![CSS][CSSlogo]][css-url]
+* [![Python][python-logo]][python-url]
+* [![Flask][flask-logo]][flask-url]
+* [![SQLAlchemy][sqlalchemy-logo]][sqlalchemy-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
