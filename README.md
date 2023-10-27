@@ -24,13 +24,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/LukeConnors/PledgePalooza">
-    <img src="./react-app/src/assets/favicon-PP.png alt="Logo" width="80" height="80">
+    <img  alt="favicon-PP" src="https://github.com/LukeConnors/PledgePalooza/assets/79298692/c80dc948-0a6f-4897-b77d-016499a8e665"  width="80" height="80">
   </a>
 
 <h3 align="center">Pledge Palooza</h3>
 
   <p align="center">
-    "Pledge Palooza is a Kickstarter-inspired platform.
+    Pledge Palooza is a Kickstarter-inspired platform.
     <br />
     <a href="https://github.com/LukeConnors/PledgePalooza/wiki"><strong>Explore the docs »</strong></a>
     <br />
@@ -41,27 +41,23 @@
 
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-  </ol>
-</details>
-
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://pledgepalooza.onrender.com/)
+[![Pledge Palooza Screenshot][product-screenshot]](https://pledgepalooza.onrender.com/)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `LukeConnors`, `PledgePalooza`, `Pledge Palooza`, `project_description`
+<p align="center">
+Pledge Palooza is a Kickstarter-inspired platform that boasts an impressive feature set and a robust technology stack. Our frontend leverages React, Redux, and CSS to deliver a seamless user experience. On the backend, we've harnessed the power of Python, Flask, and SQLAlchemy to ensure reliability and performance.
+</p>
+  
+<p align="center">
+Authenticated users enjoy a variety of functions, from backing projects and receiving rewards to launching their own campaigns complete with image uploads. Managing your supported and created projects is a breeze, and our intuitive search and category features make finding the perfect project effortless.
+</p>
+  
+<p align="center">
+Even guests can explore the platform, browsing all available projects and performing searches by name or category. Pledge Palooza is your gateway to the world of crowdfunding, combining cutting-edge technology with a wealth of features for both creators and backers.
+</p>
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -71,6 +67,10 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 
 * [![React][React.js]][React-url]
+* [![CSS][CSSlogo][css-url]
+* [![Python][python-logo][python-url]
+* [![Flask][flask-logo][flask-url]
+* [![SQLAlchemy][sqlalchemy-logo][sqlalchemy-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -81,7 +81,14 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
+[contributors-url]: https://github.com/LukeConnors/PledgePalooza/graphs/contributors
+[css-url]: https://www.w3.org/Style/CSS/Overview.en.html
+[CSSlogo]: https://github.com/LukeConnors/PledgePalooza/assets/79298692/48242ad9-9069-45eb-b0ff-ef4f129ac330
+[hmtl-url]: https://html.com/
+[flask-logo]: https://github.com/LukeConnors/PledgePalooza/assets/79298692/65ebf511-3737-44d6-8b28-38c1b84168c2
+[flask-url]: https://flask.palletsprojects.com/en/3.0.x/
+[sqlalchemy-logo]: https://github.com/LukeConnors/PledgePalooza/assets/79298692/df7fa880-ed06-48ed-ac84-fb1bfdea1397
+[sqlalchemy-url]: https://www.sqlalchemy.org/
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
 [forks-url]: https://github.com/github_username/repo_name/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
@@ -92,9 +99,12 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: <img width="1454" alt="Screenshot 2023-10-27 at 3 27 18 PM" src="https://github.com/LukeConnors/PledgePalooza/assets/79298692/0b713f8b-ebf9-4ea4-8a1a-bb52d3e40e68">
+[python-logo]: https://github.com/LukeConnors/PledgePalooza/assets/79298692/b64e47fc-a05e-4757-bf83-143d8221a7cd
+[python-url]: https://www.python.org/
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
+[HTML]:https://github.com/LukeConnors/PledgePalooza/assets/79298692/a1ca70ad-9a3b-4f71-aba5-2bff9f29edf3
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
