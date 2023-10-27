@@ -84,7 +84,7 @@ Even guests can explore the platform, browsing all available projects and perfor
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/LukeConnors/PledgePalooza.svg?style=for-the-badge
 [contributors-url]: https://github.com/LukeConnors/PledgePalooza/graphs/contributors
 [css-url]: https://www.w3.org/Style/CSS/Overview.en.html
 [CSSlogo]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
