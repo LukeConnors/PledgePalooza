@@ -17,7 +17,11 @@
 *** See the bottom of this document for the declaration of the reference variables
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
---
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![LinkedIn - Luke Connors][linkedin-shield]][linkedin-url]
+[![LinkedIn - Tristan Allaman][linkedin-shield]][linkedin-url2]
+[![LinkedIn - Albert Marrero][linkedin-shield]][linkedin-url3]
 
 
 <!-- PROJECT LOGO -->
@@ -98,7 +102,9 @@ Even guests can explore the platform, browsing all available projects and perfor
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[linkedin-url]: https://www.linkedin.com/in/luke-connors-981373b1/
+[linkedin-url2]: https://www.linkedin.com/in/tristan-allaman-a18206232/
+[linkedin-url3]: www.linkedin.com/in/albert-marrero-dev
 [product-screenshot]: https://github.com/LukeConnors/PledgePalooza/assets/79298692/0b713f8b-ebf9-4ea4-8a1a-bb52d3e40e68
 [python-logo]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
 [python-url]: https://www.python.org/
