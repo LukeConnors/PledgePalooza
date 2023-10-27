@@ -13,6 +13,8 @@ background-color: #36d892;
 flex-basis: auto;
 height: 650px;
 width: 540px;
+word-wrap: break-word;   
+overflow-wrap: break-word
 
 }
 
