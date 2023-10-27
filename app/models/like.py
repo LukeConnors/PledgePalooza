@@ -4,7 +4,9 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Like(db.Model):
     __tablename__ = 'likes'
-    
+
+
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     projectId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), nullable=False)
@@ -18,7 +20,6 @@ class Like(db.Model):
     else:
         __table_args__ = (UniqueConstraint(userId, projectId, name='unique_liked_project'),)
 
-    
     def to_dict(self):
         return {
             'id': self.id,
