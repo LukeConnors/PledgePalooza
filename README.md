@@ -99,7 +99,7 @@ Even guests can explore the platform, browsing all available projects and perfor
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: <img width="1454" alt="Screenshot 2023-10-27 at 3 27 18 PM" src="https://github.com/LukeConnors/PledgePalooza/assets/79298692/0b713f8b-ebf9-4ea4-8a1a-bb52d3e40e68">
+[product-screenshot]: https://github.com/LukeConnors/PledgePalooza/assets/79298692/0b713f8b-ebf9-4ea4-8a1a-bb52d3e40e68
 [python-logo]: https://github.com/LukeConnors/PledgePalooza/assets/79298692/b64e47fc-a05e-4757-bf83-143d8221a7cd
 [python-url]: https://www.python.org/
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
