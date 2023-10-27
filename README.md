@@ -21,7 +21,7 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![LinkedIn - Luke Connors][linkedin-shield]][linkedin-url]
 [![LinkedIn - Tristan Allaman][linkedin-shield]][linkedin-url2]
-[![LinkedIn - Albert Marrero][linkedin-shield]][linkedin-url3]
+[![LinkedIn - Albert Marrero][linkedin-shield][linkedin-url3]
 
 
 <!-- PROJECT LOGO -->
@@ -78,7 +78,6 @@ Even guests can explore the platform, browsing all available projects and perfor
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
