@@ -19,9 +19,6 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 [![Contributors][contributors-shield]][contributors-url]
-[![LinkedIn - Luke Connors][linkedin-shield]][linkedin-url]
-[![LinkedIn - Tristan Allaman][linkedin-shield]][linkedin-url2]
-[![LinkedIn - Albert Marrero][linkedin-shield][linkedin-url3]
 
 
 <!-- PROJECT LOGO -->
