@@ -24,7 +24,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/LukeConnors/PledgePalooza">
-    <img src="./react-app/src/assets/LOGO.png" alt="Logo" width="80" height="80">
+    <img src="./react-app/public/favicon-32x32.png alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Pledge Palooza</h3>
@@ -59,7 +59,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://pledgepalooza.onrender.com/)
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `LukeConnors`, `PledgePalooza`, `Pledge Palooza`, `project_description`
 
