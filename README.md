@@ -85,7 +85,7 @@ Even guests can explore the platform, browsing all available projects and perfor
 [css-url]: https://www.w3.org/Style/CSS/Overview.en.html
 [CSSlogo]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
 [hmtl-url]: https://html.com/
-[flask-logo]: https://github.com/LukeConnors/PledgePalooza/assets/79298692/65ebf511-3737-44d6-8b28-38c1b84168c2
+[flask-logo]: https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white
 [flask-url]: https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white
 [postgres-logo]: https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
 [postgres-url]: https://www.sqlalchemy.org/
