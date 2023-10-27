@@ -75,6 +75,19 @@ Even guests can explore the platform, browsing all available projects and perfor
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Contact
+
+Luke Connors - [LinkedIn](https://www.linkedin.com/in/luke-connors-981373b1/)
+
+Tristan Allaman - [LinkedIn](https://www.linkedin.com/in/tristan-allaman-a18206232/)
+
+Albert Marrero - [LinkedIn](www.linkedin.com/in/albert-marrero-dev)
+
+Project Link: 
+[GitHub](https://github.com/LukeConnors/PledgePalooza/)
+[Live Link](https://pledgepalooza.onrender.com/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
