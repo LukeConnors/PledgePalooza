@@ -47,14 +47,17 @@ function ProjectFormPage() {
     formDataToSend.append("bannerImg", formData.bannerImg);
 
     let formErrors = {};
-    if (!formData.name) {
-      formErrors.name = "Name is required.";
+    if (!formData.name || formData.name.length > 40) {
+      formErrors.name = "Name is required and has to be less than 40 characters.";
     }
     if (!formData.description || formData.description.length < 25) {
       formErrors.description = "Description needs to be 25 or more characters";
     }
     if (!formData.location) {
       formErrors.location = "Location is required";
+    }
+    if(!formData.summary){
+      formErrors.summary = "Summary is required"
     }
     if (!formData.categoryId) {
       formErrors.categoryId = "Category is required";
@@ -147,6 +150,7 @@ function ProjectFormPage() {
                 value={formData.summary}
                 onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
               />
+              {errors.summary && <div className="error-message">{errors.summary}</div>}
             </div>
             <div className="project-form-category">
               <label htmlFor="category">Select a category:</label>
