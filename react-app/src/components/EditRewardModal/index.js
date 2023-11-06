@@ -83,7 +83,7 @@ function EditRewardModal({ projectId, reward }) {
       // dispatch(getProject(projectId));
       closeModal();
     } catch (e) {
-      console.log("fetch error:", e);
+      return("fetch error:", e);
     }
   };
 

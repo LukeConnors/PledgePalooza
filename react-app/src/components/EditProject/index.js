@@ -111,25 +111,6 @@ function EditProject() {
     }
 
 
-
-    // try {
-    //   const res = await fetch(`/api/projects/${projectId}`, {
-    //     method: "PUT",
-    //     body: formDataToSend,
-    //     credentials: "include",
-    //   });
-
-    //   if (res.ok) {
-    //     const data = await res.json();
-    //     history.push(`/projects/${data.id}`);
-    //   } else {
-    //     const errors = await res.json();
-    //     setErrors(errors.form_errors);
-    //     console.log("Error:", errors);
-    //   }
-    // } catch (error) {
-    //   console.log("Fetch error:", error);
-    // }
     let editedProject = await dispatch(projectActions.editProject(projectId, formDataToSend))
     if(editedProject && editedProject.id){
       history.push(`/projects/${projectId}`)

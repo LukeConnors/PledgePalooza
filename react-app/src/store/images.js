@@ -35,7 +35,7 @@ export const getImages = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      console.log("ERROR FETCHING IMAGES");
+      return("ERROR FETCHING IMAGES");
     }
 
     dispatch(setImages(data));
@@ -47,12 +47,10 @@ export const getRewardImages = (id) => async (dispatch) => {
     const response = await fetch(`/api/rewards/${id}/image`);
 
     if (!response.ok) {
-      console.log("Error response:", response);
       throw new Error("Failed to fetch reward images");
     }
 
     const data = await response.json();
-    console.log("Fetched REWARD IMAGE data:", data.image);
 
     dispatch(setRewardImage(data.image[0]));
   } catch (error) {
@@ -66,7 +64,6 @@ export default function reducer(state = initialState, action) {
       return { images: action.payload };
 
     case GET_REWARD_IMAGE:
-      console.log("Received reward image data:", action.payload);
       return {
         ...state,
         rewardImage: [...state.rewardImage, action.payload],

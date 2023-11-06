@@ -23,7 +23,6 @@ function ProjectsByCategory() {
     setIsLoaded(true);
   }, [categoryId]);
 
-  console.log(catProjects)
 
 
   if (catProjects) {

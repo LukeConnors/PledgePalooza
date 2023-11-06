@@ -9,12 +9,9 @@ function MyBackedProjects() {
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
   const state = useSelector(state => state);
-  console.log(state);
   const backedProjects = useSelector(state => state.backedProjects.backedProjects)
-  console.log(backedProjects);
 
   useEffect(() => {
-    console.log('Before dispatch')
     dispatch(fetchBackedProjects())
         .then(() => setIsLoaded(true)) // If using redux-thunk with promise, set isLoaded to true when promise resolves
         .catch((error) => {
@@ -32,7 +29,6 @@ function MyBackedProjects() {
     );
   }
 
-  console.log(backedProjects)
 
   return (
     <>

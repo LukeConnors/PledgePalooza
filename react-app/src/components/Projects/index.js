@@ -12,7 +12,6 @@ function Projects() {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.projects);
   const projectIds = Object.keys(projects || {});
-  console.log(projectIds);
   const [likedProjects, setLikedProjects] = useState([])
   const [hoveredProject, setHoveredProject] = useState(null);
   const [errorMessages, setErrorMessages] = useState({})
@@ -27,7 +26,7 @@ function Projects() {
     e.preventDefault();
 
     const project = projects[projectId]
-    
+
     if(user.id === project.ownerId){
       setErrorMessages(prev =>({...prev, [projectId]: "You cannot like your own project!"}));
       return

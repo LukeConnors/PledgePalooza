@@ -50,7 +50,6 @@ export const getProjectRewards = (projectId) => async (dispatch) => {
   const response = await fetch(`/api/projects/${projectId}/rewards`);
   if (response.ok) {
     const data = await response.json();
-    console.log("DATAAA", data);
     dispatch(setProjectRewards(data.rewards));
   }
 };

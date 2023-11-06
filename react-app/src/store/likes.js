@@ -55,14 +55,12 @@ export const createLike = (like, projectId) => async (dispatch) => {
 }
 
 export const deleteLike = (likeId, projectId) => async (dispatch) => {
-        console.log('Deleting like for projectId', projectId);
     const response = await fetch(`/api/projects/${projectId}/likes`, {
         method: 'DELETE',
     });
 
     if(response.ok){
         const data = await response.json();
-        console.log(data);
         dispatch(removeLike(data.likeId));
     } else {
         console.error('Failed to unlike project')

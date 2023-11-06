@@ -11,7 +11,6 @@ function MyLikedProjects() {
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
     const likes =  useSelector((state => state.likes))
-    console.log(likes)
     const dispatch = useDispatch()
     if(!user){
         history.push("/");
@@ -19,7 +18,6 @@ function MyLikedProjects() {
 
     const handleLikeClick = async (projectId, e) => {
         e.preventDefault();
-        console.log('projectId:', projectId)
           dispatch(deleteLike(null, projectId));
           setLikedProjects(likedProjects?.filter(id => id !== projectId));
         }
@@ -29,7 +27,6 @@ function MyLikedProjects() {
             setLikedProjects(likedProjectsDetails || []);
         })
     }, [user, dispatch, likedProjects]);
-    console.log(likedProjects);
 
 
     return (

@@ -18,7 +18,6 @@ export const fetchBackedProjects = () => async (dispatch) => {
         const response = await fetch('/api/users/current/backed-projects');
         if(response.ok){
             const data = await response.json();
-            console.log('Fetched Data:', data);
             dispatch(getBackedProjects(data.backed_projects));
         } else {
             console.error("Failed to fetched user's backed projects")

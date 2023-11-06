@@ -34,16 +34,14 @@ function ImageFormModal(projectId) {
             });
             if (res.ok) {
               const data = await res.json();
-              console.log(data);
               closeModal()
               setSubmitted(true)
               window.location.reload();
             } else {
               const errorData = await res.json();
-              console.log(errorData);
             }
           } catch (e) {
-            console.log("fetch error:", e);
+            return("fetch error:", e);
           }
     }
 

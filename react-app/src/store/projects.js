@@ -50,10 +50,8 @@ export const getProjects = () => async (dispatch) => {
 
 export const getUserProjects = () => async (dispatch) => {
   const res = await fetch("/api/projects/my-projects");
-  console.log("THIS IS THE RES!", res)
   if (res.ok) {
     const data = await res.json();
-    console.log('THIS WAS THE DATA!', data)
     dispatch(setUserProjects(data.my_projects))
     return data
   }
@@ -63,18 +61,15 @@ export const getProject = (projectId) => async (dispatch) => {
   const response = await fetch(`/api/projects/${projectId}`);
 
   const data = await response.json();
-  console.log("THIS IS THE FETCH DATA", data)
   dispatch(setDetailedProject(data));
 };
 
 export const createProject = (payload) => async (dispatch) => {
   try {
-    console.log('THIS IS THE PAYLOAD!', payload)
     const res = await fetch("/api/projects/", {
       method: "POST",
       body: payload
     })
-    console.log("THIS IS THE RES", res)
     if (res.ok) {
       const newProject = await res.json()
       dispatch(addProject(newProject))

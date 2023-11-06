@@ -13,7 +13,7 @@ function SearchBar({input, setInput, setResults}){
                 setResults(data.projects);
             })
             .catch((e) => {
-                console.log("Error fetching data:", e)
+                return("Error fetching data:", e)
             })
         } else {
             setResults([])
