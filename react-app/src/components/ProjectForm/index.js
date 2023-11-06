@@ -55,6 +55,8 @@ function ProjectFormPage() {
     }
     if (!formData.location) {
       formErrors.location = "Location is required";
+    } else if (formData.location.length > 50) {
+      formErrors.location = "Location must be less than 50 characters";
     }
     if(!formData.summary){
       formErrors.summary = "Summary is required"
