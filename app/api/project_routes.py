@@ -52,7 +52,6 @@ def post_form():
 
             # Upload the file to S3 and get the URL
             image_url = upload_file_to_s3(banner_img)
-            print("!!!!!!!!!!!!!!!!!!!!!!", image_url)
 
             # Set the `bannerImg` field of the project to the S3 URL
             new_project = Project(
