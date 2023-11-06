@@ -62,6 +62,11 @@ function ProjectFormPage() {
     if (!formData.categoryId) {
       formErrors.categoryId = "Category is required";
     }
+    if (!formData.bannerImg) {
+      formErrors.bannerImg = "Banner Image is required";
+    } else if (!formData.bannerImg.name.match(/\.(jpg|jpeg|png)$/)) {
+      formErrors.bannerImg = "Banner Image must be a .jpg, .jpeg, or .png file";
+    }
     if (!formData.endDate) {
       formErrors.endDate = "End Date is required";
     } else {
