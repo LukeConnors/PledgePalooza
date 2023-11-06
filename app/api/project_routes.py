@@ -52,6 +52,7 @@ def post_form():
 
             # Upload the file to S3 and get the URL
             image_url = upload_file_to_s3(banner_img)
+            print("!!!!!!!!!!!!!!!!!!!!!!", image_url)
 
             # Set the `bannerImg` field of the project to the S3 URL
             new_project = Project(
@@ -310,6 +311,12 @@ def post_backed(id):
                 rewardId = None,
                 userId = current_user.id
             )
+
+            if(new_back.cost < 0):
+                return jsonify({"error": "Invalid back amount"}
+                                 ), 400
+
+
             count = 0
             for reward in rewards:
                 if(reward.price <= new_back.cost and reward.price > count):

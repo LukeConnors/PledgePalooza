@@ -13,6 +13,10 @@ function BackProjectModal({ projectId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(formData.cost < 1){
+      alert("You must back at least $1")
+      return
+    }
    try {
       await dispatch(createBackedProject(projectId, formData.cost));
       closeModal();
