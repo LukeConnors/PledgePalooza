@@ -32,3 +32,9 @@ a:hover {
 input {
   outline-color: #006400;
 }
+
+
+.errors{
+  color: red;
+  font-size: 12px;
+}
