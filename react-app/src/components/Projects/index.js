@@ -40,13 +40,13 @@ function Projects() {
     }, [dispatch, user]);
 
     useEffect(() => {
-      console.log(likedProjects); // This will log the updated state when likedProjects changes
+      console.log(likedProjects); 
     }, [likedProjects]); 
 
 
     
     const handleMouseEnter = (projectId) => {
-      if (!likes.hasOwnProperty(projectId)) { // Checking if we have a cached like status
+      if (!likes.hasOwnProperty(projectId)) { 
         dispatch(loadProjectLikeStatus(projectId));
       }
       setHoveredProject(projectId);
@@ -67,8 +67,6 @@ function Projects() {
   
       // Check if the project is already liked to determine action
       if (likes[projectId]) {
-        // likes[projectId].id must be replaced with the identifier used for likes
-        // If it's stored as an object under a project's id, you need to access the like's own id correctly
         await dispatch(deleteLike(likes[projectId].likeId, projectId)); 
       } else {
         const like = {
