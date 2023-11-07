@@ -415,3 +415,9 @@ def my_likes():
         return {"my_likes": [like.to_dict() for like in likes]}
     else:
         return jsonify({"error": "Likes could not be found for the current user"}), 404
+
+@project_routes.route('/<int:projectId>/like-status')
+@login_required
+def get_project_like_status(projectId):
+    like_status = Like.query.filter_by(projectId=projectId, userId=current_user.id).first() is not None
+    return jsonify({"likeStatus": like_status})

@@ -6,12 +6,15 @@ import * as projectActions from "../../store/projects";
 import { createLike } from "../../store/likes";
 import { deleteLike } from "../../store/likes";
 import { loadMyLikes } from "../../store/likes";
+import { loadProjectLikeStatus } from "../../store/likes";
 import thumbsUp from "../../assets/thumbs-up-icon.png"
 
 function Projects() {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.projects);
   const projectIds = Object.keys(projects || {});
+  const likes = useSelector((state) => state.likes);
+  console.log(likes);
   const [likedProjects, setLikedProjects] = useState([])
   const [hoveredProject, setHoveredProject] = useState(null);
   const [errorMessages, setErrorMessages] = useState({})
@@ -20,32 +23,65 @@ function Projects() {
 
     useEffect(() => {
       dispatch(projectActions.getProjects());
-    }, [dispatch]);
 
-  const handleLikeClick = async (projectId, e) => {
-    e.preventDefault();
+      if (user) {
+        dispatch(loadMyLikes())
+          .then((likedProjectDetails) => {
+            if (likedProjectDetails) {
+              // Extract project IDs and filter out any potential undefined values
+              const likedProjectIds = likedProjectDetails.map((detail) => detail.projectId).filter(Boolean);
+              setLikedProjects(likedProjectIds);
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to load likes:", error);
+          });
+      }
+    }, [dispatch, user]);
 
-    const project = projects[projectId]
+    useEffect(() => {
+      console.log(likedProjects); // This will log the updated state when likedProjects changes
+    }, [likedProjects]); 
 
-    if(user.id === project.ownerId){
-      setErrorMessages(prev =>({...prev, [projectId]: "You cannot like your own project!"}));
-      return
-    }
 
-    setErrorMessages(prev => ({...prev, [projectId]: ""}));
+    
+    const handleMouseEnter = (projectId) => {
+      if (!likes.hasOwnProperty(projectId)) { // Checking if we have a cached like status
+        dispatch(loadProjectLikeStatus(projectId));
+      }
+      setHoveredProject(projectId);
+    };
 
-    if (likedProjects?.includes(projectId)) {
-      dispatch(deleteLike(null, projectId));
-      setLikedProjects(likedProjects?.filter(id => id !== projectId));
-    } else {
-      const like = {
-        userId: user.id,
-        projectId: projectId
-      };
-      dispatch(createLike(like, projectId));
-      setLikedProjects([...likedProjects, projectId]);
-    }
+
+    const handleLikeClick = async (projectId, e) => {
+      e.preventDefault();
+      e.stopPropagation();
+  
+      const project = projects[projectId];
+      if (user.id === project.ownerId) {
+        setErrorMessages(prev => ({ ...prev, [projectId]: "You cannot like your own project!" }));
+        return;
+      }
+  
+      setErrorMessages(prev => ({ ...prev, [projectId]: "" }));
+  
+      // Check if the project is already liked to determine action
+      if (likes[projectId]) {
+        // likes[projectId].id must be replaced with the identifier used for likes
+        // If it's stored as an object under a project's id, you need to access the like's own id correctly
+        await dispatch(deleteLike(likes[projectId].likeId, projectId)); 
+      } else {
+        const like = {
+          userId: user.id,
+          projectId: projectId,
+        };
+        await dispatch(createLike(like, projectId));
+      }
+  
+      // Additionally, ensure to refresh the liked status after updating
+      dispatch(loadProjectLikeStatus(projectId));
   };
+  
 
   let pledged = 0;
   let backers = 0;
@@ -96,13 +132,14 @@ function Projects() {
         <h2 className="feat-projects">Featured Projects:</h2>
 
         <div>
-          {projectIds.map((projectId, index) => {
+          {projectIds?.map((projectId, index) => {
             const project = projects[projectId];
+            const isLiked = likes[projectId];
 
             return index % 2 === 0 ? (
               <Link to={`/projects/${project?.id}`} key={project?.id}
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
+              onMouseEnter={() => handleMouseEnter(project.id)}
+              onMouseLeave={() => setHoveredProject(null)}
               >
                 <div className="project-card" key={project?.id}>
                   <div className="main-project-image">
@@ -113,7 +150,7 @@ function Projects() {
                       ></img>
                       {hoveredProject === project.id && user && (
                         <img
-                        className={`like-icon ${likedProjects.includes(project.id) ? 'liked' : ''}`}
+                          className={`like-icon ${isLiked ? 'liked' : ''}`}
                           src={thumbsUp}
                           alt="thumbs up icon"
                           onClick={(e) => handleLikeClick(project.id, e)}
@@ -130,7 +167,7 @@ function Projects() {
               </Link>
             ) : (
               <Link to={`/projects/${project?.id}`} key={project?.id}
-                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseEnter={() => handleMouseEnter(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
                 <div className="project-card" key={project?.id}>
@@ -148,7 +185,7 @@ function Projects() {
                       ></img>
                       {hoveredProject === project.id && user && (
                         <img
-                        className={`like-icon ${likedProjects.includes(project.id) ? 'liked' : ''}`}
+                          className={`like-icon ${isLiked ? 'liked' : ''}`}
                           src={thumbsUp}
                           alt="thumbs up icon"
                           onClick={(e) => handleLikeClick(project.id, e)}

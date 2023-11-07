@@ -1,6 +1,7 @@
 const GET_LIKES = "like/GET_LIKES"
 const ADD_LIKE = "like/ADD_LIKE"
 const REMOVE_LIKE = "like/REMOVE_LIKE"
+const GET_PROJECT_LIKE_STATUS = "like/GET_PROJECT_LIKE_STATUS";
 
 const getLikes = (likes) => ({
     type: GET_LIKES,
@@ -16,6 +17,12 @@ const removeLike = (like) => ({
     type: REMOVE_LIKE,
     like
 })
+
+const getProjectLikeStatus = (projectId, status) => ({
+    type: GET_PROJECT_LIKE_STATUS,
+    projectId,
+    status
+});
 
 export const loadMyLikes = () => async (dispatch) => {
     const response = await fetch('/api/projects/my-likes');
@@ -34,6 +41,16 @@ export const loadMyLikes = () => async (dispatch) => {
         return likedProjectsDetails;
     } else {
         console.error("Failed to fetch user's likes");
+    }
+}
+
+export const loadProjectLikeStatus = (projectId) => async (dispatch) => {
+    const response = await fetch(`/api/projects/${projectId}/like-status`); // Adjust the endpoint as needed
+    if(response.ok){
+        const { likeStatus } = await response.json(); // Expecting the response to contain { likeStatus: true/false }
+        dispatch(getProjectLikeStatus(projectId, likeStatus));
+    } else {
+        console.error("Failed to fetch like status for the project");
     }
 }
 
@@ -75,6 +92,11 @@ export const likesReducer = (state = {}, action) => {
                 newState[like.id] = like
             })
             return newState;
+        case GET_PROJECT_LIKE_STATUS:
+            return {
+                ...state,
+                [action.projectId]: action.status
+            };
         case ADD_LIKE:
             const newLike = action.like
             newState = {...state}
