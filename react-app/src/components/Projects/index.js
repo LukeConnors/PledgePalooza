@@ -14,7 +14,6 @@ function Projects() {
   const projects = useSelector((state) => state.projects);
   const projectIds = Object.keys(projects || {});
   const likes = useSelector((state) => state.likes);
-  console.log(likes);
   const [likedProjects, setLikedProjects] = useState([])
   const [hoveredProject, setHoveredProject] = useState(null);
   const [errorMessages, setErrorMessages] = useState({})
@@ -38,12 +37,6 @@ function Projects() {
           });
       }
     }, [dispatch, user]);
-
-    useEffect(() => {
-      console.log(likedProjects); // This will log the updated state when likedProjects changes
-    }, [likedProjects]); 
-
-
     
     const handleMouseEnter = (projectId) => {
       if (!likes.hasOwnProperty(projectId)) { // Checking if we have a cached like status
