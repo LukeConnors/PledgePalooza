@@ -1,0 +1,33 @@
+.footer {
+  background-color: #017362;
+  color: #fefefe;
+  margin-top: 30px;
+}
+.footer-header {
+  font-size: 24px;
+  text-align: center;
+  padding: 50px 0px;
+}
+
+.about-us {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  width: 50%;
+  align-items: center;
+}
+
+.user-info {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.icons {
+  font-size: 50px;
+  width: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+}
