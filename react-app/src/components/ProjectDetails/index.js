@@ -95,7 +95,7 @@ function ProjectDetails() {
       dots[slideIndex - 1].className += " active";
     }
   }
-  const backed = backedProjects.filter(
+  const backed = backedProjects?.filter(
     (backedProject) => backedProject?.userId === user.id && backedProject?.projectId === project?.id
   );
 
