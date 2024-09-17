@@ -669,3 +669,4 @@ def undo_rewards():
         db.session.execute(text("DELETE FROM rewards"))
 
     db.session.commit()
+
