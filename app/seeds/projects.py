@@ -12,7 +12,7 @@ def seed_projects():
         location='Enchantoria Games, San Francisco, USA',
         ownerId=1,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/MysticRealm1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/MysticRealms_Pic_1.png',
         endDate=date(2023, 12, 31),
     )
 

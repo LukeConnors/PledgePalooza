@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 def seed_images():
     project_image1 = Image(
-        url="https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/MysticRealm2.png",
+        url="https://pledgepalooza-images.s3.us-east-2.amazonaws.com/MysticRealms_Pic_2.png",
         imageable_id=1,
         imageable_type="project"
     )
