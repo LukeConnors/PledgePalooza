@@ -25,7 +25,7 @@ def seed_projects():
         ''',
         ownerId=2,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/VRheadset.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Virtual_Oasis_pic_1.png',
         endDate=date(2024, 6, 30),
     )
 
@@ -38,7 +38,7 @@ def seed_projects():
         ''',
         ownerId=3,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Cosmic1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Cosmic_Odyssey_pic1.png',
         endDate=date(2024, 8, 15),
     )
 
@@ -51,7 +51,7 @@ def seed_projects():
         ''',
         ownerId=4,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Arcane1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Arcane_Alchemy_pic1.png',
         endDate=date(2023, 10, 31),
     )
 
@@ -64,7 +64,7 @@ def seed_projects():
         ''',
         ownerId=5,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Cybernetica1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Cybernetica_pic1.png',
         endDate=date(2024, 5, 15),
     )
 
@@ -77,7 +77,7 @@ def seed_projects():
         ''',
         ownerId=6,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/DragonsDomain.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/DragonsDominion_pic1.png',
         endDate=date(2023, 9, 30),
     )
     project7 = Project(
@@ -89,7 +89,7 @@ def seed_projects():
         ''',
         ownerId=7,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/aquaventure.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/UnderwaterVROdyssey_pic1.png',
         endDate=date(2024, 4, 20),
     )
 
@@ -102,7 +102,7 @@ def seed_projects():
         ''',
         ownerId=8,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/quantumx1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/QuantumX_pic1.png',
         endDate=date(2024, 2, 28),
     )
 
@@ -115,7 +115,7 @@ def seed_projects():
         ''',
         ownerId=9,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for tech products
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/lunalens1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/LunaLens_pic1.png',
         endDate=date(2024, 3, 15),
     )
 
@@ -128,7 +128,7 @@ def seed_projects():
         ''',
         ownerId=10,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/skyhawk.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/SkyHawk_pic1.png',
         endDate=date(2024, 4, 10),
     )
     project11 = Project(
@@ -138,7 +138,7 @@ def seed_projects():
         location='EcoTech Solutions, Amsterdam, Netherlands',
         ownerId=6,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/ecocharge1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/EcoCharge_pic1.png',
         endDate=date(2024, 5, 5),
     )
     project12 = Project(
@@ -150,7 +150,7 @@ def seed_projects():
         ''',
         ownerId=5,  # Replace with the actual user ID
         categoryId=4,  # Replace with the actual category ID for fashion
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/ecostyle1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/EcoStyle_pic1.png',
         endDate=date(2024, 6, 30),
     )
 
@@ -163,7 +163,7 @@ def seed_projects():
         ''',
         ownerId=4,  # Replace with the actual user ID
         categoryId=4,  # Replace with the actual category ID for fashion
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/urbanthreads.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/UrbanThreads_pic1.png',
         endDate=date(2024, 7, 15),
     )
     project14 = Project(
@@ -175,7 +175,7 @@ def seed_projects():
         ''',
         ownerId=3,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for books
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/epictales.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/EpicTales_pic1.png',
         endDate=date(2024, 10, 20),
     )
 
@@ -188,7 +188,7 @@ def seed_projects():
         ''',
         ownerId=2,  # Replace with the actual user ID
         categoryId=5,  # Replace with the actual category ID for books
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/cookbook1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/CookbookChronicles_pic1.png',
         endDate=date(2024, 11, 10),
     )
 
@@ -201,7 +201,7 @@ def seed_projects():
         ''',
         ownerId=1,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for books
-        bannerImg='https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/mystery1.png',
+        bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Whodunit_Mysteries_pic1.png',
         endDate=date(2024, 12, 5),
     )
 
