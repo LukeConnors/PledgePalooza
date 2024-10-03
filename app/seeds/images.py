@@ -88,7 +88,7 @@ def seed_images():
     )
 
     reward_image1 = Image(
-        url="https://pledgepaloozabucket.s3.us-east-2.amazonaws.com/Arcane1.png",
+        url="https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Mystic-Realms-Early-Bird-Special.png",
         imageable_id=1,
         imageable_type="reward"
     )
