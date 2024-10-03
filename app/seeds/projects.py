@@ -13,7 +13,7 @@ def seed_projects():
         ownerId=1,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/MysticRealms_Pic_1.png',
-        endDate=date(2023, 12, 31),
+        endDate=date(2024, 12, 31),
     )
 
     project2 = Project(
@@ -26,7 +26,7 @@ def seed_projects():
         ownerId=2,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Virtual_Oasis_pic_1.png',
-        endDate=date(2024, 6, 30),
+        endDate=date(2025, 6, 30),
     )
 
     project3 = Project(
@@ -39,7 +39,7 @@ def seed_projects():
         ownerId=3,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Cosmic_Odyssey_pic1.png',
-        endDate=date(2024, 8, 15),
+        endDate=date(2025, 8, 15),
     )
 
     project4 = Project(
@@ -52,7 +52,7 @@ def seed_projects():
         ownerId=4,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Arcane_Alchemy_pic1.png',
-        endDate=date(2023, 10, 31),
+        endDate=date(2024, 10, 31),
     )
 
     project5 = Project(
@@ -65,7 +65,7 @@ def seed_projects():
         ownerId=5,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Cybernetica_pic1.png',
-        endDate=date(2024, 5, 15),
+        endDate=date(2025, 5, 15),
     )
 
     project6 = Project(
@@ -78,7 +78,7 @@ def seed_projects():
         ownerId=6,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for board games
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/DragonsDominion_pic1.png',
-        endDate=date(2023, 9, 30),
+        endDate=date(2025, 9, 30),
     )
     project7 = Project(
         name='AquaVenture: The Underwater VR Odyssey',
@@ -90,7 +90,7 @@ def seed_projects():
         ownerId=7,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for video games
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/UnderwaterVROdyssey_pic1.png',
-        endDate=date(2024, 4, 20),
+        endDate=date(2025, 4, 20),
     )
 
     project8 = Project(
@@ -103,7 +103,7 @@ def seed_projects():
         ownerId=8,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/QuantumX_pic1.png',
-        endDate=date(2024, 2, 28),
+        endDate=date(2025, 2, 28),
     )
 
     project9 = Project(
@@ -116,7 +116,7 @@ def seed_projects():
         ownerId=9,  # Replace with the actual user ID
         categoryId=2,  # Replace with the actual category ID for tech products
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/LunaLens_pic1.png',
-        endDate=date(2024, 3, 15),
+        endDate=date(2025, 3, 15),
     )
 
     project10 = Project(
@@ -129,7 +129,7 @@ def seed_projects():
         ownerId=10,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/SkyHawk_pic1.png',
-        endDate=date(2024, 4, 10),
+        endDate=date(2025, 4, 10),
     )
     project11 = Project(
         name='EcoCharge: The Solar-Powered Charger',
@@ -139,7 +139,7 @@ def seed_projects():
         ownerId=6,  # Replace with the actual user ID
         categoryId=3,  # Replace with the actual category ID for tech products
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/EcoCharge_pic1.png',
-        endDate=date(2024, 5, 5),
+        endDate=date(2025, 5, 5),
     )
     project12 = Project(
         name='EcoStyle: Sustainable Fashion Line',
@@ -151,7 +151,7 @@ def seed_projects():
         ownerId=5,  # Replace with the actual user ID
         categoryId=4,  # Replace with the actual category ID for fashion
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/EcoStyle_pic1.png',
-        endDate=date(2024, 6, 30),
+        endDate=date(2025, 6, 30),
     )
 
     project13 = Project(
@@ -164,7 +164,7 @@ def seed_projects():
         ownerId=4,  # Replace with the actual user ID
         categoryId=4,  # Replace with the actual category ID for fashion
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/UrbanThreads_pic1.png',
-        endDate=date(2024, 7, 15),
+        endDate=date(2025, 7, 15),
     )
     project14 = Project(
         name='Epic Tales: Fantasy Novel Series',
@@ -176,7 +176,7 @@ def seed_projects():
         ownerId=3,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for books
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/EpicTales_pic1.png',
-        endDate=date(2024, 10, 20),
+        endDate=date(2025, 10, 20),
     )
 
     project15 = Project(
@@ -189,7 +189,7 @@ def seed_projects():
         ownerId=2,  # Replace with the actual user ID
         categoryId=5,  # Replace with the actual category ID for books
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/CookbookChronicles_pic1.png',
-        endDate=date(2024, 11, 10),
+        endDate=date(2025, 11, 10),
     )
 
     project16 = Project(
@@ -202,7 +202,7 @@ def seed_projects():
         ownerId=1,  # Replace with the actual user ID
         categoryId=1,  # Replace with the actual category ID for books
         bannerImg='https://pledgepalooza-images.s3.us-east-2.amazonaws.com/Whodunit_Mysteries_pic1.png',
-        endDate=date(2024, 12, 5),
+        endDate=date(2025, 12, 5),
     )
 
 
